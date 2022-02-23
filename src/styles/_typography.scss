@@ -1,0 +1,52 @@
+@import url("https://fonts.googleapis.com/css2?family=Eczar:wght@600&family=Roboto+Mono:wght@400;500;700&family=Roboto:ital,wght@0,400;1,700&display=swap");
+
+/* headings */
+@mixin font-heading--large {
+  font-family: "Eczar";
+  font-weight: 600;
+  font-size: 80px;
+  line-height: 82px;
+  letter-spacing: -1px;
+}
+@mixin font-heading--medium {
+  font-family: "Roboto";
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 42px;
+}
+@mixin font-heading--small {
+  font-family: "Roboto Mono";
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 38px;
+  text-transform: uppercase;
+}
+
+/* paragraphs */
+@mixin font-paragraph--large {
+  font-family: "Roboto";
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 36px;
+}
+
+@mixin font-paragraph--medium {
+  font-family: "Roboto Mono";
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 38px;
+}
+
+@mixin font-paragraph--small {
+  font-family: "Roboto";
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 31px;
+}
+
+/* buttons */
+@mixin font-button {
+  font-family: "Roboto Mono";
+  font-weight: 500;
+  $text-white: #ffffff;
+}

@@ -1,0 +1,21 @@
+$breakpoint-lg: 1280px;
+$breakpoint-md: 700px;
+$breakpoint-sm: 480px;
+
+@mixin lg {
+  @media screen and (max-width: $breakpoint-lg) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media screen and (max-width: $breakpoint-md) {
+    @content;
+  }
+}
+
+@mixin sm {
+  @media screen and (max-width: $breakpoint-sm) {
+    @content;
+  }
+}
