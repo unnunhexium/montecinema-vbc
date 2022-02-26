@@ -4,6 +4,7 @@
     <TheHero />
     <MoviesList />
     <BookingSection />
+    <ScreeningsSection />
   </div>
 </template>
 
@@ -12,6 +13,7 @@ import TheHeader from "./components/TheHeader.vue";
 import TheHero from "./components/TheHero.vue";
 import MoviesList from "./components/MoviesList.vue";
 import BookingSection from "./components/BookingSection.vue";
+import ScreeningsSection from "./components/ScreeningsSection.vue";
 
 export default {
   components: {
@@ -19,13 +21,14 @@ export default {
     MoviesList,
     TheHero,
     BookingSection,
+    ScreeningsSection,
   },
 };
 </script>
 
 <style lang="scss">
-@import "src/styles";
 @import "src/styles/reset.scss";
+@import "src/styles";
 
 .index {
   background: $bg-white;
