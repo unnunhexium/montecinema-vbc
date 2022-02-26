@@ -8,6 +8,14 @@
   line-height: 82px;
   letter-spacing: -1px;
 }
+
+@mixin font-heading--big {
+  font-family: "Eczar";
+  font-weight: 600;
+  font-size: 64px;
+  line-height: 65px;
+}
+
 @mixin font-heading--medium {
   font-family: "Roboto";
   font-weight: 700;
