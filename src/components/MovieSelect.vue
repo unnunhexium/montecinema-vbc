@@ -15,7 +15,6 @@
         <ArrowDown class="movie-select__input-image"></ArrowDown>
       </template>
     </Multiselect>
-    <!-- <pre class="language-json"><code>{{ value  }}</code></pre> -->
   </div>
 </template>
 
