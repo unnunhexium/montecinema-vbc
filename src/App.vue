@@ -1,6 +1,6 @@
 <template>
   <div>
-    <TheHeader />
+    <TheHeader v-if="!$route.name.startsWith('User')" />
     <router-view></router-view>
   </div>
 </template>
