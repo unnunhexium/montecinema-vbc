@@ -1,12 +1,19 @@
 <template>
   <div>
     Single movie of id:
-    {{ $route.params.movieId }}
+    {{ movieId }}
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    movieId: {
+      type: Number,
+      default: 0,
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped></style>

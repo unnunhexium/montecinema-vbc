@@ -21,6 +21,7 @@ export const routes = [
   {
     path: "/movies/:movieId",
     name: "SingleMovie",
+    props: true,
     component: () => import("@/components/pages/public/MovieDetailPage.vue"),
   },
   {
@@ -39,13 +40,13 @@ export const routes = [
     component: () => import("@/components/pages/public/RegisterPage.vue"),
     children: [
       {
-        path: "/register/first",
+        path: "/first",
         name: "First",
         component: () =>
           import("@/components/pages/public/RegisterFirstPage.vue"),
       },
       {
-        path: "/register/second",
+        path: "/second",
         name: "Second",
         component: () =>
           import("@/components/pages/public/RegisterSecondPage.vue"),
