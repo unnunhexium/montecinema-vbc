@@ -52,7 +52,7 @@ export default {
       const filteredTabs = this.tabs.filter((tab) => tab.id !== this.todayIs);
       const index = this.tabs.findIndex((tab) => tab.id === this.todayIs);
       return [
-        { day: "Today" },
+        { day: "Today", id: -1 },
         ...filteredTabs.slice(index),
         ...filteredTabs.slice(0, index),
       ];
@@ -73,7 +73,7 @@ export default {
     padding-bottom: 1em;
   }
   &__tab {
-    padding-right: 8px;
+    margin-right: 8px;
     &--calendar {
       background: transparent;
       padding: 0.75em 1em;
