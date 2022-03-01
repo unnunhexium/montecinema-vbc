@@ -4,12 +4,12 @@
     <div class="day-tabs-list__wrapper">
       <DayTab
         v-for="tab in mappedTabs"
-        :tab="tab"
         :key="tab.id"
         :value="tab.day"
         class="day-tabs-list__tab"
-        >{{ displayToday(tab) }}</DayTab
       >
+        {{ displayToday(tab) }}
+      </DayTab>
       <button class="day-tabs-list__tab--calendar">
         <Calendar class="day-tabs-list__tab--icon" />
       </button>
@@ -19,20 +19,20 @@
 
 <script>
 import DayTab from "./DayTab.vue";
-import Calendar from "@/calendar.svg";
+import Calendar from "@/assets/calendar.svg";
 
 export default {
   components: { DayTab, Calendar },
   data() {
     return {
       tabs: [
+        { day: "Sun", id: 0 },
         { day: "Mon", id: 1 },
         { day: "Tue", id: 2 },
         { day: "Wed", id: 3 },
         { day: "Thu", id: 4 },
         { day: "Fri", id: 5 },
         { day: "Sat", id: 6 },
-        { day: "Sun", id: 7 },
       ],
     };
   },
@@ -52,7 +52,7 @@ export default {
       const filteredTabs = this.tabs.filter((tab) => tab.id !== this.todayIs);
       const index = this.tabs.findIndex((tab) => tab.id === this.todayIs);
       return [
-        { day: "Today" },
+        { day: "Today", id: -1 },
         ...filteredTabs.slice(index),
         ...filteredTabs.slice(0, index),
       ];
@@ -63,19 +63,17 @@ export default {
 
 <style lang="scss" scoped>
 .day-tabs-list {
+  overflow: auto;
   &__wrapper {
     display: flex;
   }
   &__title {
-    font-family: "Roboto Mono";
-    font-weight: 700;
-    font-size: 14px;
-    text-transform: uppercase;
+    @include font-heading--the-smallest;
     color: $text-accent-b;
-    padding-bottom: 12px;
+    padding-bottom: 1em;
   }
   &__tab {
-    padding-right: 8px;
+    margin-right: 8px;
     &--calendar {
       background: transparent;
       padding: 0.75em 1em;
