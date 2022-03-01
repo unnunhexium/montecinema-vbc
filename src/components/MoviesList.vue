@@ -14,6 +14,7 @@
 <script>
 import MovieCard from "./MovieCard.vue";
 import movies from "../data/movies";
+import { fetchMovies } from "@/api/movies";
 
 export default {
   name: "MoviesList",
@@ -22,6 +23,10 @@ export default {
     return {
       movies,
     };
+  },
+  async created() {
+    let data = await fetchMovies();
+    this.movies = data;
   },
 };
 </script>
