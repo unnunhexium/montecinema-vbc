@@ -31,7 +31,7 @@ export default {
   &__heading,
   &__heading--mobile,
   &__details {
-    @include font-heading--small;
+    @include font-heading--smaller;
   }
 
   &__heading {

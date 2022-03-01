@@ -43,13 +43,7 @@ export default {
       inputValue: "",
     };
   },
-  watch: {
-    inputValue(val) {
-      if (val.length > 0) {
-        this.invalidEmail = false;
-      }
-    },
-  },
+
   methods: {
     subscribe() {
       if (this.inputValue.length > 0) {

@@ -1,9 +1,10 @@
 <template>
   <div class="the-header" id="the-header">
     <img src="/assets/logo.svg" class="the-header__logo" />
+    <NavBar />
     <div class="the-header__wrapper">
       <BaseButton href="/" type="secondary">Register</BaseButton>
-      <BaseButton href="/">Login</BaseButton>
+      <BaseButton @click="login">Login</BaseButton>
     </div>
     <img src="/assets/navigation-menu.svg" class="the-header__hamburger" />
   </div>
@@ -11,10 +12,17 @@
 
 <script>
 import BaseButton from "./base/BaseButton.vue";
+import NavBar from "./NavBar.vue";
 export default {
   name: "TheHeader",
   components: {
     BaseButton,
+    NavBar,
+  },
+  methods: {
+    login() {
+      this.$router.push("/login");
+    },
   },
 };
 </script>
@@ -23,6 +31,7 @@ export default {
 .the-header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   &__logo {
     cursor: pointer;

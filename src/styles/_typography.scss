@@ -8,17 +8,41 @@
   line-height: 82px;
   letter-spacing: -1px;
 }
+
+@mixin font-heading--big {
+  font-family: "Eczar";
+  font-weight: 600;
+  font-size: 64px;
+  line-height: 65px;
+}
+
 @mixin font-heading--medium {
   font-family: "Roboto";
   font-weight: 700;
   font-size: 36px;
   line-height: 42px;
 }
+
 @mixin font-heading--small {
+  font-family: "Roboto";
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+}
+
+@mixin font-heading--smaller {
   font-family: "Roboto Mono";
   font-weight: 700;
   font-size: 22px;
   line-height: 38px;
+  text-transform: uppercase;
+}
+
+@mixin font-heading--the-smallest {
+  font-family: "Roboto Mono";
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
   text-transform: uppercase;
 }
 
@@ -44,9 +68,33 @@
   line-height: 31px;
 }
 
+@mixin font-paragraph--smaller {
+  font-family: "Roboto";
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+}
+
+/* other text elements */
+
+/* navbar, input text */
+@mixin font-element--medium {
+  font-family: "Roboto";
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
+}
+
+/* genre, year of production, length */
+@mixin font-element--small {
+  font-family: "Roboto";
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+}
+
 /* buttons */
 @mixin font-button {
   font-family: "Roboto Mono";
   font-weight: 500;
-  $text-white: #ffffff;
 }
