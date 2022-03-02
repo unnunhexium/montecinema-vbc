@@ -21,7 +21,6 @@ export default {
   data() {
     return {
       movies: [],
-      error: false,
     };
   },
   methods: {
@@ -30,7 +29,7 @@ export default {
     },
   },
   async created() {
-    const { data } = await this.fetchMovies(); //DESTRUKTURYZACJA!!!!!!
+    const { data } = await this.fetchMovies();
     this.movies = data;
   },
 };
