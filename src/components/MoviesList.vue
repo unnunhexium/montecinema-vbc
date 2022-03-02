@@ -13,19 +13,24 @@
 
 <script>
 import MovieCard from "./MovieCard.vue";
-import movies from "../data/movies";
-import { fetchMovies } from "@/api/movies";
+import { getMovies } from "@/api/movies";
 
 export default {
   name: "MoviesList",
   components: { MovieCard },
   data() {
     return {
-      movies,
+      movies: [],
+      error: false,
     };
   },
+  methods: {
+    async fetchMovies() {
+      return await getMovies();
+    },
+  },
   async created() {
-    let data = await fetchMovies();
+    const { data } = await this.fetchMovies(); //DESTRUKTURYZACJA!!!!!!
     this.movies = data;
   },
 };
