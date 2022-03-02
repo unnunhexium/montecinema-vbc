@@ -4,7 +4,6 @@
     <MoviesList />
     <BookingSection />
     <ScreeningsSection />
-    <router-view />
   </div>
 </template>
 
