@@ -85,6 +85,16 @@
   line-height: 21px;
 }
 
+/* input label */
+@mixin font-element--small-accent {
+  font-family: "Roboto Mono";
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 18px;
+  text-transform: uppercase;
+  color: $text-accent-b;
+}
+
 /* genre, year of production, length */
 @mixin font-element--small {
   font-family: "Roboto";
@@ -94,6 +104,7 @@
 }
 
 /* buttons */
+
 @mixin font-button {
   font-family: "Roboto Mono";
   font-weight: 500;
