@@ -30,7 +30,7 @@ export default {
     },
   },
   async created() {
-    const { data } = await this.fetchMovies(); //DESTRUKTURYZACJA!!!!!!
+    const { data } = await this.fetchMovies();
     this.movies = data;
   },
 };
