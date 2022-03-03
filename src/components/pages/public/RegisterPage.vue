@@ -32,7 +32,7 @@ export default {
 <style lang="scss" scoped>
 .register-page {
   &__wrapper {
-    max-width: 600px;
+    max-width: 624px;
     padding: 2em 0.5em 0;
     margin: 0 auto;
   }

@@ -1,6 +1,14 @@
 <template>
   <form novalidate @submit.prevent="" class="register-card">
-    <BaseInput @input="setInput" class="register-card__email" />
+    <BaseInput
+      v-model="inputValue"
+      class="register-card__email"
+      type="email"
+      placeholder="Please enter your email."
+      :errorMessage="emailError"
+      label="Email"
+      @blur="checkError"
+    />
     <PasswordInput class="register-card__password" />
     <p class="register-card__valid-flag">At least 8 characters</p>
     <p class="register-card__valid-flag">At least one letter</p>
@@ -25,11 +33,18 @@ export default {
   data() {
     return {
       inputValue: "",
+      emailError: "",
     };
   },
   methods: {
-    setInput(event) {
-      this.inputValue = event.target.value;
+    checkError() {
+      console.log("blur");
+      const emailRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+      if (this.inputValue === "" || !emailRegex.test(this.inputValue)) {
+        this.emailError = "Please enter a valid email.";
+      } else {
+        this.emailError = "";
+      }
     },
   },
 };

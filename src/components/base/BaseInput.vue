@@ -1,28 +1,44 @@
 <template>
   <div class="base-input">
     <label class="base-input__label">
-      Email
+      {{ label }}
       <input
         class="base-input__input"
-        type="email"
-        id="email"
-        name="email"
-        placeholder=" Something ending with monterail.com"
-        @input="$emit('input', $event)"
+        :type="type"
+        :placeholder="placeholder"
+        :value="value"
+        @input="$emit('input', $event.target.value)"
+        @blur="$emit('blur')"
       />
     </label>
-    <p class="base-input__error" v-if="error">Please enter a valid email.</p>
+    <p class="base-input__error" v-if="errorMessage">{{ errorMessage }}</p>
   </div>
 </template>
 
 <script>
 export default {
   name: "BaseInput",
-  emits: ["input"],
+  emits: ["input", "blur"],
   props: {
-    error: {
-      type: Boolean,
-      default: false,
+    label: {
+      type: String,
+      default: "",
+    },
+    type: {
+      type: String,
+      required: true,
+    },
+    placeholder: {
+      type: String,
+      required: true,
+    },
+    errorMessage: {
+      type: String,
+      default: "",
+    },
+    value: {
+      type: String,
+      default: "",
     },
   },
 };

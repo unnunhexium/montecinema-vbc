@@ -16,16 +16,6 @@ export default {
   components: {
     RegisterFirstCard,
   },
-  data() {
-    return {
-      inputValue: "",
-    };
-  },
-  methods: {
-    setInput(event) {
-      this.inputValue = event.target.value;
-    },
-  },
 };
 </script>
 
