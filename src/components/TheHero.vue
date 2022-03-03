@@ -9,7 +9,7 @@
       <BaseButton href="#online-booking">Book a ticket</BaseButton>
     </div>
     <img
-      src="/assets/cinema.png"
+      src="@/assets/images/cinema.jpg"
       class="the-hero__image"
       alt="People sitting in cinema"
     />

@@ -12,7 +12,11 @@
       class="movie-select__input"
     >
       <template slot="caret">
-        <ArrowDown class="movie-select__input-image"></ArrowDown>
+        <img
+          src="@/assets/icons/arrows/arrow-down.svg"
+          class="movie-select__input-image"
+          alt="arrow"
+        />
       </template>
     </Multiselect>
   </div>
@@ -20,10 +24,9 @@
 
 <script>
 import Multiselect from "vue-multiselect";
-import ArrowDown from "@/assets/icons/arrows/arrow-down.svg";
 
 export default {
-  components: { Multiselect, ArrowDown },
+  components: { Multiselect },
   data() {
     return {
       value: "",

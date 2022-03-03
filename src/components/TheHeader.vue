@@ -1,12 +1,12 @@
 <template>
   <div class="the-header" id="the-header">
-    <img src="/assets/logo.svg" class="the-header__logo" />
+    <img src="@/assets/logo.svg" class="the-header__logo" />
     <NavBar />
     <div class="the-header__wrapper">
       <BaseButton href="/" type="secondary">Register</BaseButton>
       <BaseButton @click="login">Login</BaseButton>
     </div>
-    <img src="/assets/navigation-menu.svg" class="the-header__hamburger" />
+    <img src="@/assets/navigation-menu.svg" class="the-header__hamburger" />
   </div>
 </template>
 

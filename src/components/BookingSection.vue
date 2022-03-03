@@ -4,7 +4,7 @@
     <p class="booking-section__subtitle">Soon</p>
     <div class="booking-section__wrapper">
       <a href="#the-header">
-        <img src="/assets/logo.svg" class="booking-section__logo" />
+        <img src="@/assets/logo.svg" class="booking-section__logo" />
       </a>
       <template v-if="!subscribed">
         <p class="booking-section__content">

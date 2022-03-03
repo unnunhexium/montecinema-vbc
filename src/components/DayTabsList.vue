@@ -11,7 +11,11 @@
         {{ displayToday(tab) }}
       </DayTab>
       <button class="day-tabs-list__tab--calendar">
-        <Calendar class="day-tabs-list__tab--icon" />
+        <IconCalendar
+          src="@/assets/calendar.svg"
+          class="day-tabs-list__tab--icon"
+          alt="calendar"
+        />
       </button>
     </div>
   </div>
@@ -19,10 +23,10 @@
 
 <script>
 import DayTab from "./DayTab.vue";
-import Calendar from "@/assets/calendar.svg";
+import IconCalendar from "./svg/icon-calendar.vue";
 
 export default {
-  components: { DayTab, Calendar },
+  components: { DayTab, IconCalendar },
   data() {
     return {
       tabs: [
@@ -85,13 +89,8 @@ export default {
       &:focus,
       &:hover {
         background: $btn-dark;
-      }
-    }
-    &--icon {
-      &:active,
-      &:focus,
-      &:hover {
-        path {
+
+        ::v-deep svg path {
           stroke: $text-white;
         }
       }

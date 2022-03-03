@@ -8,9 +8,11 @@
       name="password"
       placeholder="Enter your password"
     />
-    <button class="buttontest"><img src="@/assets/icons/view.svg" /></button>
+    <button class="buttontest">
+      <img src="@/assets/icons/view.svg" alt="show password" />
+    </button>
     <button>
-      <img src="@/assets/icons/view.svg" alt="hide password" />
+      <img src="@/assets/icons/view-off.svg" alt="hide password" />
     </button>
   </label>
 </template>
