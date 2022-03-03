@@ -1,4 +1,5 @@
 <template>
+  <!-- WORK IN PROGRESS-->
   <form novalidate @submit.prevent="" class="login-card">
     <BaseInput @input="setInput" class="login-card__email" />
     <PasswordInput class="login-card__password" />
