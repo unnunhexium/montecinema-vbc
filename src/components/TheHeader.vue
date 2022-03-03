@@ -3,7 +3,7 @@
     <img src="@/assets/logo.svg" class="the-header__logo" />
     <NavBar />
     <div class="the-header__wrapper">
-      <BaseButton href="/" type="secondary">Register</BaseButton>
+      <BaseButton @click="register" type="secondary">Register</BaseButton>
       <BaseButton @click="login">Login</BaseButton>
     </div>
     <img src="@/assets/navigation-menu.svg" class="the-header__hamburger" />
@@ -20,6 +20,9 @@ export default {
     NavBar,
   },
   methods: {
+    register() {
+      this.$router.push("/register");
+    },
     login() {
       this.$router.push("/login");
     },

@@ -1,10 +1,13 @@
 <template>
-  <form novalidate @submit.prevent="" class="login-card">
-    <BaseInput @input="setInput" class="login-card__email" />
-    <PasswordInput class="login-card__password" />
-    <div class="login-card__buttons-wrapper">
-      <a class="login-card__link">Register instead</a>
-      <button class="login-card__button">Log in</button>
+  <form novalidate @submit.prevent="" class="register-card">
+    <BaseInput @input="setInput" class="register-card__email" />
+    <PasswordInput class="register-card__password" />
+    <p class="register-card__valid-flag">At least 8 characters</p>
+    <p class="register-card__valid-flag">At least one letter</p>
+    <p class="register-card__valid-flag">At least one digit</p>
+    <div class="register-card__buttons-wrapper">
+      <a class="register-card__link">Log in instead</a>
+      <button class="register-card__button">Next step</button>
     </div>
   </form>
 </template>
@@ -14,7 +17,7 @@ import BaseInput from "@/components/base/BaseInput.vue";
 import PasswordInput from "@/components/PasswordInput.vue";
 
 export default {
-  name: "LoginCard",
+  name: "RegisterCard",
   components: {
     BaseInput,
     PasswordInput,
@@ -33,7 +36,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.login-card {
+.register-card {
   max-width: 600px;
   box-shadow: 0px 4px 22px rgba(52, 53, 65, 0.15);
   border-radius: 24px;
@@ -49,6 +52,14 @@ export default {
     @include font-button;
     font-size: 18px;
     color: $text-accent;
+  }
+
+  &__valid-flag {
+    @include font-element--small-thin;
+  }
+
+  &__button {
+    margin-top: 40px;
   }
 }
 </style>
