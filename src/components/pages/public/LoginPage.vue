@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import LoginCard from "@/components/LoginCard.vue";
+import LoginCard from "@/components/auth/LoginCard.vue";
 
 export default {
   name: "LoginPage",

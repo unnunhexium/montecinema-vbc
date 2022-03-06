@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import RegisterFirstCard from "@/components/RegisterFirstCard.vue";
+import RegisterFirstCard from "@/components/auth/RegisterFirstCard.vue";
 
 export default {
   name: "RegisterFirstPage",

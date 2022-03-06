@@ -11,7 +11,7 @@
 
 <script>
 import DayTabsList from "./DayTabsList.vue";
-import MovieSelect from "./MovieSelect.vue";
+import MovieSelect from "./base/MovieSelect.vue";
 
 export default {
   components: { DayTabsList, MovieSelect },
