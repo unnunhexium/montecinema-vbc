@@ -1,8 +1,8 @@
 <template>
-  <div class="register-page">
-    <div class="register-page__wrapper">
-      <h1 class="register-page__heading">Ahoy you!</h1>
-      <h2 class="register-page__subheading">Care to register?</h2>
+  <div class="register-first-page">
+    <div class="register-first-page__wrapper">
+      <h1 class="register-first-page__heading">Ahoy you!</h1>
+      <h2 class="register-first-page__subheading">Care to register?</h2>
       <RegisterFirstCard />
     </div>
   </div>
@@ -20,10 +20,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.login-page {
+.register-first-page {
   &__wrapper {
-    max-width: 600px;
-    padding: 2em 2em 0;
+    max-width: 624px;
+    padding: 2em 0.5em 0;
     margin: 0 auto;
   }
 

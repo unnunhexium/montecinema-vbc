@@ -20,16 +20,6 @@ export default {
   components: {
     LoginCard,
   },
-  data() {
-    return {
-      inputValue: "",
-    };
-  },
-  methods: {
-    setInput(event) {
-      this.inputValue = event.target.value;
-    },
-  },
 };
 </script>
 

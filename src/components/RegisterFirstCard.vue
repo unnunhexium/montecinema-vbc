@@ -1,15 +1,19 @@
 <template>
   <form novalidate @submit.prevent="" class="register-card">
     <BaseInput
-      v-model="inputValue"
+      v-model="formData.email"
       class="register-card__email"
       type="email"
       placeholder="Please enter your email."
       :errorMessage="emailError"
       label="Email"
-      @blur="checkError"
+      @blur="checkEmailError"
     />
-    <PasswordInput class="register-card__password" />
+    <PasswordInput
+      v-model="formData.password"
+      class="register-card__password"
+      @blur="checkPasswordError"
+    />
     <p class="register-card__valid-flag">At least 8 characters</p>
     <p class="register-card__valid-flag">At least one letter</p>
     <p class="register-card__valid-flag">At least one digit</p>
@@ -32,27 +36,29 @@ export default {
   },
   data() {
     return {
-      inputValue: "",
+      formData: {
+        email: "",
+        password: "",
+      },
       emailError: "",
     };
   },
   methods: {
-    checkError() {
-      console.log("blur");
+    checkEmailError() {
       const emailRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-      if (this.inputValue === "" || !emailRegex.test(this.inputValue)) {
+      if (this.formData.email === "" || !emailRegex.test(this.formData.email)) {
         this.emailError = "Please enter a valid email.";
       } else {
         this.emailError = "";
       }
     },
+    checkPasswordError() {},
   },
 };
 </script>
 
 <style lang="scss" scoped>
 .register-card {
-  max-width: 600px;
   box-shadow: 0px 4px 22px rgba(52, 53, 65, 0.15);
   border-radius: 24px;
   padding: 64px;

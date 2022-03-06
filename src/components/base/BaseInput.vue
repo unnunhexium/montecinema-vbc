@@ -26,11 +26,11 @@ export default {
     },
     type: {
       type: String,
-      required: true,
+      default: "text",
     },
     placeholder: {
       type: String,
-      required: true,
+      default: "",
     },
     errorMessage: {
       type: String,

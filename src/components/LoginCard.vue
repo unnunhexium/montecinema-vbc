@@ -1,8 +1,14 @@
 <template>
   <!-- WORK IN PROGRESS-->
   <form novalidate @submit.prevent="" class="login-card">
-    <BaseInput @input="setInput" class="login-card__email" />
-    <PasswordInput class="login-card__password" />
+    <BaseInput
+      v-model="formData.email"
+      class="login-card__email"
+      type="email"
+      placeholder="Please enter your email."
+      label="email"
+    />
+    <PasswordInput v-model="formData.password" class="login-card__password" />
     <div class="login-card__buttons-wrapper">
       <a class="login-card__link">Register instead</a>
       <button class="login-card__button">Log in</button>
@@ -22,7 +28,10 @@ export default {
   },
   data() {
     return {
-      inputValue: "",
+      formData: {
+        email: "",
+        password: "",
+      },
     };
   },
   methods: {

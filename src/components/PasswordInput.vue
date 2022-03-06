@@ -4,19 +4,20 @@
     <div class="password-input__wrapper">
       <input
         class="password-input__input"
-        :type="type"
-        id="password"
-        name="password"
-        placeholder="Enter your password"
+        :type="inputType"
+        placeholder="Please enter your password."
+        :value="value"
+        @input="$emit('input', $event.target.value)"
+        @blur="$emit('blur')"
       />
       <button class="password-input__button" @click="showPassword">
         <img
-          v-show="passwordHidden"
+          v-show="isPasswordHidden"
           src="@/assets/icons/view.svg"
           alt="show password"
         />
         <img
-          v-show="!passwordHidden"
+          v-show="!isPasswordHidden"
           src="@/assets/icons/view-off.svg"
           alt="hide password"
         />
@@ -28,24 +29,26 @@
 <script>
 export default {
   name: "PasswordInput",
-  components: {},
+  emits: ["input", "blur"],
+  props: {
+    value: {
+      type: String,
+      default: "",
+    },
+  },
   data() {
     return {
-      type: "password",
+      isPasswordHidden: true,
     };
   },
   computed: {
-    passwordHidden() {
-      return this.type === "password";
+    inputType() {
+      return this.isPasswordHidden ? "password" : "text";
     },
   },
   methods: {
     showPassword() {
-      if (this.type === "password") {
-        this.type = "text";
-      } else {
-        this.type = "password";
-      }
+      this.isPasswordHidden = !this.isPasswordHidden;
     },
   },
 };
