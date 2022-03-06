@@ -1,11 +1,63 @@
 <template>
-  <div>This is log in page.</div>
+  <div class="login-page">
+    <div class="login-page__wrapper">
+      <h1 class="login-page__heading">Hi there!</h1>
+      <h2 class="login-page__subheading">Care to log in?</h2>
+      <LoginCard />
+      <div class="login-page__description-wrapper">
+        <p class="login-page__info">Did you forget your password?</p>
+        <a class="login-page__link"> Reset it now</a>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
+import LoginCard from "@/components/LoginCard.vue";
+
 export default {
-  name: "LogInPage",
+  name: "LoginPage",
+  components: {
+    LoginCard,
+  },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.login-page {
+  &__wrapper {
+    max-width: 600px;
+    padding: 2em 2em 0;
+    margin: 0 auto;
+  }
+
+  &__heading,
+  &__subheading {
+    @include font-heading--large;
+  }
+
+  &__subheading {
+    color: $text-light;
+    padding-bottom: 0.5em;
+  }
+
+  &__description-wrapper {
+    display: flex;
+    padding-top: 2.5em;
+  }
+
+  &__info,
+  &__link {
+    @include font-paragraph--smaller;
+    line-height: 1.75em;
+  }
+
+  &__info {
+    padding-right: 0.25em;
+  }
+
+  &__link {
+    color: $text-accent;
+  }
+}
+</style>

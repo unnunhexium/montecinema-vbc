@@ -37,21 +37,12 @@ export const routes = [
   {
     path: "/register",
     name: "Register",
-    component: () => import("@/components/pages/public/RegisterPage.vue"),
-    children: [
-      {
-        path: "/first",
-        name: "First",
-        component: () =>
-          import("@/components/pages/public/RegisterFirstPage.vue"),
-      },
-      {
-        path: "/second",
-        name: "Second",
-        component: () =>
-          import("@/components/pages/public/RegisterSecondPage.vue"),
-      },
-    ],
+    component: () => import("@/components/pages/public/RegisterFirstPage.vue"),
+  },
+  {
+    path: "/register-2",
+    name: "RegisterSecondStep",
+    component: () => import("@/components/pages/public/RegisterSecondPage.vue"),
   },
   {
     path: "*",
