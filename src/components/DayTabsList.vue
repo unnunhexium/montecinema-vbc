@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import DayTab from "./DayTab.vue";
+import DayTab from "./base/DayTab.vue";
 import IconCalendar from "./svg/icon-calendar.vue";
 
 export default {
