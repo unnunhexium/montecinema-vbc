@@ -33,6 +33,11 @@ export default {
       required: true,
     },
   },
+  computed: {
+    screenings() {
+      return this.$store.state.screenings;
+    },
+  },
   methods: {
     imageAlt,
     movieLength,

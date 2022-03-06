@@ -27,17 +27,16 @@ export default {
     },
     getDayOfWeek() {
       const dayOfWeek = new Date().getDay();
-      return isNaN(dayOfWeek)
-        ? null
-        : [
-            "Sunday",
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday",
-          ][dayOfWeek];
+      const days = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ];
+      return days[dayOfWeek];
     },
     getDate() {
       const today = new Date();
@@ -46,6 +45,9 @@ export default {
       const dd = `0${today.getDate()}`.slice(-2);
       return `${dd}/${mm}/${yyyy}`;
     },
+  },
+  async created() {
+    this.$store.dispatch("fetchScreenings");
   },
 };
 </script>
