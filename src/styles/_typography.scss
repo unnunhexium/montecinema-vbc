@@ -75,6 +75,13 @@
   line-height: 19px;
 }
 
+@mixin font-paragraph--the-smallest {
+  font-family: "Roboto";
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+}
+
 /* other text elements */
 
 /* navbar, input text */

@@ -27,3 +27,12 @@
     color: $text-light;
   }
 }
+
+@mixin light-pill {
+  @include font-paragraph--the-smallest;
+  color: $text-accent;
+  background: $bg-accent;
+  border-radius: 24px;
+  padding: 0.6em 0.875em;
+  display: inline-block;
+}

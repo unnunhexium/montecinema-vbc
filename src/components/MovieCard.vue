@@ -1,9 +1,10 @@
 <template>
   <div class="movie-card">
     <h3 class="movie-card__title">{{ movie.title }}</h3>
-    <img :src="movie.image" class="movie-card__image" :alt="imageAlt" />
-    <p class="movie-card__description">
-      {{ movie.description }}
+    <p class="movie-card__length">{{ movieLength }}</p>
+    <img :src="movie.poster_url" class="movie-card__image" :alt="imageAlt" />
+    <p class="movie-card__genre">
+      {{ movie.genre.name }}
     </p>
   </div>
 </template>
@@ -20,6 +21,11 @@ export default {
   computed: {
     imageAlt() {
       return `An image from ${this.movie.title} film.`;
+    },
+    movieLength() {
+      const minutes = `0${this.movie.length % 60}`.slice(-2);
+      const hours = (this.movie.length - minutes) / 60;
+      return `${hours}h ${minutes}min`;
     },
   },
 };
@@ -38,16 +44,26 @@ export default {
 
   &__title {
     @include font-heading--medium;
-    padding-bottom: 0.45em;
+    color: $text-dark;
+    padding-bottom: 0.25em;
   }
 
-  &__description {
-    @include font-paragraph--small;
+  &__length {
+    @include font-paragraph--the-smallest;
+    text-transform: none;
+    color: $text-light;
+    padding-bottom: 1em;
   }
 
   &__image {
+    height: 190px;
     width: 100%;
+    object-fit: cover;
     padding-bottom: 1em;
+  }
+
+  &__genre {
+    @include light-pill;
   }
 }
 </style>

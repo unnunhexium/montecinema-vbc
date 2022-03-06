@@ -2,7 +2,6 @@
   <div class="index">
     <TheHero />
     <MoviesList />
-    <BookingSection />
     <ScreeningsSection />
   </div>
 </template>
@@ -10,14 +9,12 @@
 <script>
 import TheHero from "@/components/TheHero.vue";
 import MoviesList from "@/components/MoviesList.vue";
-import BookingSection from "@/components/BookingSection.vue";
 import ScreeningsSection from "@/components/ScreeningsSection.vue";
 
 export default {
   components: {
     MoviesList,
     TheHero,
-    BookingSection,
     ScreeningsSection,
   },
 };
