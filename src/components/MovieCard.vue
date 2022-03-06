@@ -1,8 +1,12 @@
 <template>
   <div class="movie-card">
     <h3 class="movie-card__title">{{ movie.title }}</h3>
-    <p class="movie-card__length">{{ movieLength }}</p>
-    <img :src="movie.poster_url" class="movie-card__image" :alt="imageAlt" />
+    <p class="movie-card__length">{{ movieLength(movie.length) }}</p>
+    <img
+      :src="movie.poster_url"
+      class="movie-card__image"
+      :alt="imageAlt(movie.title)"
+    />
     <p class="movie-card__genre">
       {{ movie.genre.name }}
     </p>
@@ -10,6 +14,8 @@
 </template>
 
 <script>
+import { imageAlt, movieLength } from "@/helpers";
+
 export default {
   name: "MovieCard",
   props: {
@@ -18,15 +24,9 @@ export default {
       required: true,
     },
   },
-  computed: {
-    imageAlt() {
-      return `An image from ${this.movie.title} film.`;
-    },
-    movieLength() {
-      const minutes = `0${this.movie.length % 60}`.slice(-2);
-      const hours = (this.movie.length - minutes) / 60;
-      return `${hours}h ${minutes}min`;
-    },
+  methods: {
+    imageAlt,
+    movieLength,
   },
 };
 </script>
