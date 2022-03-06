@@ -22,18 +22,19 @@
 
 <script>
 import MovieCard from "./MovieCard.vue";
-import { getMovies } from "@/api/movies";
 
 export default {
   name: "MoviesList",
   components: { MovieCard },
   data() {
     return {
-      movies: [],
       listExpanded: false,
     };
   },
   computed: {
+    movies() {
+      return this.$store.state.movies;
+    },
     moviesToDisplay() {
       return this.listExpanded
         ? this.movies.slice(0, 6)
@@ -41,16 +42,12 @@ export default {
     },
   },
   methods: {
-    async fetchMovies() {
-      return await getMovies();
-    },
     showAllMovies() {
       return this.movies.slice(0, 5);
     },
   },
   async created() {
-    const { data } = await this.fetchMovies();
-    this.movies = data;
+    this.$store.dispatch("fetchMovies");
   },
 };
 </script>
