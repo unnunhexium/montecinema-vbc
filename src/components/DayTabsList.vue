@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import DayTab from "./DayTab.vue";
+import DayTab from "./base/DayTab.vue";
 import IconCalendar from "./svg/icon-calendar.vue";
 
 export default {
@@ -73,6 +73,7 @@ export default {
   }
   &__title {
     @include font-heading--the-smallest;
+    text-transform: uppercase;
     color: $text-accent-b;
     padding-bottom: 1em;
   }

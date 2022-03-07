@@ -1,14 +1,21 @@
 <template>
   <div class="movie-card">
     <h3 class="movie-card__title">{{ movie.title }}</h3>
-    <img :src="movie.image" class="movie-card__image" :alt="imageAlt" />
-    <p class="movie-card__description">
-      {{ movie.description }}
+    <p class="movie-card__length">{{ getFormattedLength(movie.length) }}</p>
+    <img
+      :src="movie.poster_url"
+      class="movie-card__image"
+      :alt="imageAlt(movie.title)"
+    />
+    <p class="movie-card__genre">
+      {{ movie.genre.name }}
     </p>
   </div>
 </template>
 
 <script>
+import { imageAlt, getFormattedLength } from "@/helpers";
+
 export default {
   name: "MovieCard",
   props: {
@@ -17,10 +24,9 @@ export default {
       required: true,
     },
   },
-  computed: {
-    imageAlt() {
-      return `An image from ${this.movie.title} film.`;
-    },
+  methods: {
+    imageAlt,
+    getFormattedLength,
   },
 };
 </script>
@@ -38,16 +44,25 @@ export default {
 
   &__title {
     @include font-heading--medium;
-    padding-bottom: 0.45em;
+    color: $text-dark;
+    padding-bottom: 0.25em;
   }
 
-  &__description {
-    @include font-paragraph--small;
+  &__length {
+    @include font-paragraph--the-smallest;
+    color: $text-light;
+    padding-bottom: 1em;
   }
 
   &__image {
+    height: 190px;
     width: 100%;
+    object-fit: cover;
     padding-bottom: 1em;
+  }
+
+  &__genre {
+    @include light-pill;
   }
 }
 </style>

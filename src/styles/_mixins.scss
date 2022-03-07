@@ -27,3 +27,27 @@
     color: $text-light;
   }
 }
+
+@mixin light-pill {
+  @include font-paragraph--the-smallest;
+  color: $text-accent;
+  background: $bg-accent;
+  border-radius: 24px;
+  padding: 0.6em 0.875em;
+  display: inline-block;
+}
+
+@mixin time-pill {
+  @include font-button;
+  background: transparent;
+  display: inline-block;
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: 64px;
+  transition: background-color 0.4s, border-color 0.2s;
+  &:active,
+  &:focus,
+  &:hover {
+    color: $text-white;
+  }
+}

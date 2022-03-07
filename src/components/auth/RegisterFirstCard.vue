@@ -26,7 +26,7 @@
 
 <script>
 import BaseInput from "@/components/base/BaseInput.vue";
-import PasswordInput from "@/components/PasswordInput.vue";
+import PasswordInput from "@/components/base/PasswordInput.vue";
 
 export default {
   name: "RegisterCard",

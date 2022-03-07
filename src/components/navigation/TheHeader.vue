@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import BaseButton from "./base/BaseButton.vue";
+import BaseButton from "../base/BaseButton.vue";
 import NavBar from "./NavBar.vue";
 export default {
   name: "TheHeader",
