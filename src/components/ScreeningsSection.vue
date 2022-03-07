@@ -54,7 +54,7 @@ export default {
 
 <style lang="scss" scoped>
 .screenings-section {
-  padding: 4em 3em 0;
+  padding: 4em 3em 11.75em;
 
   &__title,
   &__content {

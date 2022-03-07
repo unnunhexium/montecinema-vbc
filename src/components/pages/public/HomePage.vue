@@ -3,6 +3,7 @@
     <TheHero />
     <MoviesList />
     <ScreeningsSection />
+    <ContactCard />
   </div>
 </template>
 
@@ -10,12 +11,14 @@
 import TheHero from "@/components/TheHero.vue";
 import MoviesList from "@/components/MoviesList.vue";
 import ScreeningsSection from "@/components/ScreeningsSection.vue";
+import ContactCard from "@/components/ContactCard.vue";
 
 export default {
   components: {
     MoviesList,
     TheHero,
     ScreeningsSection,
+    ContactCard,
   },
 };
 </script>
@@ -26,7 +29,7 @@ export default {
 
 .index {
   background: $bg-white;
-  padding: 0 0 10.75em;
+  padding: 0 0 7.75em;
   max-width: $layout-width;
   margin: 0 auto;
   @include sm {

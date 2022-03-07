@@ -33,6 +33,8 @@ export default {
 
 <style lang="scss" scoped>
 .movie-card {
+  display: flex;
+  flex-flow: column;
   padding: 2.5em;
   border-radius: 8px;
   box-shadow: 0px 24px 78px rgba(0, 0, 0, 0.08),
@@ -59,10 +61,12 @@ export default {
     width: 100%;
     object-fit: cover;
     padding-bottom: 1em;
+    margin-top: auto;
   }
 
   &__genre {
     @include light-pill;
+    margin-right: auto;
   }
 }
 </style>
