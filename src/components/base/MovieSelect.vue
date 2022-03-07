@@ -3,7 +3,7 @@
     <p class="movie-select__title">Movie</p>
     <Multiselect
       v-model="value"
-      :options="options"
+      :options="movies"
       :searchable="false"
       :close-on-select="false"
       :show-labels="false"
@@ -30,22 +30,12 @@ export default {
   data() {
     return {
       value: "",
-      options: [
-        "All movies",
-        "options",
-        "selected",
-        "mulitple",
-        "label",
-        "searchable",
-        "clearOnSelect",
-        "hideSelected",
-        "maxHeight",
-        "allowEmpty",
-        "showLabels",
-        "onChange",
-        "touched",
-      ],
     };
+  },
+  computed: {
+    movies() {
+      return this.$store.state.movies.map((movie) => movie.title);
+    },
   },
 };
 </script>
