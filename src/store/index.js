@@ -27,4 +27,8 @@ export default new Vuex.Store({
       commit("setScreenings", data);
     },
   },
+  getters: {
+    movies: (state) => state.movies,
+    screenings: (state) => state.screenings,
+  },
 });

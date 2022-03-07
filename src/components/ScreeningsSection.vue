@@ -7,7 +7,12 @@
       <MovieSelect />
     </div>
     <div class="screenings-section__cards-wrapper">
-      <ScreeningCard v-for="movie in movies" :movie="movie" :key="movie.id" />
+      <ScreeningCard
+        v-for="movie in movies"
+        :movie="movie"
+        :key="movie.id"
+        :seances="getSeances(movie.id)"
+      />
     </div>
   </div>
 </template>
@@ -16,12 +21,12 @@
 import DayTabsList from "./DayTabsList.vue";
 import MovieSelect from "./base/MovieSelect.vue";
 import ScreeningCard from "./ScreeningCard.vue";
+import { mapGetters } from "vuex";
+
 export default {
   components: { DayTabsList, MovieSelect, ScreeningCard },
   computed: {
-    movies() {
-      return this.$store.state.movies;
-    },
+    ...mapGetters(["movies", "screenings"]),
     imageAlt() {
       return `An image from ${this.movie.title} film.`;
     },
@@ -48,6 +53,11 @@ export default {
   },
   async created() {
     this.$store.dispatch("fetchScreenings");
+  },
+  methods: {
+    getSeances(id) {
+      return this.screenings.filter((screening) => screening.movie === id);
+    },
   },
 };
 </script>
