@@ -1,7 +1,7 @@
 <template>
   <div class="movie-card">
     <h3 class="movie-card__title">{{ movie.title }}</h3>
-    <p class="movie-card__length">{{ movieLength(movie.length) }}</p>
+    <p class="movie-card__length">{{ getFormattedLength(movie.length) }}</p>
     <img
       :src="movie.poster_url"
       class="movie-card__image"
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { imageAlt, movieLength } from "@/helpers";
+import { imageAlt, getFormattedLength } from "@/helpers";
 
 export default {
   name: "MovieCard",
@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     imageAlt,
-    movieLength,
+    getFormattedLength,
   },
 };
 </script>
@@ -50,7 +50,6 @@ export default {
 
   &__length {
     @include font-paragraph--the-smallest;
-    text-transform: none;
     color: $text-light;
     padding-bottom: 1em;
   }

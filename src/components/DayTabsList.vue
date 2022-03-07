@@ -73,6 +73,7 @@ export default {
   }
   &__title {
     @include font-heading--the-smallest;
+    text-transform: uppercase;
     color: $text-accent-b;
     padding-bottom: 1em;
   }

@@ -9,7 +9,9 @@
       <h4 class="screening-card__title">{{ movie.title }}</h4>
       <div class="screening-card__info-wrapper">
         <p class="screening-card__genre">{{ movie.genre.name }}</p>
-        <p class="screening-card__length">{{ movieLength(movie.length) }}</p>
+        <p class="screening-card__length">
+          {{ getFormattedLength(movie.length) }}
+        </p>
       </div>
       <div class="screening-card__hour-list">
         <HourTab>20:00</HourTab>
@@ -19,7 +21,7 @@
 </template>
 
 <script>
-import { imageAlt, movieLength } from "@/helpers";
+import { imageAlt, getFormattedLength } from "@/helpers";
 import HourTab from "./base/HourTab.vue";
 
 export default {
@@ -40,7 +42,7 @@ export default {
   },
   methods: {
     imageAlt,
-    movieLength,
+    getFormattedLength,
   },
 };
 </script>
@@ -75,7 +77,6 @@ export default {
   }
   &__length {
     @include font-paragraph--the-smallest;
-    text-transform: none;
     color: $text-light;
     padding-bottom: 1em;
   }
