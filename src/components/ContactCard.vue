@@ -7,7 +7,8 @@
         <p class="contact-card__location">
           Monterail Sp. z o.o. <br />
           ul. Oławska 27-29 <br />
-          50-123 Wrocław Poland
+          50-123 Wrocław <br />
+          Poland
         </p>
       </div>
       <div class="contact-card__wrapper">
@@ -41,6 +42,7 @@ export default {
 .contact-card {
   max-width: 600px;
   margin: 0 auto;
+  padding: 0 48px;
   &__heading {
     text-align: center;
     padding-bottom: 0.75em;
@@ -62,6 +64,7 @@ export default {
 
   &__icon {
     margin-right: 1em;
+    min-width: 32px;
   }
 
   ::v-deep svg path {
