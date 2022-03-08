@@ -55,6 +55,7 @@ export default {
   &__input-wrapper {
     display: flex;
   }
+
   &__title {
     @include font-heading--the-smallest;
     color: $text-accent-b;
@@ -68,9 +69,9 @@ export default {
   }
 
   &__input {
+    width: 100%;
     background: transparent;
     padding: 0;
-    width: 200px;
     @include font-paragraph--small;
     background: $bg-light;
     color: $text-dark;
