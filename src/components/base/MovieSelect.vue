@@ -13,7 +13,7 @@
     >
       <template slot="caret">
         <img
-          src="@/assets/icons/arrows/arrow-down.svg"
+          src="@/assets/icons/arrows/arrow-down-small.svg"
           class="movie-select__input-image"
           alt="arrow"
         />
@@ -59,23 +59,23 @@ export default {
   &__title {
     @include font-heading--the-smallest;
     color: $text-accent-b;
-    padding-bottom: 1em;
+    padding-bottom: 0.75rem;
   }
 
   &__input-image {
+    right: 1rem;
     position: absolute;
     top: 50%;
     transform: translate(0, -50%);
   }
 
   &__input {
+    border-radius: 8px;
     width: 100%;
-    background: transparent;
     padding: 0;
     @include font-paragraph--small;
     background: $bg-light;
     color: $text-dark;
-    border-radius: 8px;
   }
   ::v-deep .multiselect {
     &__option {
@@ -87,10 +87,12 @@ export default {
       font-size: 18px;
     }
     &__tags {
+      border-radius: 8px;
+      height: 56px;
       background: $bg-light;
       border: none;
       font-size: 18px;
-      padding: 1rem 2.725rem;
+      padding: 1rem 1.5rem;
     }
     &__placeholder {
       color: $text-dark;

@@ -51,7 +51,6 @@ export default {
 
 <style lang="scss" scoped>
 .base-input {
-  margin: 1em 0;
   width: 100%;
 
   &__label,
