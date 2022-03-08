@@ -10,7 +10,7 @@ export default {
 
 <style lang="scss" scoped>
 .day-tab {
-  @include time-pill;
+  @include bordered-pill;
   font-size: 18px;
   color: $text-dark;
   padding: 1rem 2.725rem;

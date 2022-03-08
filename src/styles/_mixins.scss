@@ -28,7 +28,9 @@
   }
 }
 
-@mixin light-pill {
+/* genre */
+
+@mixin filled-pill {
   @include font-paragraph--the-smallest;
   color: $text-accent;
   background: $bg-accent;
@@ -37,7 +39,9 @@
   display: inline-block;
 }
 
-@mixin time-pill {
+/* day tab, hour tab */
+
+@mixin bordered-pill {
   @include font-button;
   background: transparent;
   display: inline-block;
