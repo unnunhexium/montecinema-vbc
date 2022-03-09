@@ -46,9 +46,6 @@ export default {
       return this.movies.slice(0, 5);
     },
   },
-  async created() {
-    this.$store.dispatch("fetchMovies");
-  },
 };
 </script>
 

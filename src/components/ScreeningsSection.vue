@@ -51,9 +51,7 @@ export default {
       return `${dd}/${mm}/${yyyy}`;
     },
   },
-  async created() {
-    this.$store.dispatch("fetchScreenings");
-  },
+
   methods: {
     getSeances(id) {
       return this.screenings.filter((screening) => screening.movie === id);
