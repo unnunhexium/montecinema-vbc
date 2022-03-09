@@ -30,5 +30,14 @@ export default new Vuex.Store({
   getters: {
     movies: (state) => state.movies,
     screenings: (state) => state.screenings,
+    genres: (state) => {
+      const genres = [];
+      state.movies.forEach((movie) => {
+        if (!genres.includes(movie.genre.name)) {
+          genres.push(movie.genre.name);
+        }
+      });
+      return genres;
+    },
   },
 });
