@@ -62,7 +62,7 @@ export default {
   }
 
   &__genre {
-    @include light-pill;
+    @include filled-pill;
   }
 }
 </style>

@@ -10,7 +10,7 @@ export default {
 
 <style lang="scss" scoped>
 .hour-tab {
-  @include time-pill;
+  @include bordered-pill;
   font-size: 16px;
   color: $text-accent;
   padding: 0.75rem 2rem;
