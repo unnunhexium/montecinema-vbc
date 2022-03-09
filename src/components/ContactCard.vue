@@ -13,11 +13,15 @@
       </div>
       <div class="contact-card__wrapper">
         <IconEmail class="contact-card__icon" />
-        <p class="contact-card__email">hello@monterail.com</p>
+        <a class="contact-card__email" href="mailto:hello@monterail.com">
+          hello@monterail.com
+        </a>
       </div>
       <div class="contact-card__wrapper">
         <IconPhone class="contact-card__icon" />
-        <p class="contact-card__phone">+48 533 600 136</p>
+        <a class="contact-card__phone" href="tel:+48 533 600 136">
+          +48 533 600 136
+        </a>
       </div>
     </div>
   </div>
@@ -76,12 +80,15 @@ export default {
     color: $text-dark;
   }
 
-  &__location {
+  &__location,
+  &__email {
     padding-bottom: 2.2em;
   }
 
-  &__email {
-    padding-bottom: 2.2em;
+  &__email,
+  &__phone {
+    text-decoration: none;
+    color: $text-dark;
   }
 }
 </style>
