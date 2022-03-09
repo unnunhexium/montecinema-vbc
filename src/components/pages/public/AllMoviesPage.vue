@@ -8,14 +8,23 @@
           v-model="query"
           class="all-movies-page__search-input"
           type="search"
-          placeholder="What are you looking for?"
+          placeholder=" What are you looking for?"
           label="search"
         />
       </div>
-      <MovieSelect />
+      <MovieSelect
+        @input="setOption"
+        :selectedOption="selectedOption"
+        :options="selectOptions"
+        placeholder="All categories"
+      />
     </div>
     <div class="all-movies-page__movies-list">
-      <MovieCard v-for="movie in movies" :movie="movie" :key="movie.id" />
+      <MovieCard
+        v-for="movie in filteredMovies"
+        :movie="movie"
+        :key="movie.id"
+      />
     </div>
   </div>
 </template>
@@ -25,6 +34,7 @@ import BreadcrumbNav from "@/components/BreadcrumbNav.vue";
 import BaseInput from "@/components/base/BaseInput.vue";
 import MovieSelect from "@/components/base/MovieSelect.vue";
 import MovieCard from "@/components/MovieCard.vue";
+import { mapGetters } from "vuex";
 
 export default {
   name: "AllMoviesPage",
@@ -32,15 +42,36 @@ export default {
   data() {
     return {
       query: "",
+      selectedOption: "",
     };
   },
   computed: {
-    movies() {
-      return this.$store.state.movies;
+    ...mapGetters(["movies", "genres"]),
+    selectOptions() {
+      return ["All categories", ...this.genres];
+    },
+    filteredMovies() {
+      const searchedMovies = this.movies.filter((movie) => {
+        if (!this.query) {
+          return true;
+        } else {
+          return movie.title.toUpperCase().includes(this.query.toUpperCase());
+        }
+      });
+      return this.selectedOption === "All categories"
+        ? searchedMovies
+        : searchedMovies.filter(
+            (movie) => movie.genre.name === this.selectedOption
+          );
     },
   },
-  async created() {
-    this.$store.dispatch("fetchMovies");
+  mounted() {
+    this.selectedOption = this.selectOptions[0];
+  },
+  methods: {
+    setOption(value) {
+      this.selectedOption = value;
+    },
   },
 };
 </script>
@@ -67,9 +98,6 @@ export default {
   &__search-wrapper {
     display: flex;
     position: relative;
-  }
-
-  &__search-input {
   }
 
   &__movies-list {
