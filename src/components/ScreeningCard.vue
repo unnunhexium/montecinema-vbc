@@ -72,7 +72,7 @@ export default {
     align-items: baseline;
   }
   &__genre {
-    @include light-pill;
+    @include filled-pill;
     margin: 0 0.875em 1.75em 0;
   }
   &__length {

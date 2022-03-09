@@ -10,6 +10,11 @@
         @input="$emit('input', $event.target.value)"
         @blur="$emit('blur')"
       />
+      <img
+        src="@/assets/icons/search.svg"
+        class="base-input__search-icon"
+        v-if="type === 'search'"
+      />
     </label>
     <p class="base-input__error" v-if="errorMessage">{{ errorMessage }}</p>
   </div>
@@ -46,7 +51,7 @@ export default {
 
 <style lang="scss" scoped>
 .base-input {
-  margin: 1em 0;
+  width: 100%;
 
   &__label,
   &__input {
@@ -59,6 +64,13 @@ export default {
 
   &__input {
     @include input-element;
+  }
+
+  &__search-icon {
+    position: absolute;
+    top: 35%;
+    right: 0.5rem;
+    transform: translate(0, 50%);
   }
 
   &__error {
