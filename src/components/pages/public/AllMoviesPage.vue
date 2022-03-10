@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import BreadcrumbNav from "@/components/BreadcrumbNav.vue";
+import BreadcrumbNav from "@/components/navigation/BreadcrumbNav.vue";
 import BaseInput from "@/components/base/BaseInput.vue";
 import MovieSelect from "@/components/base/MovieSelect.vue";
 import MovieCard from "@/components/MovieCard.vue";
@@ -50,17 +50,17 @@ export default {
     selectOptions() {
       return ["All categories", ...this.genres];
     },
+    searchedMovies() {
+      return this.query
+        ? this.movies.filter((movie) =>
+            movie.title.toUpperCase().includes(this.query.toUpperCase())
+          )
+        : this.movies;
+    },
     filteredMovies() {
-      const searchedMovies = this.movies.filter((movie) => {
-        if (!this.query) {
-          return true;
-        } else {
-          return movie.title.toUpperCase().includes(this.query.toUpperCase());
-        }
-      });
       return this.selectedOption === "All categories"
-        ? searchedMovies
-        : searchedMovies.filter(
+        ? this.searchedMovies
+        : this.searchedMovies.filter(
             (movie) => movie.genre.name === this.selectedOption
           );
     },
