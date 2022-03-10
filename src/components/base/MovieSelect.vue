@@ -2,14 +2,15 @@
   <div class="movie-select">
     <p class="movie-select__title">Movie</p>
     <Multiselect
-      v-model="value"
+      class="movie-select__input"
+      :value="selectedOption"
+      @input="$emit('input', $event)"
       :options="options"
       :searchable="false"
       :close-on-select="false"
       :show-labels="false"
       :allow-empty="false"
-      placeholder=""
-      class="movie-select__input"
+      open-direction="bottom"
     >
       <template slot="caret">
         <img
@@ -26,39 +27,34 @@
 import Multiselect from "vue-multiselect";
 
 export default {
+  name: "MovieSelect",
   components: { Multiselect },
-  data() {
-    return {
-      value: "",
-      options: [
-        "All movies",
-        "options",
-        "selected",
-        "mulitple",
-        "label",
-        "searchable",
-        "clearOnSelect",
-        "hideSelected",
-        "maxHeight",
-        "allowEmpty",
-        "showLabels",
-        "onChange",
-        "touched",
-      ],
-    };
+  props: {
+    selectedOption: {
+      type: String,
+      required: true,
+    },
+    options: {
+      type: Array,
+      required: true,
+    },
   },
 };
 </script>
+
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style lang="scss" scoped>
 .movie-select {
+  &:active {
+    background: $bg-white;
+    color: $text-dark;
+  }
   &__input-wrapper {
     display: flex;
   }
 
   &__title {
-    @include font-heading--the-smallest;
-    color: $text-accent-b;
+    @include font-element--small-accent;
     padding-bottom: 0.75rem;
   }
 
@@ -76,16 +72,36 @@ export default {
     @include font-paragraph--small;
     background: $bg-light;
     color: $text-dark;
-  }
-  ::v-deep .multiselect {
-    &__option {
-      background: $bg-light;
-      vertical-align: center;
+    &:active {
+      border-radius: 8px 8px 0 0;
     }
+  }
+
+  ::v-deep .multiselect {
+    &__input:hover,
+    &__single:hover {
+      border: none;
+    }
+
+    &__option {
+      background: $bg-white;
+      vertical-align: center;
+
+      &--highlight {
+        background: $bg-light;
+        color: $text-dark;
+        vertical-align: center;
+      }
+    }
+
     &__single {
       background: transparent;
       font-size: 18px;
+      line-height: 1.5rem;
+      padding: 0px;
+      margin: 0px;
     }
+
     &__tags {
       border-radius: 8px;
       height: 56px;
@@ -94,6 +110,7 @@ export default {
       font-size: 18px;
       padding: 1rem 1.5rem;
     }
+
     &__placeholder {
       color: $text-dark;
       font-size: 18px;

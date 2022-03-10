@@ -13,6 +13,10 @@ export default {
   components: {
     TheHeader,
   },
+  async created() {
+    this.$store.dispatch("fetchMovies");
+    this.$store.dispatch("fetchScreenings");
+  },
 };
 </script>
 

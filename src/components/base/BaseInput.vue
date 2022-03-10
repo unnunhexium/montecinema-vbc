@@ -4,17 +4,24 @@
       {{ label }}
       <input
         class="base-input__input"
-        :type="type"
-        :placeholder="placeholder"
         :value="value"
         @input="$emit('input', $event.target.value)"
         @blur="$emit('blur')"
+        :type="type"
+        :placeholder="placeholder"
       />
-      <img
-        src="@/assets/icons/search.svg"
-        class="base-input__search-icon"
-        v-if="type === 'search'"
-      />
+      <template v-if="type === 'search'">
+        <img
+          src="@/assets/icons/search.svg"
+          class="base-input__search-icon"
+          v-if="value.length == 0"
+        />
+        <img
+          src="@/assets/icons/close.svg"
+          class="base-input__close-icon"
+          v-if="value.length > 0"
+        />
+      </template>
     </label>
     <p class="base-input__error" v-if="errorMessage">{{ errorMessage }}</p>
   </div>
@@ -64,11 +71,21 @@ export default {
 
   &__input {
     @include input-element;
+    position: relative;
+    &::-webkit-search-cancel-button {
+      right: 1rem;
+      bottom: 0.2rem;
+      position: relative;
+      transform: scale(175%);
+      z-index: 2;
+      opacity: 0;
+    }
   }
 
-  &__search-icon {
+  &__search-icon,
+  &__close-icon {
     position: absolute;
-    top: 35%;
+    top: 30%;
     right: 0.5rem;
     transform: translate(0, 50%);
   }
