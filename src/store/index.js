@@ -8,6 +8,7 @@ export default new Vuex.Store({
   state: {
     movies: [],
     screenings: [],
+    movieDetails: [],
   },
   mutations: {
     setMovies(state, movies) {
@@ -31,13 +32,7 @@ export default new Vuex.Store({
     movies: (state) => state.movies,
     screenings: (state) => state.screenings,
     genres: (state) => {
-      const genres = [];
-      state.movies.forEach((movie) => {
-        if (!genres.includes(movie.genre.name)) {
-          genres.push(movie.genre.name);
-        }
-      });
-      return genres;
+      return [...new Set(state.movies.map((movie) => movie.genre.name))];
     },
   },
 });
