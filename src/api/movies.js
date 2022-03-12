@@ -12,3 +12,7 @@ export const getMovies = async () => {
 export const getScreenings = async () => {
   return await axios.get(`${API_BASE_URL}/${SCREENINGS_URL}`);
 };
+
+export const getMovieDetails = async (id) => {
+  return await axios.get(`${API_BASE_URL}/${MOVIES_URL}/${id}`);
+};
