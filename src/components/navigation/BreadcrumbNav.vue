@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import ArrowLeft from "./svg/icon-arrow-left.vue";
+import ArrowLeft from "../svg/icon-arrow-left.vue";
 
 export default {
   name: "BreadcrumbNav",
