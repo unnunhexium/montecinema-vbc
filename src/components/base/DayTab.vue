@@ -12,8 +12,10 @@ export default {
 .day-tab {
   @include bordered-pill;
   font-size: 18px;
+  line-height: 18px;
   color: $text-dark;
-  padding: 1rem 2.725rem;
+  max-height: 56px;
+  padding: 0 39px;
   border: 2px solid $btn-dark;
   &:active,
   &:focus,

@@ -1,6 +1,6 @@
 <template>
   <div class="day-tabs-list">
-    <p class="day-tabs-list__title">Day</p>
+    <p class="day-tabs-list__title" v-if="$route.name === 'Home'">Day</p>
     <div class="day-tabs-list__wrapper">
       <DayTab
         v-for="tab in mappedTabs"
