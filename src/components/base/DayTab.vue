@@ -1,10 +1,18 @@
 <template>
-  <button class="day-tab"><slot /></button>
+  <button :class="['day-tab', { active }]" @click="$emit('click')">
+    <slot />
+  </button>
 </template>
 
 <script>
 export default {
   name: "DayTab",
+  props: {
+    active: {
+      type: Boolean,
+      default: false,
+    },
+  },
 };
 </script>
 
@@ -17,10 +25,12 @@ export default {
   max-height: 56px;
   padding: 0 39px;
   border: 2px solid $btn-dark;
-  &:active,
-  &:focus,
-  &:hover {
+  &.active {
     background: $btn-dark;
+    color: $text-white;
+  }
+  &:hover {
+    background: darken($btn-dark, 20);
   }
 }
 </style>

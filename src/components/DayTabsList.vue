@@ -1,20 +1,31 @@
 <template>
   <div class="day-tabs-list">
-    <p class="day-tabs-list__title" v-if="$route.name === 'Home'">Day</p>
+    <p class="day-tabs-list__title" v-if="showLabel">Day</p>
     <div class="day-tabs-list__wrapper">
       <DayTab
-        v-for="tab in mappedTabs"
+        class="day-tabs-list__tab"
+        v-for="(tab, index) in mappedTabs"
+        @click="setDate(index)"
         :key="tab.id"
         :value="tab.day"
-        class="day-tabs-list__tab"
+        :active="isTabActive(index)"
       >
         {{ displayToday(tab) }}
       </DayTab>
-      <button class="day-tabs-list__tab--calendar">
+      <button class="day-tabs-list__tab--button" @click="openPicker">
         <IconCalendar
           src="@/assets/calendar.svg"
           class="day-tabs-list__tab--icon"
           alt="calendar"
+        />
+        <Datepicker
+          :format="customFormatter"
+          v-model="selectedDate"
+          input-class="day-tabs-list__tab--input"
+          calendar-class="day-tabs-list__tab--picker"
+          ref="datePicker"
+          monday-first
+          :disabled-dates="{ to: new Date() }"
         />
       </button>
     </div>
@@ -24,9 +35,10 @@
 <script>
 import DayTab from "./base/DayTab.vue";
 import IconCalendar from "./svg/icon-calendar.vue";
+import Datepicker from "vuejs-datepicker";
 
 export default {
-  components: { DayTab, IconCalendar },
+  components: { DayTab, IconCalendar, Datepicker },
   data() {
     return {
       tabs: [
@@ -38,11 +50,47 @@ export default {
         { day: "Fri", id: 5 },
         { day: "Sat", id: 6 },
       ],
+      selectedDate: new Date(),
+      formattedDate: "",
     };
+  },
+  watch: {
+    selectedDate(newVal) {
+      this.$emit("set-date", newVal);
+    },
   },
   methods: {
     displayToday(tab) {
       return this.todayIs === tab.id ? "Today" : tab.day;
+    },
+    customFormatter(date) {
+      return new Date(date);
+    },
+    setDate(index) {
+      let today = new Date();
+      this.selectedDate = new Date(today.setDate(today.getDate() + index));
+    },
+    openPicker() {
+      this.$refs.datePicker.showCalendar();
+    },
+    getTabDate(index) {
+      const today = new Date();
+      return new Date(today.setDate(today.getDate() + index));
+    },
+    isTabActive(index) {
+      console.table(
+        this.selectedDate.getDay(),
+        this.getTabDate(index).getDay(),
+        this.selectedDate.getMonth(),
+        this.getTabDate(index).getMonth(),
+        this.selectedDate.getFullYear(),
+        this.getTabDate(index).getFullYear()
+      );
+      return (
+        this.selectedDate.getDate() === this.getTabDate(index).getDate() &&
+        this.selectedDate.getMonth() === this.getTabDate(index).getMonth() &&
+        this.selectedDate.getFullYear() === this.getTabDate(index).getFullYear()
+      );
     },
   },
 
@@ -51,6 +99,9 @@ export default {
       const d = new Date();
       let day = d.getDay();
       return day;
+    },
+    getDate() {
+      return new Date(this.selectedDate).getMonth();
     },
     mappedTabs() {
       const filteredTabs = this.tabs.filter((tab) => tab.id !== this.todayIs);
@@ -61,13 +112,15 @@ export default {
         ...filteredTabs.slice(0, index),
       ];
     },
+    showLabel() {
+      return this.$route.name === "Home" || this.$route.name === "Screenings";
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
 .day-tabs-list {
-  overflow: auto;
   &__wrapper {
     display: flex;
   }
@@ -79,7 +132,7 @@ export default {
   }
   &__tab {
     margin-right: 8px;
-    &--calendar {
+    &--button {
       background: transparent;
       padding: 0.75em 1em;
       cursor: pointer;
@@ -90,12 +143,25 @@ export default {
       &:focus,
       &:hover {
         background: $btn-dark;
-
         ::v-deep svg path {
           stroke: $text-white;
         }
       }
     }
+    ::v-deep &--picker {
+      right: 0;
+    }
+    ::v-deep &--input {
+      display: none;
+    }
+  }
+  ::v-deep span.cell.selected {
+    background: $btn-default;
+  }
+  ::v-deep
+    .vdp-datepicker__calendar
+    .cell:not(.blank):not(.disabled).day:hover {
+    border: 2px solid $btn-default;
   }
 }
 </style>

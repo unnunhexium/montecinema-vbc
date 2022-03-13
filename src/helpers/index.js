@@ -12,8 +12,8 @@ export const getYear = (string) => {
   return string.slice(0, 4);
 };
 
-export const getDayOfWeek = () => {
-  const dayOfWeek = new Date().getDay();
+export const getDayOfWeek = (date = new Date()) => {
+  const dayOfWeek = new Date(date).getDay();
   const days = [
     "Sunday",
     "Monday",
@@ -26,8 +26,8 @@ export const getDayOfWeek = () => {
   return days[dayOfWeek];
 };
 
-export const getDate = () => {
-  const today = new Date();
+export const getDate = (date = new Date()) => {
+  const today = new Date(date);
   const yyyy = today.getFullYear();
   const mm = `0${today.getMonth() + 1}`.slice(-2);
   const dd = `0${today.getDate()}`.slice(-2);
