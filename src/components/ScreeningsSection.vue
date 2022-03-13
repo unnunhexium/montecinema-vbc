@@ -1,14 +1,21 @@
 <template>
   <div class="screenings-section">
     <h2 class="screenings-section__title">Screenings:</h2>
-    <p class="screenings-section__content">{{ getDayOfWeek }} {{ getDate }}</p>
+    <p class="screenings-section__content">
+      {{ selectedWeekday }} {{ formattedDate }}
+    </p>
     <div class="screenings-section__input-wrapper">
-      <DayTabsList />
-      <MovieSelect />
+      <DayTabsList @set-date="setDate" />
+      <MovieSelect
+        :options="selectOptions"
+        :selectedOption="selectedOption"
+        @input="setOption"
+        placeholder="All categories"
+      />
     </div>
     <div class="screenings-section__cards-wrapper">
       <ScreeningCard
-        v-for="movie in movies"
+        v-for="movie in filteredMovies"
         :movie="movie"
         :key="movie.id"
         :seances="getSeances(movie.id)"
@@ -22,6 +29,7 @@ import DayTabsList from "./DayTabsList.vue";
 import MovieSelect from "./base/MovieSelect.vue";
 import ScreeningCard from "./ScreeningCard.vue";
 import { mapGetters } from "vuex";
+import { getDayOfWeek } from "@/helpers";
 
 export default {
   components: { DayTabsList, MovieSelect, ScreeningCard },
@@ -30,32 +38,52 @@ export default {
     imageAlt() {
       return `An image from ${this.movie.title} film.`;
     },
-    getDayOfWeek() {
-      const dayOfWeek = new Date().getDay();
-      const days = [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-      ];
-      return days[dayOfWeek];
+    movies() {
+      return this.$store.state.movies;
     },
-    getDate() {
-      const today = new Date();
-      const yyyy = today.getFullYear();
-      const mm = `0${today.getMonth() + 1}`.slice(-2);
-      const dd = `0${today.getDate()}`.slice(-2);
-      return `${dd}/${mm}/${yyyy}`;
+    // WIP
+    // selectOptions() {
+    //   return ["All categories", ...this.movies.map((movie) => movie.title)];
+    // },
+    filteredMovies() {
+      return this.selectedOption === "All categories"
+        ? this.movies
+        : this.movies.filter(
+            (movie) => movie.genre.name === this.selectedOption
+          );
+    },
+    ...mapGetters(["movies", "genres", "screenings"]),
+    selectOptions() {
+      return ["All categories", ...this.genres];
+    },
+    selectedWeekday() {
+      return getDayOfWeek(this.selectedDate);
+    },
+    formattedDate() {
+      return this.selectedDate.toLocaleDateString("en-GB");
     },
   },
-
   methods: {
     getSeances(id) {
       return this.screenings.filter((screening) => screening.movie === id);
     },
+    getDayOfWeek,
+    setOption(value) {
+      this.selectedOption = value;
+    },
+    setDate(date) {
+      this.selectedDate = date;
+    },
+  },
+  data() {
+    return {
+      query: "",
+      selectedOption: "",
+      selectedDate: new Date(),
+    };
+  },
+  mounted() {
+    this.selectedOption = this.selectOptions[0];
   },
 };
 </script>

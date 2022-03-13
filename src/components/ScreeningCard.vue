@@ -34,10 +34,9 @@ export default {
       type: Object,
       required: true,
     },
-  },
-  computed: {
-    screenings() {
-      return this.$store.state.screenings;
+    seances: {
+      type: Array,
+      required: true,
     },
   },
   methods: {
