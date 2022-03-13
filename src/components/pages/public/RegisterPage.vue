@@ -3,18 +3,18 @@
     <div class="register-first-page__wrapper">
       <h1 class="register-first-page__heading">Ahoy you!</h1>
       <h2 class="register-first-page__subheading">Care to register?</h2>
-      <RegisterFirstCard />
+      <RegisterCard />
     </div>
   </div>
 </template>
 
 <script>
-import RegisterFirstCard from "@/components/auth/RegisterFirstCard.vue";
+import RegisterCard from "@/components/auth/RegisterCard.vue";
 
 export default {
   name: "RegisterFirstPage",
   components: {
-    RegisterFirstCard,
+    RegisterCard,
   },
 };
 </script>
