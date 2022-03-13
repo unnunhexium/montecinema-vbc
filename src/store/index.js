@@ -8,7 +8,7 @@ export default new Vuex.Store({
   state: {
     movies: [],
     screenings: [],
-    movieDetails: [],
+    movieTitle: "",
   },
   mutations: {
     setMovies(state, movies) {
@@ -16,6 +16,9 @@ export default new Vuex.Store({
     },
     setScreenings(state, screenings) {
       state.screenings = screenings;
+    },
+    setMovieTitle(state, movieTitle) {
+      state.movieTitle = movieTitle;
     },
   },
   actions: {
@@ -27,6 +30,9 @@ export default new Vuex.Store({
       const { data } = await getScreenings();
       commit("setScreenings", data);
     },
+    async setMovieTitle({ commit }, title) {
+      commit("setMovieTitle", title);
+    },
   },
   getters: {
     movies: (state) => state.movies,
@@ -34,5 +40,6 @@ export default new Vuex.Store({
     genres: (state) => {
       return [...new Set(state.movies.map((movie) => movie.genre.name))];
     },
+    movieTitle: (state) => state.movieTitle,
   },
 });

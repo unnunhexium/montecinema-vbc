@@ -29,14 +29,20 @@ export default {
   components: {
     ArrowLeft,
   },
-  data() {
-    return {
-      currentRoute: "Movies",
-    };
-  },
   computed: {
     breadcrumbs() {
-      return [];
+      if (this.$route.name === "SingleMovie") {
+        return [{ title: "Movies", url: "/movies" }];
+      } else {
+        return [];
+      }
+    },
+    currentRoute() {
+      if (this.$route.name === "SingleMovie") {
+        return this.$store.state.movieTitle;
+      } else {
+        return this.$route.meta.breadcrumb || this.$route.name;
+      }
     },
   },
 };
