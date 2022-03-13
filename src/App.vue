@@ -1,9 +1,9 @@
 <template>
   <div>
-    <TheHeader v-if="hideSimpleNav" />
+    <TheHeader v-if="showTheHeaderNav" />
     <SimpleNav v-if="showSimpleNav" />
-    <BreadcrumbNav v-if="hideSimpleNav" />
-    <router-view></router-view>
+    <BreadcrumbNav v-if="showBreadcrumbNav" />
+    <router-view />
   </div>
 </template>
 
@@ -19,11 +19,22 @@ export default {
     BreadcrumbNav,
   },
   computed: {
+    // register and login
     showSimpleNav() {
-      return this.$route.name === "Register";
+      return this.$route.name === "Register" || this.$route.name === "Login";
     },
-    hideSimpleNav() {
-      return this.$route.name !== "Register";
+    // all but register and login not
+    showTheHeaderNav() {
+      return this.$route.name !== "Register" && this.$route.name !== "Login";
+    },
+    // all movies, movie detail, screenings, contact
+    showBreadcrumbNav() {
+      return (
+        this.$route.path.startsWith("/movies") ||
+        this.$route.name === "Movie" ||
+        this.$route.name === "Screenings" ||
+        this.$route.name === "Contact"
+      );
     },
   },
   async created() {

@@ -1,8 +1,12 @@
 <template>
   <div class="simple-nav">
-    <img src="@/assets/icons/logo.svg" class="simple-nav__logo" />
+    <a href="/">
+      <img src="@/assets/icons/logo.svg" class="simple-nav__logo"
+    /></a>
     <p class="simple-nav__text">
-      Developed with <span class="simple-nav__icon">♥</span> by Monterail
+      Developed with
+      <span class="simple-nav__icon">♥</span>
+      by Monterail
     </p>
   </div>
 </template>
