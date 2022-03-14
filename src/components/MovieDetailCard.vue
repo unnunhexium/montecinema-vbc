@@ -50,7 +50,10 @@ export default {
 
 <style lang="scss" scoped>
 .movie-detail-card {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1.5fr minmax(340px, 1fr);
+  grid-template-rows: 1fr;
+  gap: 28px;
   margin-top: 4em;
   &__title {
     @include font-heading--large;
@@ -83,9 +86,16 @@ export default {
   }
 
   &__image-wrapper {
+    overflow: hidden;
+    height: 100%;
+    position: relative;
   }
 
   &__image {
+    position: absolute;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
   }
 }
 </style>
