@@ -78,14 +78,6 @@ export default {
       return new Date(today.setDate(today.getDate() + index));
     },
     isTabActive(index) {
-      console.table(
-        this.selectedDate.getDay(),
-        this.getTabDate(index).getDay(),
-        this.selectedDate.getMonth(),
-        this.getTabDate(index).getMonth(),
-        this.selectedDate.getFullYear(),
-        this.getTabDate(index).getFullYear()
-      );
       return (
         this.selectedDate.getDate() === this.getTabDate(index).getDate() &&
         this.selectedDate.getMonth() === this.getTabDate(index).getMonth() &&
