@@ -8,40 +8,52 @@
     <div class="screening-card__content-wrapper">
       <h4 class="screening-card__title">{{ movie.title }}</h4>
       <div class="screening-card__info-wrapper">
-        <p class="screening-card__genre">{{ movie.genre.name }}</p>
+        <p class="screening-card__genre">
+          {{ movie.genre && movie.genre.name }}
+        </p>
         <p class="screening-card__length">
           {{ getFormattedLength(movie.length) }}
         </p>
       </div>
       <div class="screening-card__hour-list">
-        <HourTab>20:00</HourTab>
+        <HourTab
+          v-for="screening in filteredScreenings"
+          :key="screening.datetime"
+          >{{ getTime(screening.datetime) }}</HourTab
+        >
+        <p class="screening-card__alert" v-if="filteredScreenings.length == 0">
+          There are no seances for today. Please check another day.
+        </p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { imageAlt, getFormattedLength } from "@/helpers";
+import { imageAlt, getFormattedLength, getTime } from "@/helpers";
 import HourTab from "./base/HourTab.vue";
+import screeningsList from "@/mixins/screeningsList.js";
 
 export default {
   name: "ScreeningCard",
   components: {
     HourTab,
   },
+  mixins: [screeningsList],
   props: {
     movie: {
       type: Object,
       required: true,
     },
-    seances: {
+    filteredScreenings: {
       type: Array,
-      required: true,
+      default: () => [],
     },
   },
   methods: {
     imageAlt,
     getFormattedLength,
+    getTime,
   },
 };
 </script>
@@ -78,6 +90,10 @@ export default {
     @include font-paragraph--the-smallest;
     color: $text-light;
     padding-bottom: 1em;
+  }
+  &__alert {
+    @include font-paragraph--small;
+    color: $text-accent;
   }
 }
 </style>

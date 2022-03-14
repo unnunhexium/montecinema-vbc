@@ -25,14 +25,20 @@
 </template>
 
 <script>
-import DayTabsList from "./DayTabsList.vue";
 import MovieSelect from "./base/MovieSelect.vue";
 import ScreeningCard from "./ScreeningCard.vue";
 import { mapGetters } from "vuex";
-import { getDayOfWeek } from "@/helpers";
+import dayTabsMixin from "@/mixins/dayTabs.js";
 
 export default {
-  components: { DayTabsList, MovieSelect, ScreeningCard },
+  components: { MovieSelect, ScreeningCard },
+  mixins: [dayTabsMixin],
+  data() {
+    return {
+      query: "",
+      selectedOption: "",
+    };
+  },
   computed: {
     ...mapGetters(["movies", "screenings"]),
     imageAlt() {
@@ -56,32 +62,16 @@ export default {
     selectOptions() {
       return ["All categories", ...this.genres];
     },
-    selectedWeekday() {
-      return getDayOfWeek(this.selectedDate);
-    },
-    formattedDate() {
-      return this.selectedDate.toLocaleDateString("en-GB");
-    },
   },
   methods: {
     getSeances(id) {
       return this.screenings.filter((screening) => screening.movie === id);
     },
-    getDayOfWeek,
     setOption(value) {
       this.selectedOption = value;
     },
-    setDate(date) {
-      this.selectedDate = date;
-    },
   },
-  data() {
-    return {
-      query: "",
-      selectedOption: "",
-      selectedDate: new Date(),
-    };
-  },
+
   mounted() {
     this.selectedOption = this.selectOptions[0];
   },

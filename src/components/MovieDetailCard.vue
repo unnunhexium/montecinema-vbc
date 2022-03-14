@@ -29,31 +29,21 @@
 
 <script>
 import { imageAlt, getFormattedLength, getYear } from "@/helpers";
-import { getMovieDetails } from "@/api/movies";
 
 export default {
   name: "MovieDetailCard",
   components: {},
   props: {
-    movieId: {
-      type: String,
+    movieDetails: {
+      type: Object,
       required: true,
     },
   },
-  data() {
-    return {
-      movieDetails: null,
-    };
-  },
+
   methods: {
     imageAlt,
     getFormattedLength,
     getYear,
-  },
-  async created() {
-    const { data } = await getMovieDetails(this.movieId);
-    this.movieDetails = data;
-    this.$store.dispatch("setMovieTitle", this.movieDetails.title);
   },
 };
 </script>

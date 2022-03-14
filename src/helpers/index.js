@@ -33,3 +33,10 @@ export const getDate = (date = new Date()) => {
   const dd = `0${today.getDate()}`.slice(-2);
   return `${dd}/${mm}/${yyyy}`;
 };
+
+export const getTime = (date = new Date()) => {
+  const today = new Date(date);
+  const hours = `0${today.getHours()}`.slice(-2);
+  const minutes = `0${today.getMinutes()}`.slice(-2);
+  return `${hours}:${minutes}`;
+};

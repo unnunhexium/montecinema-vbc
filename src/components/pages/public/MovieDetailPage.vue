@@ -1,14 +1,24 @@
 <template>
   <div class="movie-detail-page">
-    <MovieDetailCard :movieId="movieId" class="movie-detail-page__movie-card" />
+    <MovieDetailCard
+      :movieDetails="movieDetails"
+      class="movie-detail-page__movie-card"
+    />
     <div>
       <h2 class="movie-detail-page__screening-title">Screenings:</h2>
       <p class="movie-detail-page__screening-content">
-        {{ getDayOfWeek() }} {{ getDate() }}
+        {{ selectedWeekday }} {{ formattedDate }}
       </p>
-      <ScreeningCard />
+      <DayTabsList
+        class="movie-detail-page__day-tabs-list"
+        @set-date="setDate"
+      />
+      <ScreeningCard
+        class="movie-detail-page__screening-card"
+        :movie="movieDetails"
+        :filteredScreenings="filterByDay(movieId, selectedDate)"
+      />
     </div>
-    <DayTabsList />
   </div>
 </template>
 
@@ -16,20 +26,35 @@
 import MovieDetailCard from "@/components/MovieDetailCard.vue";
 import DayTabsList from "@/components/DayTabsList.vue";
 import ScreeningCard from "@/components/ScreeningCard.vue";
-import { getDayOfWeek, getDate } from "@/helpers";
+import dayTabsMixin from "@/mixins/dayTabs.js";
+import { getDayOfWeek, getDate, getTime } from "@/helpers";
+import { getMovieDetails } from "@/api/movies";
+import screeningsList from "@/mixins/screeningsList.js";
 
 export default {
   name: "MovieDetailPage",
   components: { MovieDetailCard, DayTabsList, ScreeningCard },
+  data() {
+    return {
+      movieDetails: {},
+    };
+  },
+  mixins: [dayTabsMixin, screeningsList],
   methods: {
     getDayOfWeek,
     getDate,
+    getTime,
   },
   props: {
     movieId: {
       type: String,
       required: true,
     },
+  },
+  async created() {
+    const { data } = await getMovieDetails(this.movieId);
+    this.movieDetails = data;
+    this.$store.dispatch("setMovieTitle", this.movieDetails.title);
   },
 };
 </script>
@@ -54,6 +79,11 @@ export default {
     color: $text-lighter;
     padding-bottom: 0.5em;
     display: flex;
+  }
+
+  &__day-tabs-list,
+  &__screening-card {
+    margin-bottom: 4em;
   }
 }
 </style>

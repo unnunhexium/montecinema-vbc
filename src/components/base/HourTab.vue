@@ -13,7 +13,8 @@ export default {
   @include bordered-pill;
   font-size: 16px;
   color: $text-accent;
-  padding: 0.75rem 2rem;
+  padding: 0.5rem 2rem;
+  margin: 0 0.5em 0.5em 0;
   border: 2px solid $btn-default;
   &:active,
   &:focus,
