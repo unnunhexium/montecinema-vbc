@@ -1,5 +1,5 @@
 <template>
-  <div class="breadcrumb-nav">
+  <nav class="breadcrumb-nav">
     <button class="breadcrumb-nav__button-back" @click="$router.go(-1)">
       <ArrowLeft />Back
     </button>
@@ -18,7 +18,7 @@
       />
     </template>
     <span class="breadcrumb-nav__breadcrumb-span">{{ currentRoute }}</span>
-  </div>
+  </nav>
 </template>
 
 <script>

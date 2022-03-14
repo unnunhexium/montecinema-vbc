@@ -1,5 +1,5 @@
 <template>
-  <div class="the-header" id="the-header">
+  <header class="the-header" id="the-header">
     <a href="/">
       <img class="the-header__logo" src="@/assets/logo.svg" />
     </a>
@@ -9,7 +9,7 @@
       <BaseButton @click="login">Login</BaseButton>
     </div>
     <img src="@/assets/navigation-menu.svg" class="the-header__hamburger" />
-  </div>
+  </header>
 </template>
 
 <script>

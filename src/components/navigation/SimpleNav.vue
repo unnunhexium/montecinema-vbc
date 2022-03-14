@@ -1,5 +1,5 @@
 <template>
-  <div class="simple-nav">
+  <nav class="simple-nav">
     <a href="/">
       <img src="@/assets/icons/logo.svg" class="simple-nav__logo"
     /></a>
@@ -8,7 +8,7 @@
       <span class="simple-nav__icon">♥</span>
       by Monterail
     </p>
-  </div>
+  </nav>
 </template>
 
 <script>
