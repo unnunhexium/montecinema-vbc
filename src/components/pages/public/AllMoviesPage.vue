@@ -11,7 +11,7 @@
           label="search"
         />
       </div>
-      <MovieSelect
+      <BaseSelect
         @input="setOption"
         :selectedOption="selectedOption"
         :options="selectOptions"
@@ -30,13 +30,13 @@
 
 <script>
 import BaseInput from "@/components/base/BaseInput.vue";
-import MovieSelect from "@/components/base/MovieSelect.vue";
+import BaseSelect from "@/components/base/BaseSelect.vue";
 import MovieCard from "@/components/MovieCard.vue";
 import { mapGetters } from "vuex";
 
 export default {
   name: "AllMoviesPage",
-  components: { BaseInput, MovieSelect, MovieCard },
+  components: { BaseInput, BaseSelect, MovieCard },
   data() {
     return {
       query: "",

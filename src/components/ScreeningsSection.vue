@@ -6,7 +6,7 @@
     </p>
     <div class="screenings-section__input-wrapper">
       <DayTabsList @set-date="setDate" />
-      <MovieSelect
+      <BaseSelect
         :options="selectOptions"
         :selectedOption="selectedOption"
         @input="setOption"
@@ -18,21 +18,22 @@
         v-for="movie in filteredMovies"
         :movie="movie"
         :key="movie.id"
-        :seances="getSeances(movie.id)"
+        :filteredScreenings="filterByDay(movie.id, selectedDate)"
       />
     </div>
   </div>
 </template>
 
 <script>
-import MovieSelect from "./base/MovieSelect.vue";
+import BaseSelect from "./base/BaseSelect.vue";
 import ScreeningCard from "./ScreeningCard.vue";
 import { mapGetters } from "vuex";
 import dayTabsMixin from "@/mixins/dayTabs.js";
+import screeningsList from "@/mixins/screeningsList.js";
 
 export default {
-  components: { MovieSelect, ScreeningCard },
-  mixins: [dayTabsMixin],
+  components: { BaseSelect, ScreeningCard },
+  mixins: [dayTabsMixin, screeningsList],
   data() {
     return {
       query: "",
@@ -47,21 +48,15 @@ export default {
     movies() {
       return this.$store.state.movies;
     },
-    // WIP
-    // selectOptions() {
-    //   return ["All categories", ...this.movies.map((movie) => movie.title)];
-    // },
+    selectOptions() {
+      return ["All movies", ...this.movies.map((movie) => movie.title)];
+    },
     filteredMovies() {
-      return this.selectedOption === "All categories"
+      return this.selectedOption === "All movies"
         ? this.movies
-        : this.movies.filter(
-            (movie) => movie.genre.name === this.selectedOption
-          );
+        : this.movies.filter((movie) => movie.title === this.selectedOption);
     },
     ...mapGetters(["movies", "genres", "screenings"]),
-    selectOptions() {
-      return ["All categories", ...this.genres];
-    },
   },
   methods: {
     getSeances(id) {
@@ -94,7 +89,9 @@ export default {
   }
 
   &__input-wrapper {
-    display: flex;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 40px;
     justify-content: space-between;
     padding-bottom: 6.125em;
   }

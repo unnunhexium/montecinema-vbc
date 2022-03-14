@@ -1,8 +1,8 @@
 <template>
-  <div class="movie-select">
-    <p class="movie-select__title">Movie</p>
+  <div class="base-select">
+    <p class="base-select__title">Movie</p>
     <Multiselect
-      class="movie-select__input"
+      class="base-select__input"
       :value="selectedOption"
       @input="$emit('input', $event)"
       :options="options"
@@ -15,7 +15,7 @@
       <template slot="caret">
         <img
           src="@/assets/icons/arrows/arrow-down-small.svg"
-          class="movie-select__input-image"
+          class="base-select__input-image"
           alt="arrow"
         />
       </template>
@@ -27,7 +27,7 @@
 import Multiselect from "vue-multiselect";
 
 export default {
-  name: "MovieSelect",
+  name: "baseSelect",
   components: { Multiselect },
   props: {
     selectedOption: {
@@ -44,7 +44,7 @@ export default {
 
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style lang="scss" scoped>
-.movie-select {
+.base-select {
   &:active {
     background: $bg-white;
     color: $text-dark;
@@ -67,7 +67,8 @@ export default {
 
   &__input {
     border-radius: 8px;
-    width: 100%;
+    min-width: 300px;
+    max-width: 400px;
     padding: 0;
     @include font-paragraph--small;
     background: $bg-light;
