@@ -1,9 +1,21 @@
 <template>
-  <div>Screenings.</div>
+  <div class="screenings-page">
+    <ScreeningsSection />
+  </div>
 </template>
 
 <script>
-export default {};
+import ScreeningsSection from "@/components/ScreeningsSection.vue";
+
+export default {
+  components: {
+    ScreeningsSection,
+  },
+};
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.screenings-page {
+  max-width: $layout-width;
+}
+</style>
