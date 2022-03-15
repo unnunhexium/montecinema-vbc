@@ -56,3 +56,17 @@
     color: $text-white;
   }
 }
+
+@mixin outline-transparent {
+  outline: none;
+  border: 2px dotted transparent;
+  border-radius: 44px;
+  padding: 0.65em;
+}
+
+@mixin outline-focus {
+  outline: none;
+  border: 2px dotted $btn-pressed;
+  border-radius: 44px;
+  padding: 0.65em;
+}

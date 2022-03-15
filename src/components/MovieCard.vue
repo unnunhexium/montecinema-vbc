@@ -42,6 +42,11 @@ export default {
   box-shadow: 0px 24px 78px rgba(0, 0, 0, 0.08),
     0px 5.36071px 17.4223px rgba(0, 0, 0, 0.0238443),
     0px 1.59602px 5.18708px rgba(0, 0, 0, 0.0161557);
+  border: 2px dotted transparent;
+
+  &:focus-visible {
+    border: 2px dotted $btn-pressed;
+  }
   @include sm {
     padding: 1.5em;
   }

@@ -44,20 +44,28 @@ export default {
   &--primary {
     background: $btn-default;
     color: $text-white;
-    &:active,
-    &:focus,
+    border: 3px solid transparent;
+
     &:hover {
+      border: 3px solid $btn-pressed;
       background: $btn-hover;
     }
+
     &:active,
-    &:focus {
-      border: 4px solid $btn-pressed;
+    &:focus-visible {
+      outline: none;
+      border: 3px solid $btn-pressed;
     }
   }
 
   &--secondary {
     color: $text-accent;
     background: transparent;
+    @include outline-transparent;
+
+    &:focus-visible {
+      @include outline-focus;
+    }
   }
 }
 </style>

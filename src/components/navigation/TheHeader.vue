@@ -1,12 +1,14 @@
 <template>
   <header class="the-header" id="the-header">
-    <a href="/">
-      <img class="the-header__logo" src="@/assets/logo.svg" />
+    <a class="the-header__logo" href="/">
+      <img src="@/assets/logo.svg" />
     </a>
     <NavBar />
     <div class="the-header__wrapper">
-      <BaseButton @click="register" type="secondary">Register</BaseButton>
-      <BaseButton @click="login">Login</BaseButton>
+      <BaseButton class="the-header__button" @click="register" type="secondary"
+        >Register</BaseButton
+      >
+      <BaseButton class="the-header__button" @click="login">Login</BaseButton>
     </div>
     <img src="@/assets/navigation-menu.svg" class="the-header__hamburger" />
   </header>
@@ -40,6 +42,11 @@ export default {
 
   &__logo {
     cursor: pointer;
+    @include outline-transparent;
+
+    &:focus-visible {
+      @include outline-focus;
+    }
     @include sm {
       padding: 30px 0 30px;
     }

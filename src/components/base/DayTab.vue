@@ -25,9 +25,11 @@ export default {
   max-height: 56px;
   padding: 0 39px;
   border: 2px solid $btn-dark;
-  &.active {
-    background: $btn-dark;
-    color: $text-white;
+
+  &:focus-visible {
+    color: $text-dark;
+    outline: none;
+    border: 2px dotted $btn-pressed;
   }
   &:hover {
     background: darken($btn-dark, 20);

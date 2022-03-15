@@ -72,14 +72,22 @@ export default {
   &__input {
     @include input-element;
     position: relative;
-    &::-webkit-search-cancel-button {
-      right: 1rem;
-      bottom: 0.2rem;
-      position: relative;
-      transform: scale(175%);
-      z-index: 2;
-      opacity: 0;
-    }
+    margin-bottom: 0.5em;
+  }
+  &::-webkit-search-cancel-button {
+    right: 1rem;
+    bottom: 0.2rem;
+    position: relative;
+    transform: scale(175%);
+    z-index: 2;
+    opacity: 0;
+  }
+  &:hover {
+    background: $inp-hover;
+  }
+  &:active,
+  &:focus {
+    border: 1px solid $inp-active--border;
   }
 
   &__search-icon,
@@ -91,7 +99,7 @@ export default {
   }
 
   &__error {
-    @include font-paragraph--small;
+    @include font-paragraph--smaller;
     color: $text-accent;
   }
 }
