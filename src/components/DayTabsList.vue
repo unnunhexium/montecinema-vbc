@@ -92,7 +92,7 @@ export default {
       let day = d.getDay();
       return day;
     },
-    getDate() {
+    selectedDateMonth() {
       return new Date(this.selectedDate).getMonth();
     },
     mappedTabs() {
@@ -105,7 +105,8 @@ export default {
       ];
     },
     showLabel() {
-      return this.$route.name === "Home" || this.$route.name === "Screenings";
+      const inputLabelRoutes = ["Home", "Screenings"];
+      return inputLabelRoutes.includes(this.$route.name);
     },
   },
 };
@@ -126,7 +127,7 @@ export default {
     margin-right: 8px;
     &--button {
       background: transparent;
-      padding: 0.75em 1em;
+      padding: 0.7em 1em;
       cursor: pointer;
       border: 2px solid $btn-dark;
       border-radius: 64px;

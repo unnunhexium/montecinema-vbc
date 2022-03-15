@@ -1,4 +1,5 @@
 import { getDate } from "@/helpers";
+import { mapGetters } from "vuex";
 
 export default {
   methods: {
@@ -13,8 +14,6 @@ export default {
     },
   },
   computed: {
-    screenings() {
-      return this.$store.state.screenings;
-    },
+    ...mapGetters(["screenings"]),
   },
 };

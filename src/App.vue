@@ -29,11 +29,10 @@ export default {
     },
     // all movies, movie detail, screenings, contact
     showBreadcrumbNav() {
+      const breadcrumbsRoutes = ["Movie", "Screenings", "Contact"];
       return (
         this.$route.path.startsWith("/movies") ||
-        this.$route.name === "Movie" ||
-        this.$route.name === "Screenings" ||
-        this.$route.name === "Contact"
+        breadcrumbsRoutes.includes(this.$route.name)
       );
     },
   },

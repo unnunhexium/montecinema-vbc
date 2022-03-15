@@ -21,7 +21,7 @@
           :key="screening.datetime"
           >{{ getTime(screening.datetime) }}</HourTab
         >
-        <p class="screening-card__alert" v-if="filteredScreenings.length == 0">
+        <p class="screening-card__alert" v-if="!filteredScreenings.length">
           There are no seances for today. Please check another day.
         </p>
       </div>

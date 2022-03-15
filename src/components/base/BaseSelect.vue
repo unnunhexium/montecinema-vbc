@@ -27,7 +27,7 @@
 import Multiselect from "vue-multiselect";
 
 export default {
-  name: "baseSelect",
+  name: "BaseSelect",
   components: { Multiselect },
   props: {
     selectedOption: {

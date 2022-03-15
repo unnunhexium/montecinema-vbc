@@ -30,6 +30,7 @@ import dayTabsMixin from "@/mixins/dayTabs.js";
 import { getDayOfWeek, getDate, getTime } from "@/helpers";
 import { getMovieDetails } from "@/api/movies";
 import screeningsList from "@/mixins/screeningsList.js";
+import { mapActions } from "vuex";
 
 export default {
   name: "MovieDetailPage",
@@ -44,6 +45,7 @@ export default {
     getDayOfWeek,
     getDate,
     getTime,
+    ...mapActions(["setMovieTitle"]),
   },
   props: {
     movieId: {
@@ -54,7 +56,7 @@ export default {
   async created() {
     const { data } = await getMovieDetails(this.movieId);
     this.movieDetails = data;
-    this.$store.dispatch("setMovieTitle", this.movieDetails.title);
+    this.setMovieTitle(this.movieDetails.title);
   },
 };
 </script>

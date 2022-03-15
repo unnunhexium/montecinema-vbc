@@ -14,7 +14,7 @@
       <img
         src="@/assets/icons/arrows/arrow-next.svg"
         class="breadcrumb-nav__arrow"
-        :key="breadcrumb.title"
+        :key="breadcrumb.url"
       />
     </template>
     <span class="breadcrumb-nav__breadcrumb-span">{{ currentRoute }}</span>
@@ -50,6 +50,7 @@ export default {
 
 <style lang="scss" scoped>
 .breadcrumb-nav {
+  margin: 0 48px;
   background: $bg-accent;
   padding: 1.25em 0 1.25em 1.5em;
   display: flex;
