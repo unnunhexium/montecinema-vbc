@@ -1,5 +1,5 @@
 <template>
-  <div class="movie-card">
+  <router-link class="movie-card" :to="`/movies/${movie.id}`">
     <h3 class="movie-card__title">{{ movie.title }}</h3>
     <p class="movie-card__length">{{ getFormattedLength(movie.length) }}</p>
     <img
@@ -10,7 +10,7 @@
     <p class="movie-card__genre">
       {{ movie.genre.name }}
     </p>
-  </div>
+  </router-link>
 </template>
 
 <script>
@@ -33,6 +33,8 @@ export default {
 
 <style lang="scss" scoped>
 .movie-card {
+  all: unset;
+  cursor: pointer;
   display: flex;
   flex-flow: column;
   padding: 2.5em;

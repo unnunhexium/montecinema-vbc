@@ -6,7 +6,7 @@
       type="email"
       placeholder="Please enter your email."
       :errorMessage="emailError"
-      label="Email"
+      label="email"
       @blur="checkEmailError"
     />
     <PasswordInput

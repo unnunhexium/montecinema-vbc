@@ -21,6 +21,9 @@ export const routes = [
   {
     path: "/movies/:movieId",
     name: "SingleMovie",
+    meta: {
+      breadcrumb: "Movie",
+    },
     props: true,
     component: () => import("@/components/pages/public/MovieDetailPage.vue"),
   },
@@ -37,12 +40,7 @@ export const routes = [
   {
     path: "/register",
     name: "Register",
-    component: () => import("@/components/pages/public/RegisterFirstPage.vue"),
-  },
-  {
-    path: "/register-2",
-    name: "RegisterSecondStep",
-    component: () => import("@/components/pages/public/RegisterSecondPage.vue"),
+    component: () => import("@/components/pages/public/RegisterPage.vue"),
   },
   {
     path: "*",

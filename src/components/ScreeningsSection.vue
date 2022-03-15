@@ -1,61 +1,74 @@
 <template>
   <div class="screenings-section">
     <h2 class="screenings-section__title">Screenings:</h2>
-    <p class="screenings-section__content">{{ getDayOfWeek }} {{ getDate }}</p>
+    <p class="screenings-section__content">
+      {{ selectedWeekday }} {{ formattedDate }}
+    </p>
     <div class="screenings-section__input-wrapper">
-      <DayTabsList />
-      <MovieSelect />
+      <DayTabsList @set-date="setDate" />
+      <BaseSelect
+        :options="selectOptions"
+        :selectedOption="selectedOption"
+        @input="setOption"
+        placeholder="All categories"
+      />
     </div>
     <div class="screenings-section__cards-wrapper">
       <ScreeningCard
-        v-for="movie in movies"
+        v-for="movie in filteredMovies"
         :movie="movie"
         :key="movie.id"
-        :seances="getSeances(movie.id)"
+        :filteredScreenings="filterByDay(movie.id, selectedDate)"
       />
     </div>
   </div>
 </template>
 
 <script>
-import DayTabsList from "./DayTabsList.vue";
-import MovieSelect from "./base/MovieSelect.vue";
+import BaseSelect from "./base/BaseSelect.vue";
 import ScreeningCard from "./ScreeningCard.vue";
 import { mapGetters } from "vuex";
+import dayTabsMixin from "@/mixins/dayTabs.js";
+import screeningsList from "@/mixins/screeningsList.js";
 
 export default {
-  components: { DayTabsList, MovieSelect, ScreeningCard },
+  components: { BaseSelect, ScreeningCard },
+  mixins: [dayTabsMixin, screeningsList],
+  data() {
+    return {
+      query: "",
+      selectedOption: "",
+    };
+  },
   computed: {
     ...mapGetters(["movies", "screenings"]),
     imageAlt() {
       return `An image from ${this.movie.title} film.`;
     },
-    getDayOfWeek() {
-      const dayOfWeek = new Date().getDay();
-      const days = [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-      ];
-      return days[dayOfWeek];
+    movies() {
+      return this.$store.state.movies;
     },
-    getDate() {
-      const today = new Date();
-      const yyyy = today.getFullYear();
-      const mm = `0${today.getMonth() + 1}`.slice(-2);
-      const dd = `0${today.getDate()}`.slice(-2);
-      return `${dd}/${mm}/${yyyy}`;
+    selectOptions() {
+      return ["All movies", ...this.movies.map((movie) => movie.title)];
     },
+    filteredMovies() {
+      return this.selectedOption === "All movies"
+        ? this.movies
+        : this.movies.filter((movie) => movie.title === this.selectedOption);
+    },
+    ...mapGetters(["movies", "genres", "screenings"]),
   },
-
   methods: {
     getSeances(id) {
       return this.screenings.filter((screening) => screening.movie === id);
     },
+    setOption(value) {
+      this.selectedOption = value;
+    },
+  },
+
+  mounted() {
+    this.selectedOption = this.selectOptions[0];
   },
 };
 </script>
@@ -76,7 +89,9 @@ export default {
   }
 
   &__input-wrapper {
-    display: flex;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 40px;
     justify-content: space-between;
     padding-bottom: 6.125em;
   }

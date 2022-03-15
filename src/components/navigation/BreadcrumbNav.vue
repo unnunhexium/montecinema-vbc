@@ -1,5 +1,5 @@
 <template>
-  <div class="breadcrumb-nav">
+  <nav class="breadcrumb-nav">
     <button class="breadcrumb-nav__button-back" @click="$router.go(-1)">
       <ArrowLeft />Back
     </button>
@@ -14,29 +14,35 @@
       <img
         src="@/assets/icons/arrows/arrow-next.svg"
         class="breadcrumb-nav__arrow"
-        :key="breadcrumb.title"
+        :key="breadcrumb.url"
       />
     </template>
     <span class="breadcrumb-nav__breadcrumb-span">{{ currentRoute }}</span>
-  </div>
+  </nav>
 </template>
 
 <script>
-import ArrowLeft from "./svg/icon-arrow-left.vue";
+import ArrowLeft from "../svg/icon-arrow-left.vue";
 
 export default {
   name: "BreadcrumbNav",
   components: {
     ArrowLeft,
   },
-  data() {
-    return {
-      currentRoute: "Movies",
-    };
-  },
   computed: {
     breadcrumbs() {
-      return [];
+      if (this.$route.name === "SingleMovie") {
+        return [{ title: "Movies", url: "/movies" }];
+      } else {
+        return [];
+      }
+    },
+    currentRoute() {
+      if (this.$route.name === "SingleMovie") {
+        return this.$store.state.movieTitle;
+      } else {
+        return this.$route.meta.breadcrumb || this.$route.name;
+      }
     },
   },
 };
@@ -44,6 +50,7 @@ export default {
 
 <style lang="scss" scoped>
 .breadcrumb-nav {
+  margin: 0 48px;
   background: $bg-accent;
   padding: 1.25em 0 1.25em 1.5em;
   display: flex;
