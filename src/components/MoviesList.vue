@@ -80,7 +80,7 @@ export default {
     cursor: pointer;
     background: transparent;
     border: none;
-    @include outline-transparent;
+    @include outline-non-bordered-transparent;
 
     &:active,
     &:hover {
@@ -88,7 +88,7 @@ export default {
     }
 
     &:focus-visible {
-      @include outline-focus;
+      @include outline-non-bordered-focus;
     }
   }
   &__card-wrapper {

@@ -30,7 +30,6 @@
 <script>
 export default {
   name: "BaseInput",
-  emits: ["input", "blur"],
   props: {
     label: {
       type: String,
@@ -82,10 +81,7 @@ export default {
     z-index: 2;
     opacity: 0;
   }
-  &:hover {
-    background: $inp-hover;
-  }
-  &:active,
+
   &:focus {
     border: 1px solid $inp-active--border;
   }

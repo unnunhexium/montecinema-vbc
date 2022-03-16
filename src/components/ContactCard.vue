@@ -89,12 +89,9 @@ export default {
   &__phone {
     text-decoration: none;
     color: $text-dark;
-    outline: none;
-    border: 2px dotted transparent;
-    &:focus {
-      outline: none;
-      border-radius: 44px;
-      border: 2px dotted $btn-pressed;
+    @include outline-non-bordered-transparent;
+    &:focus-visible {
+      @include outline-non-bordered-focus;
     }
   }
 }

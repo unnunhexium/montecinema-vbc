@@ -11,13 +11,28 @@
         <ContactCard />
       </div>
       <div class="contact-page__media-icons">
-        <img src=@/assets/icons/media/twitter.svg/ alt="Logo of Twitter."> <img
-        src=@/assets/icons/media/facebook.svg/ alt="Logo of Facebook."> <img
-        src=@/assets/icons/media/linkedin.svg/ alt="Logo of LinkedIn."> <img
-        src=@/assets/icons/media/instagram.svg/ alt="Logo of Instagram."> <img
-        src=@/assets/icons/media/github.svg/ alt="Logo of GitHub."> <img
-        src=@/assets/icons/media/behance.svg/ alt="Logo of Behance."><img
-        src=@/assets/icons/media/basketball.svg alt="Logo of Basketball."/>
+        <a href="" class="contact-page__media-icon">
+          <img src=@/assets/icons/media/twitter.svg/ alt="Logo of Twitter.">
+        </a>
+        <a href="">
+          <img src=@/assets/icons/media/facebook.svg/ alt="Logo of Facebook.">
+        </a>
+        <a href="">
+          <img src=@/assets/icons/media/linkedin.svg/ alt="Logo of LinkedIn.">
+        </a>
+        <a href="">
+          <img src=@/assets/icons/media/instagram.svg/ alt="Logo of Instagram.">
+        </a>
+        <a href="">
+          <img src=@/assets/icons/media/github.svg/ alt="Logo of GitHub.">
+        </a>
+        <a href="">
+          <img src=@/assets/icons/media/behance.svg/ alt="Logo of Behance.">
+        </a>
+        <a href="">
+          <img src=@/assets/icons/media/basketball.svg alt="Logo of
+          Basketball.">
+        </a>
       </div>
     </div>
   </div>
@@ -66,6 +81,13 @@ export default {
     align-items: center;
     padding: 24px 0;
     border-radius: 0px 8px 8px 0px;
+  }
+  a {
+    @include outline-non-bordered-transparent;
+
+    &:focus-visible {
+      @include outline-non-bordered-focus;
+    }
   }
 
   &__map {

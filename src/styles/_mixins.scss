@@ -70,3 +70,17 @@
   border-radius: 44px;
   padding: 0.65em;
 }
+
+@mixin outline-non-bordered-transparent {
+  outline: none;
+  border: 2px dotted transparent;
+  border-radius: 44px;
+  padding: 2px;
+}
+
+@mixin outline-non-bordered-focus {
+  outline: none;
+  border: 2px dotted $btn-pressed;
+  border-radius: 44px;
+  padding: 2px;
+}

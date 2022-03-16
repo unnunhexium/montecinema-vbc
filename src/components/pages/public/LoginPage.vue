@@ -6,7 +6,7 @@
       <LoginCard />
       <div class="login-page__description-wrapper">
         <p class="login-page__info">Did you forget your password?</p>
-        <a class="login-page__link"> Reset it now</a>
+        <a url="/" class="login-page__link"> Reset it now</a>
       </div>
     </div>
   </div>
@@ -25,9 +25,9 @@ export default {
 
 <style lang="scss" scoped>
 .login-page {
+  margin: 124px 0;
   &__wrapper {
     max-width: 600px;
-    padding: 2em 2em 0;
     margin: 0 auto;
   }
 
@@ -58,6 +58,7 @@ export default {
 
   &__link {
     color: $text-accent;
+    cursor: pointer;
   }
 }
 </style>
