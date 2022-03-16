@@ -1,6 +1,11 @@
 <template>
   <a v-if="href" :href="href" :class="buttonClasses"><slot /></a>
-  <button v-else :class="buttonClasses" @click="$emit('click')">
+  <button
+    v-else
+    :class="buttonClasses"
+    @click="$emit('click')"
+    :disabled="disabled"
+  >
     <slot />
   </button>
 </template>
@@ -17,6 +22,10 @@ export default {
     type: {
       type: String,
       default: "primary",
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
     },
   },
   computed: {
@@ -55,6 +64,7 @@ export default {
     &:focus-visible {
       outline: none;
       border: 3px solid $btn-pressed;
+      background: darken($btn-default, 20);
     }
   }
 
@@ -65,6 +75,14 @@ export default {
 
     &:focus-visible {
       @include outline-focus;
+    }
+  }
+
+  &[disabled] {
+    background: $text-lighter;
+    cursor: not-allowed;
+    &:hover {
+      border-color: $text-lighter;
     }
   }
 }
