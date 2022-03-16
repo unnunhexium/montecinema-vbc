@@ -1,5 +1,4 @@
 <template>
-  <!-- WORK IN PROGRESS-->
   <form novalidate @submit.prevent="" class="login-card">
     <BaseInput
       v-model="formData.email"
@@ -10,8 +9,10 @@
     />
     <PasswordInput v-model="formData.password" class="login-card__password" />
     <div class="login-card__buttons-wrapper">
-      <a class="login-card__link">Register instead</a>
-      <button class="login-card__button">Log in</button>
+      <router-link :to="{ name: 'Register' }" class="login-card__link">
+        Register instead
+      </router-link>
+      <BaseButton class="login-card__button">Log in </BaseButton>
     </div>
   </form>
 </template>
@@ -19,12 +20,14 @@
 <script>
 import BaseInput from "@/components/base/BaseInput.vue";
 import PasswordInput from "@/components/base/PasswordInput.vue";
+import BaseButton from "@/components/base/BaseButton.vue";
 
 export default {
   name: "LoginCard",
   components: {
     BaseInput,
     PasswordInput,
+    BaseButton,
   },
   data() {
     return {
@@ -49,16 +52,39 @@ export default {
   border-radius: 24px;
   padding: 64px;
 
-  &__password {
-  }
-
   &__buttons-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 16px;
+    align-items: baseline;
   }
 
   &__link {
     @include font-button;
     font-size: 18px;
     color: $text-accent;
+    text-decoration: none;
+    justify-self: center;
+    outline: none;
+    border: 2px dotted transparent;
+    border-radius: 44px;
+    padding: 13px 9px;
+
+    &:focus-visible {
+      outline: none;
+      border: 2px dotted $btn-pressed;
+      border-radius: 44px;
+      padding: 13px 9px;
+    }
+  }
+  &__button {
+    margin-top: 40px;
+  }
+  .base-button {
+    font-size: 18px;
+    line-height: 18px;
+    padding: 0.85em 3.4em;
+    border-radius: 64px;
   }
 }
 </style>
