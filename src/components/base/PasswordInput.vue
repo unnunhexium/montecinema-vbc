@@ -61,6 +61,7 @@ export default {
   &__wrapper {
     display: flex;
     position: relative;
+    padding-bottom: 0.6em;
   }
 
   &__input {
@@ -75,10 +76,15 @@ export default {
     display: block;
     cursor: pointer;
     position: absolute;
-    transform: translate(0, -50%);
+    transform: translate(0, 50%);
     z-index: 2;
     right: 8px;
-    top: 50%;
+    bottom: 35px;
+    @include outline-non-bordered-transparent;
+
+    &:focus-visible {
+      @include outline-non-bordered-focus;
+    }
   }
 }
 </style>

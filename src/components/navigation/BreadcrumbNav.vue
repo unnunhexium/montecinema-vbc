@@ -66,8 +66,9 @@ export default {
     border: 2px solid $btn-dark;
     display: flex;
     align-items: center;
+
     &:active,
-    &:focus,
+    &:focus-visible,
     &:hover {
       background: $btn-dark;
       ::v-deep svg path {
@@ -90,6 +91,11 @@ export default {
 
   &__breadcrumb-link {
     color: $text-accent;
+    @include outline-transparent;
+
+    &:focus-visible {
+      @include outline-focus;
+    }
   }
 
   &__breadcrumb-span {

@@ -1,29 +1,60 @@
 <template>
-  <div class="register-first-page">
-    <div class="register-first-page__wrapper">
-      <h1 class="register-first-page__heading">Ahoy you!</h1>
-      <h2 class="register-first-page__subheading">Care to register?</h2>
-      <RegisterCard />
+  <div class="register-page">
+    <div class="register-page__wrapper">
+      <h1 class="register-page__heading">Ahoy you!</h1>
+      <h2 class="register-page__subheading">Care to register?</h2>
+      <RegisterCard
+        v-if="!secondStepActive"
+        :formData="formData"
+        @set-form-field="setFormField"
+        @go-to-next-step="secondStepActive = true"
+      />
+      <Register2ndCard
+        v-else
+        :formData="formData"
+        @set-form-field="setFormField"
+      />
     </div>
   </div>
 </template>
 
 <script>
 import RegisterCard from "@/components/auth/RegisterCard.vue";
+import Register2ndCard from "@/components/auth/Register2ndCard.vue";
 
 export default {
   name: "RegisterFirstPage",
   components: {
     RegisterCard,
+    Register2ndCard,
+  },
+  data() {
+    return {
+      formData: {
+        email: "",
+        password: "",
+        firstName: "",
+        lastName: "",
+        dateOfBirth: "",
+        checkbox: false,
+      },
+      secondStepActive: false,
+    };
+  },
+  methods: {
+    setFormField({ value, key }) {
+      console.log(value);
+      this.formData[key] = value;
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.register-first-page {
+.register-page {
+  padding: 124px 48px;
   &__wrapper {
     max-width: 624px;
-    padding: 2em 0.5em 0;
     margin: 0 auto;
   }
 

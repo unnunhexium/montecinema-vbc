@@ -1,6 +1,20 @@
 <template>
-  <a v-if="href" :href="href" :class="buttonClasses"><slot /></a>
-  <button v-else :class="buttonClasses" @click="$emit('click')">
+  <a v-if="href" :href="href" :class="buttonClasses">
+    <slot />
+  </a>
+  <router-link
+    v-else-if="routeName"
+    :to="{ name: routeName }"
+    :class="buttonClasses"
+  >
+    <slot />
+  </router-link>
+  <button
+    v-else
+    :class="buttonClasses"
+    @click="$emit('click')"
+    :disabled="disabled"
+  >
     <slot />
   </button>
 </template>
@@ -14,9 +28,17 @@ export default {
       type: String,
       default: "",
     },
+    routeName: {
+      type: String,
+      default: "",
+    },
     type: {
       type: String,
       default: "primary",
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
     },
   },
   computed: {
@@ -44,20 +66,37 @@ export default {
   &--primary {
     background: $btn-default;
     color: $text-white;
-    &:active,
-    &:focus,
+    border: 3px solid transparent;
+
     &:hover {
+      border: 3px solid $btn-pressed;
       background: $btn-hover;
     }
+
     &:active,
-    &:focus {
-      border: 4px solid $btn-pressed;
+    &:focus-visible {
+      outline: none;
+      border: 3px solid $btn-pressed;
+      background: darken($btn-default, 20);
     }
   }
 
   &--secondary {
     color: $text-accent;
     background: transparent;
+    @include outline-transparent;
+
+    &:focus-visible {
+      @include outline-focus;
+    }
+  }
+
+  &[disabled] {
+    background: $text-lighter;
+    cursor: not-allowed;
+    &:hover {
+      border-color: $text-lighter;
+    }
   }
 }
 </style>

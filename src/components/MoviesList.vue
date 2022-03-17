@@ -80,10 +80,15 @@ export default {
     cursor: pointer;
     background: transparent;
     border: none;
+    @include outline-non-bordered-transparent;
+
     &:active,
-    &:focus,
     &:hover {
       color: $btn-hover;
+    }
+
+    &:focus-visible {
+      @include outline-non-bordered-focus;
     }
   }
   &__card-wrapper {

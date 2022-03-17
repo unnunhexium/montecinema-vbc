@@ -1,6 +1,5 @@
 <template>
   <div class="contact-card">
-    <h2 class="contact-card__heading">Contact us</h2>
     <div class="contact-card__main-wrapper">
       <div class="contact-card__wrapper">
         <IconLocation class="contact-card__icon" />
@@ -46,20 +45,14 @@ export default {
 .contact-card {
   max-width: 600px;
   margin: 0 auto;
-  padding: 0 48px;
-  &__heading {
-    text-align: center;
-    padding-bottom: 0.75em;
-  }
+  padding: 3.55em;
+
   &__main-wrapper {
-    background: $bg-light;
     color: $text-dark;
     font-family: "Roboto Mono";
     font-weight: 400;
     font-size: 18px;
     line-height: 32px;
-    padding: 3.55em;
-    border-radius: 24px;
   }
 
   &__wrapper {
@@ -82,13 +75,17 @@ export default {
 
   &__location,
   &__email {
-    padding-bottom: 2.2em;
+    margin-bottom: 2.2em;
   }
 
   &__email,
   &__phone {
     text-decoration: none;
     color: $text-dark;
+    @include outline-non-bordered-transparent;
+    &:focus-visible {
+      @include outline-non-bordered-focus;
+    }
   }
 }
 </style>

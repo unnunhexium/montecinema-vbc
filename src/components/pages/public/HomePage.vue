@@ -3,7 +3,10 @@
     <TheHero />
     <MoviesList />
     <ScreeningsSection />
-    <ContactCard />
+    <h2 class="contact-card__heading">Contact us</h2>
+    <div class="contact-card__background">
+      <ContactCard />
+    </div>
   </div>
 </template>
 
@@ -42,6 +45,21 @@ export default {
   padding: 0 48px;
   @include sm {
     padding: 0 32px;
+  }
+}
+.contact-card {
+  &__heading {
+    @include font-heading--big;
+    color: $text-dark;
+    text-align: center;
+    padding-bottom: 0.75em;
+  }
+  &__background {
+    background: $bg-light;
+    border-radius: 24px;
+    max-width: 600px;
+    max-height: 400px;
+    margin: 0 auto;
   }
 }
 </style>

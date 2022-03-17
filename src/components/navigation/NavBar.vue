@@ -38,6 +38,10 @@ export default {
     color: $text-light;
     text-decoration: none;
     padding: 0 1em;
+    @include outline-transparent;
+    &:focus-visible {
+      @include outline-focus;
+    }
   }
 }
 </style>
