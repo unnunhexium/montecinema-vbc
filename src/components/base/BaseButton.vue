@@ -1,5 +1,14 @@
 <template>
-  <a v-if="href" :href="href" :class="buttonClasses"><slot /></a>
+  <a v-if="href" :href="href" :class="buttonClasses">
+    <slot />
+  </a>
+  <router-link
+    v-else-if="routeName"
+    :to="{ name: routeName }"
+    :class="buttonClasses"
+  >
+    <slot />
+  </router-link>
   <button
     v-else
     :class="buttonClasses"
@@ -16,6 +25,10 @@ export default {
   emits: ["click"],
   props: {
     href: {
+      type: String,
+      default: "",
+    },
+    routeName: {
       type: String,
       default: "",
     },

@@ -5,10 +5,19 @@
     </a>
     <NavBar />
     <div class="the-header__wrapper">
-      <BaseButton class="the-header__button" @click="register" type="secondary"
-        >Register</BaseButton
+      <BaseButton
+        class="the-header__button"
+        routeName="Register"
+        type="secondary"
       >
-      <BaseButton class="the-header__button" @click="login">Login</BaseButton>
+        Register
+      </BaseButton>
+      <BaseButton class="the-header__button" routeName="Login">
+        Login
+      </BaseButton>
+      <BaseButton class="the-header__button" routeName="Home">
+        Logout
+      </BaseButton>
     </div>
     <img src="@/assets/navigation-menu.svg" class="the-header__hamburger" />
   </header>

@@ -11,27 +11,16 @@
         <ContactCard />
       </div>
       <div class="contact-page__media-icons">
-        <a href="" class="contact-page__media-icon">
-          <img src=@/assets/icons/media/twitter.svg/ alt="Logo of Twitter.">
-        </a>
-        <a href="">
-          <img src=@/assets/icons/media/facebook.svg/ alt="Logo of Facebook.">
-        </a>
-        <a href="">
-          <img src=@/assets/icons/media/linkedin.svg/ alt="Logo of LinkedIn.">
-        </a>
-        <a href="">
-          <img src=@/assets/icons/media/instagram.svg/ alt="Logo of Instagram.">
-        </a>
-        <a href="">
-          <img src=@/assets/icons/media/github.svg/ alt="Logo of GitHub.">
-        </a>
-        <a href="">
-          <img src=@/assets/icons/media/behance.svg/ alt="Logo of Behance.">
-        </a>
-        <a href="">
-          <img src=@/assets/icons/media/basketball.svg alt="Logo of
-          Basketball.">
+        <a
+          href=""
+          class="contact-page__media-icon"
+          v-for="icon in icons"
+          :key="icon.name"
+        >
+          <img
+            :src="require('../../../assets/icons/media/' + icon.src)"
+            :alt="logoAlt(icon.name)"
+          />
         </a>
       </div>
     </div>
@@ -45,6 +34,24 @@ export default {
   name: "ContactPage",
   components: {
     ContactCard,
+  },
+  data() {
+    return {
+      icons: [
+        { src: "twitter.svg", name: "Twitter" },
+        { src: "facebook.svg", name: "Facebook" },
+        { src: "linkedin.svg", name: "Linkedin" },
+        { src: "instagram.svg", name: "Instagram" },
+        { src: "github.svg", name: "Github" },
+        { src: "behance.svg", name: "Behance" },
+        { src: "basketball.svg", name: "Basketball" },
+      ],
+    };
+  },
+  methods: {
+    logoAlt(name) {
+      return `A logo of ${name}.`;
+    },
   },
 };
 </script>

@@ -1,7 +1,6 @@
 <template>
   <div class="contact-card">
     <div class="contact-card__main-wrapper">
-      <!-- <div class="contact-card__background" v-if="showBackground"> -->
       <div class="contact-card__wrapper">
         <IconLocation class="contact-card__icon" />
         <p class="contact-card__location">
@@ -23,7 +22,6 @@
           +48 533 600 136
         </a>
       </div>
-      <!-- </div> -->
     </div>
   </div>
 </template>
@@ -39,11 +37,6 @@ export default {
     IconLocation,
     IconEmail,
     IconPhone,
-  },
-  computed: {
-    showBackground() {
-      return this.$route.name === "Home";
-    },
   },
 };
 </script>
