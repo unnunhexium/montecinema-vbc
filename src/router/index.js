@@ -46,11 +46,40 @@ export const routes = [
     path: "*",
     redirect: "/",
   },
+  {
+    path: "",
+    component: {
+      render(h) {
+        return h("router-view");
+      },
+    },
+    redirect: "/login",
+    meta: { requiresAuth: true },
+    children: [
+      {
+        path: "/choose-seats",
+        name: "ChooseSeats",
+        component: () =>
+          import("@/components/pages/client/ChooseSeatsPage.vue"),
+      },
+    ],
+  },
 ];
 
 const router = new VueRouter({
   routes,
   mode: "history",
+});
+
+router.beforeEach((to, _, next) => {
+  if (!router.app.$store.getters["isLoggedIn"] && to.meta.requiresAuth) {
+    next({
+      path: "/login",
+      replace: true,
+    });
+  } else {
+    next();
+  }
 });
 
 export default router;

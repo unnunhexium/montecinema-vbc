@@ -14,6 +14,7 @@
     :class="buttonClasses"
     @click="$emit('click')"
     :disabled="disabled"
+    type="button"
   >
     <slot />
   </button>
@@ -69,7 +70,6 @@ export default {
     border: 3px solid transparent;
 
     &:hover {
-      border: 3px solid $btn-pressed;
       background: $btn-hover;
     }
 

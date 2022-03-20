@@ -8,9 +8,13 @@
         placeholder="Please enter your password."
         :value="value"
         @input="$emit('input', $event.target.value)"
-        @blur="$emit('blur')"
+        @keyup.prevent.enter="submit"
       />
-      <button class="password-input__button" @click="showPassword">
+      <button
+        type="button"
+        class="password-input__button"
+        @click="showPassword"
+      >
         <img
           v-show="isPasswordHidden"
           src="@/assets/icons/view.svg"
@@ -29,7 +33,6 @@
 <script>
 export default {
   name: "PasswordInput",
-  emits: ["input", "blur"],
   props: {
     value: {
       type: String,

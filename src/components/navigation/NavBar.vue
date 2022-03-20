@@ -2,19 +2,19 @@
   <nav class="nav-bar">
     <ul class="nav-bar__list">
       <li>
-        <router-link :to="{ name: 'Movies' }" class="nav-bar__list-item"
-          >Movies</router-link
-        >
+        <router-link :to="{ name: 'Movies' }" class="nav-bar__list-item">
+          Movies
+        </router-link>
       </li>
       <li>
-        <router-link :to="{ name: 'Screenings' }" class="nav-bar__list-item"
-          >Screenings</router-link
-        >
+        <router-link :to="{ name: 'Screenings' }" class="nav-bar__list-item">
+          Screenings
+        </router-link>
       </li>
       <li>
-        <router-link :to="{ name: 'Contact' }" class="nav-bar__list-item"
-          >Contact us</router-link
-        >
+        <router-link :to="{ name: 'Contact' }" class="nav-bar__list-item">
+          Contact us
+        </router-link>
       </li>
     </ul>
   </nav>

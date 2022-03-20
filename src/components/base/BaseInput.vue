@@ -6,9 +6,9 @@
         class="base-input__input"
         :value="value"
         @input="$emit('input', $event.target.value)"
-        @blur="$emit('blur')"
         :type="type"
         :placeholder="placeholder"
+        @keyup.enter="submit"
       />
       <template v-if="type === 'search'">
         <img
@@ -71,7 +71,6 @@ export default {
   &__input {
     @include input-element;
     position: relative;
-    margin-bottom: 0.5em;
   }
   &::-webkit-search-cancel-button {
     right: 1rem;
@@ -95,7 +94,7 @@ export default {
   }
 
   &__error {
-    @include font-paragraph--smaller;
+    @include font-paragraph--the-smallest;
     color: $text-accent;
   }
 }

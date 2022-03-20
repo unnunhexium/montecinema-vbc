@@ -7,9 +7,9 @@
       Developed with
       <span class="simple-nav__icon">♥</span>
       by
-      <a href="https://www.monterail.com/" class="simple-nav__link"
-        >Monterail</a
-      >
+      <a href="https://www.monterail.com/" class="simple-nav__link">
+        Monterail
+      </a>
     </p>
   </nav>
 </template>

@@ -5,17 +5,19 @@
     </a>
     <NavBar />
     <div class="the-header__wrapper">
-      <BaseButton
-        class="the-header__button"
-        routeName="Register"
-        type="secondary"
-      >
-        Register
-      </BaseButton>
-      <BaseButton class="the-header__button" routeName="Login">
-        Login
-      </BaseButton>
-      <BaseButton class="the-header__button" routeName="Home">
+      <template v-if="!isLoggedIn">
+        <BaseButton
+          class="the-header__button"
+          routeName="Register"
+          type="secondary"
+        >
+          Register
+        </BaseButton>
+        <BaseButton class="the-header__button" routeName="Login">
+          Login
+        </BaseButton>
+      </template>
+      <BaseButton class="the-header__button" v-else @click="logoutUser">
         Logout
       </BaseButton>
     </div>
@@ -26,18 +28,22 @@
 <script>
 import BaseButton from "../base/BaseButton.vue";
 import NavBar from "./NavBar.vue";
+import { mapGetters, mapActions } from "vuex";
+
 export default {
   name: "TheHeader",
   components: {
     BaseButton,
     NavBar,
   },
+  computed: {
+    ...mapGetters(["isLoggedIn"]),
+  },
   methods: {
-    register() {
-      this.$router.push("/register");
-    },
-    login() {
-      this.$router.push("/login");
+    ...mapActions(["logout"]),
+    logoutUser() {
+      this.$router.push("/");
+      this.logout();
     },
   },
 };

@@ -13,6 +13,7 @@
         v-else
         :formData="formData"
         @set-form-field="setFormField"
+        @register-user="registerUser"
       />
     </div>
   </div>
@@ -43,8 +44,16 @@ export default {
   },
   methods: {
     setFormField({ value, key }) {
-      console.log(value);
       this.formData[key] = value;
+    },
+    async registerUser() {
+      try {
+        await this.$store.dispatch("register", this.formData);
+        this.$router.push("/choose-seats");
+      } catch (error) {
+        alert(error);
+        console.error(error);
+      }
     },
   },
 };

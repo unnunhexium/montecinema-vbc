@@ -1,5 +1,5 @@
 <template>
-  <form novalidate @submit.prevent="" class="login-card">
+  <form novalidate class="login-card">
     <BaseInput
       v-model="formData.email"
       class="login-card__email"
@@ -12,7 +12,9 @@
       <router-link :to="{ name: 'Register' }" class="login-card__link">
         Register instead
       </router-link>
-      <BaseButton class="login-card__button">Log in </BaseButton>
+      <BaseButton class="login-card__button" @click="onSubmit"
+        >Log in
+      </BaseButton>
     </div>
   </form>
 </template>
@@ -41,6 +43,15 @@ export default {
     setInput(event) {
       this.inputValue = event.target.value;
     },
+    async onSubmit() {
+      try {
+        await this.$store.dispatch("login", this.formData);
+        this.$router.push("/choose-seats");
+      } catch (error) {
+        alert(error);
+        console.error(error);
+      }
+    },
   },
 };
 </script>
@@ -51,6 +62,10 @@ export default {
   box-shadow: 0px 4px 22px rgba(52, 53, 65, 0.15);
   border-radius: 24px;
   padding: 64px;
+
+  &__email {
+    margin-bottom: 1.7em;
+  }
 
   &__buttons-wrapper {
     display: grid;

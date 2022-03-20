@@ -8,17 +8,30 @@
       placeholder="Please enter your email."
       :errorMessage="emailError"
       label="email"
-      @blur="checkEmailError"
     />
     <PasswordInput
       @input="$emit('set-form-field', { value: $event, key: 'password' })"
       :value="formData.password"
       class="register-card__password"
-      @blur="checkPasswordError"
     />
-    <p class="register-card__valid-flag">At least 8 characters</p>
-    <p class="register-card__valid-flag">At least one letter</p>
-    <p class="register-card__valid-flag">At least one digit</p>
+    <p
+      class="register-card__valid-flag"
+      :class="{ valid: !containsEightChars, invalid: changeColor }"
+    >
+      At least 8 characters
+    </p>
+    <p
+      class="register-card__valid-flag"
+      :class="{ valid: !containsLetter, invalid: changeColor }"
+    >
+      At least one letter
+    </p>
+    <p
+      class="register-card__valid-flag"
+      :class="{ valid: !containsDigit, invalid: changeColor }"
+    >
+      At least one digit
+    </p>
     <div class="register-card__buttons-wrapper">
       <router-link :to="{ name: 'Login' }" class="register-card__link">
         Log in instead
@@ -48,6 +61,7 @@ export default {
   data() {
     return {
       emailError: "",
+      validPassword: false,
     };
   },
   props: {
@@ -60,6 +74,23 @@ export default {
     buttonDisabled() {
       return !(this.formData.email.length && this.formData.password.length);
     },
+    changeColor() {
+      return this.formData.password.length >= 1;
+    },
+    containsEightChars() {
+      return this.formData.password === "" || this.formData.password.length < 8;
+    },
+    containsDigit() {
+      return (
+        this.formData.password === "" || !/\d/.test(this.formData.password)
+      );
+    },
+    containsLetter() {
+      return (
+        this.formData.password === "" ||
+        !/[A-Za-z]/.test(this.formData.password)
+      );
+    },
   },
   methods: {
     checkEmailError() {
@@ -70,7 +101,6 @@ export default {
         this.emailError = "";
       }
     },
-    checkPasswordError() {},
   },
 };
 </script>
@@ -106,6 +136,7 @@ export default {
 
   &__valid-flag {
     @include font-element--small-thin;
+    color: $text-dark;
   }
 
   &__button {
@@ -117,5 +148,12 @@ export default {
     padding: 0.85em 3.4em;
     border-radius: 64px;
   }
+}
+.invalid {
+  color: $text-accent;
+}
+
+.valid {
+  color: #27ae60;
 }
 </style>
