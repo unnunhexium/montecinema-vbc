@@ -8,7 +8,6 @@
         @input="$emit('input', $event.target.value)"
         :type="type"
         :placeholder="placeholder"
-        @keyup.enter="submit"
       />
       <template v-if="type === 'search'">
         <img

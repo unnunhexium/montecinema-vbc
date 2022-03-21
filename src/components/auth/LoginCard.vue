@@ -1,5 +1,5 @@
 <template>
-  <form novalidate class="login-card">
+  <form class="login-card" @submit.prevent="onSubmit" novalidate>
     <BaseInput
       v-model="formData.email"
       class="login-card__email"
@@ -12,9 +12,7 @@
       <router-link :to="{ name: 'Register' }" class="login-card__link">
         Register instead
       </router-link>
-      <BaseButton class="login-card__button" @click="onSubmit"
-        >Log in
-      </BaseButton>
+      <BaseButton class="login-card__button"> Log in </BaseButton>
     </div>
   </form>
 </template>

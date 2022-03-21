@@ -13,7 +13,7 @@ export default new Vuex.Store({
     movies: [],
     screenings: [],
     movieTitle: "",
-    authHeader: null,
+    authHeader: localStorage.getItem(AUTH_HEADER_STORAGE_KEY),
   },
   mutations: {
     setMovies(state, movies) {
@@ -57,13 +57,6 @@ export default new Vuex.Store({
       if (!getters.isLoggedIn) return;
       removeAuthHeader();
       commit("resetAuthHeader");
-    },
-    restoreAuthSession({ commit }) {
-      const authHeader = localStorage.getItem(AUTH_HEADER_STORAGE_KEY);
-      if (authHeader) {
-        setAuthHeader(authHeader);
-        commit("setAuthHeader", { authHeader });
-      }
     },
     async register(ctx, credentials) {
       await authApi.register(credentials);

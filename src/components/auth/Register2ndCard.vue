@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="" class="register-2nd-card">
+  <form @submit.prevent="$emit('register-user')" class="register-2nd-card">
     <BaseInput
       class="register-2nd-card__input"
       @input="$emit('set-form-field', { value: $event, key: 'firstName' })"
@@ -62,11 +62,7 @@
       <router-link :to="{ name: 'Login' }" class="register-2nd-card__link">
         Log in instead
       </router-link>
-      <BaseButton
-        class="register-2nd-card__button"
-        @click="$emit('register-user')"
-        :disabled="buttonDisabled"
-      >
+      <BaseButton class="register-2nd-card__button" :disabled="buttonDisabled">
         Register
       </BaseButton>
     </div>
@@ -118,7 +114,6 @@ export default {
     },
     getDate,
     emitCheckboxValue(event) {
-      console.log(event.target.value);
       this.$emit("set-form-field", {
         value: event.target.value !== "true",
         key: "checkbox",

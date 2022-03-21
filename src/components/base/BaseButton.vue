@@ -14,7 +14,6 @@
     :class="buttonClasses"
     @click="$emit('click')"
     :disabled="disabled"
-    type="button"
   >
     <slot />
   </button>

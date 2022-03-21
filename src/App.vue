@@ -39,7 +39,6 @@ export default {
   async created() {
     this.$store.dispatch("fetchMovies");
     this.$store.dispatch("fetchScreenings");
-    this.$store.dispatch("restoreAuthSession");
   },
 };
 </script>

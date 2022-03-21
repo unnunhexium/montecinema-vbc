@@ -8,7 +8,6 @@
         placeholder="Please enter your password."
         :value="value"
         @input="$emit('input', $event.target.value)"
-        @keyup.prevent.enter="submit"
       />
       <button
         type="button"
