@@ -5,15 +5,16 @@ import * as authApi from "@/api/auth";
 import { setAuthHeader, removeAuthHeader } from "@/api/client";
 
 const AUTH_HEADER_STORAGE_KEY = "auth-header";
+const AUTH_TOKEN = localStorage.getItem(AUTH_HEADER_STORAGE_KEY);
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
   state: {
     movies: [],
     screenings: [],
     movieTitle: "",
-    authHeader: localStorage.getItem(AUTH_HEADER_STORAGE_KEY),
+    authHeader: AUTH_TOKEN,
   },
   mutations: {
     setMovies(state, movies) {
@@ -72,3 +73,9 @@ export default new Vuex.Store({
     isLoggedIn: (state) => !!state.authHeader,
   },
 });
+
+if (AUTH_TOKEN) {
+  setAuthHeader(AUTH_TOKEN);
+}
+
+export default store;
