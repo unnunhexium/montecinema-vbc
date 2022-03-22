@@ -51,7 +51,6 @@ export default {
         { day: "Sat", id: 6 },
       ],
       selectedDate: new Date(),
-      formattedDate: "",
     };
   },
   watch: {
