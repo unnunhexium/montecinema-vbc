@@ -60,7 +60,7 @@ export default {
   },
   computed: {
     metaTitle() {
-      return this.movieDetails ? this.movieDetails.title : "montecinema";
+      return this.movieDetails.title ? this.movieDetails.title : "montecinema";
     },
   },
   metaInfo() {
