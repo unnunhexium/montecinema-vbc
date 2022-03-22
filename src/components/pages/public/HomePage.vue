@@ -33,7 +33,6 @@ export default {
 .index {
   background: $bg-white;
   padding: 0 0 7.75em;
-  max-width: $layout-width;
   margin: 0 auto;
   @include sm {
     padding-bottom: 5em;

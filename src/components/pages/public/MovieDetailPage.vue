@@ -63,7 +63,6 @@ export default {
 
 <style lang="scss" scoped>
 .movie-detail-page {
-  max-width: $layout-width;
   padding: 0 48px;
   margin-top: 4em;
   &__movie-card {
