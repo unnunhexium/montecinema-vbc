@@ -43,4 +43,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss">
+router-view {
+  max-width: $layout-width;
+}
+</style>

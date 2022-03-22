@@ -14,8 +14,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.screenings-page {
-  max-width: $layout-width;
-}
-</style>
+<style lang="scss" scoped></style>
