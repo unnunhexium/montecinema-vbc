@@ -58,6 +58,16 @@ export default {
     this.movieDetails = data;
     this.setMovieTitle(this.movieDetails.title);
   },
+  computed: {
+    metaTitle() {
+      return this.movieDetails.title ? this.movieDetails.title : "montecinema";
+    },
+  },
+  metaInfo() {
+    return {
+      title: this.metaTitle,
+    };
+  },
 };
 </script>
 

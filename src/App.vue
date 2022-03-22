@@ -40,6 +40,10 @@ export default {
     this.$store.dispatch("fetchMovies");
     this.$store.dispatch("fetchScreenings");
   },
+  metaInfo: {
+    title: "montecinema",
+    titleTemplate: "%s | montecinema",
+  },
 };
 </script>
 

@@ -20,6 +20,9 @@ export default {
   components: {
     LoginCard,
   },
+  metaInfo: {
+    title: "Log in or sign up",
+  },
 };
 </script>
 

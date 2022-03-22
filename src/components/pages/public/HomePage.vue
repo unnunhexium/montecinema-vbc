@@ -23,6 +23,10 @@ export default {
     ScreeningsSection,
     ContactCard,
   },
+  metaInfo: {
+    title: "montecinema",
+    titleTemplate: null,
+  },
 };
 </script>
 

@@ -56,6 +56,9 @@ export default {
       }
     },
   },
+  metaInfo: {
+    title: "Sign up",
+  },
 };
 </script>
 
