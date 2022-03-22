@@ -1,11 +1,11 @@
 <template>
   <div class="steps-nav">
-    <button class="steps-nav__button" :class="{ active: true }">
-      <p class="steps-nav__button-num" :class="{ active: true }">1</p>
+    <button class="steps-nav__button" :class="{ active: isActive }">
+      <p class="steps-nav__button-num" :class="{ active: isActive }">1</p>
       Choose seats
     </button>
-    <button class="steps-nav__button" :class="{ active: false }">
-      <p class="steps-nav__button-num" :class="{ active: false }">2</p>
+    <button class="steps-nav__button" :class="{ active: !isActive }">
+      <p class="steps-nav__button-num" :class="{ active: !isActive }">2</p>
       Book tickets
     </button>
   </div>
@@ -14,10 +14,10 @@
 <script>
 export default {
   name: "StepsNav",
-  computed: {
-    //   WIP TO-DO
-    isActive() {
-      return false;
+  props: {
+    isActive: {
+      type: Boolean,
+      required: true,
     },
   },
 };
