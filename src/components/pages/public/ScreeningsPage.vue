@@ -13,7 +13,6 @@ export default {
   },
   metaInfo: {
     title: "Screenings",
-    titleTemplate: "%s | montecinema",
   },
 };
 </script>

@@ -55,7 +55,6 @@ export default {
   },
   metaInfo: {
     title: "Contact us",
-    titleTemplate: "%s | montecinema",
   },
 };
 </script>

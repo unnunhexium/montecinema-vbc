@@ -22,7 +22,6 @@ export default {
   },
   metaInfo: {
     title: "Log in or sign up",
-    titleTemplate: "%s | montecinema",
   },
 };
 </script>

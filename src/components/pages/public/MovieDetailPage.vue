@@ -58,10 +58,14 @@ export default {
     this.movieDetails = data;
     this.setMovieTitle(this.movieDetails.title);
   },
+  computed: {
+    metaTitle() {
+      return this.movieDetails ? this.movieDetails.title : "montecinema";
+    },
+  },
   metaInfo() {
     return {
-      title: `${this.movieDetails.title}`,
-      titleTemplate: "%s | montecinema",
+      title: this.metaTitle,
     };
   },
 };

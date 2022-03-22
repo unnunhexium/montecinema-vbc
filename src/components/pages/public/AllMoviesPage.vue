@@ -73,7 +73,6 @@ export default {
   },
   metaInfo: {
     title: "All the movies",
-    titleTemplate: "%s | montecinema",
   },
 };
 </script>

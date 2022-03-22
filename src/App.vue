@@ -41,7 +41,7 @@ export default {
     this.$store.dispatch("fetchScreenings");
   },
   metaInfo: {
-    title: "",
+    title: "montecinema",
     titleTemplate: "%s | montecinema",
   },
 };
