@@ -53,6 +53,10 @@ export default {
       return `A logo of ${name}.`;
     },
   },
+  metaInfo: {
+    title: "Contact us",
+    titleTemplate: "%s | montecinema",
+  },
 };
 </script>
 

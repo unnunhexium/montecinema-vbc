@@ -56,6 +56,10 @@ export default {
       }
     },
   },
+  metaInfo: {
+    title: "Sign up",
+    titleTemplate: "%s | montecinema",
+  },
 };
 </script>
 

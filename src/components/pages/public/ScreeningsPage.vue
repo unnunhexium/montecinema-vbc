@@ -11,6 +11,10 @@ export default {
   components: {
     ScreeningsSection,
   },
+  metaInfo: {
+    title: "Screenings",
+    titleTemplate: "%s | montecinema",
+  },
 };
 </script>
 

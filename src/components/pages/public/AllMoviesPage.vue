@@ -71,6 +71,10 @@ export default {
       this.selectedOption = value;
     },
   },
+  metaInfo: {
+    title: "All the movies",
+    titleTemplate: "%s | montecinema",
+  },
 };
 </script>
 
