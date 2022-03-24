@@ -50,7 +50,8 @@ export const routes = [
     meta: { requiresAuth: true },
     path: "/choose-seats",
     name: "ChooseSeats",
-    component: () => import("@/components/pages/client/ChooseSeatsPage.vue"),
+    component: () =>
+      import("@/components/pages/client/ChooseSeatsAndTicketsPage.vue"),
   },
 ];
 
