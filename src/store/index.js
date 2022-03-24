@@ -14,6 +14,7 @@ const store = new Vuex.Store({
     movies: [],
     screenings: [],
     movieTitle: "",
+    selectedMovie: {},
     authHeader: AUTH_TOKEN,
   },
   mutations: {
@@ -25,6 +26,9 @@ const store = new Vuex.Store({
     },
     setMovieTitle(state, movieTitle) {
       state.movieTitle = movieTitle;
+    },
+    setSelectedMovie(state, selectedMovie) {
+      state.selectedMovie = selectedMovie;
     },
     setAuthHeader(state, { authHeader }) {
       state.authHeader = authHeader;
@@ -46,6 +50,9 @@ const store = new Vuex.Store({
     },
     async setMovieTitle({ commit }, title) {
       commit("setMovieTitle", title);
+    },
+    async setSelectedMovie({ commit }, { movie, datetime }) {
+      commit("setSelectedMovie", { movie, datetime });
     },
     async login({ commit, dispatch }, credentials) {
       await dispatch("logout");
@@ -70,6 +77,7 @@ const store = new Vuex.Store({
       return [...new Set(state.movies.map((movie) => movie.genre.name))];
     },
     movieTitle: (state) => state.movieTitle,
+    selectedMovie: (state) => state.selectedMovie,
     isLoggedIn: (state) => !!state.authHeader,
   },
 });
