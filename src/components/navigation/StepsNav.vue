@@ -25,7 +25,6 @@ export default {
 
 <style lang="scss" scoped>
 .steps-nav {
-  margin: 0 48px;
   background: $bg-accent;
   padding: 1.25em 0 1.25em 1.5em;
   display: flex;
