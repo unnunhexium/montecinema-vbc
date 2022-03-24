@@ -15,24 +15,37 @@
           {{ getFormattedLength(movie.length) }}
         </p>
       </div>
-      <div class="screening-card__hour-list">
+      <div class="screening-card__hour-list" v-if="!datetime">
         <HourTab
           v-for="screening in filteredScreenings"
           :key="screening.datetime"
-          >{{ getTime(screening.datetime) }}</HourTab
+          @click.native="selectScreening(screening.datetime)"
         >
+          {{ getTime(screening.datetime) }}
+        </HourTab>
         <p class="screening-card__alert" v-if="!filteredScreenings.length">
           There are no seances for today. Please check another day.
         </p>
       </div>
+      <p class="screening-card__selected-datetime" v-else>
+        {{ getDayOfWeek(datetime) }} {{ getDate(datetime) }} -
+        {{ getTime(datetime) }}
+      </p>
     </div>
   </div>
 </template>
 
 <script>
-import { imageAlt, getFormattedLength, getTime } from "@/helpers";
+import {
+  imageAlt,
+  getFormattedLength,
+  getDayOfWeek,
+  getDate,
+  getTime,
+} from "@/helpers";
 import HourTab from "./base/HourTab.vue";
 import screeningsList from "@/mixins/screeningsList.js";
+import { mapActions } from "vuex";
 
 export default {
   name: "ScreeningCard",
@@ -49,11 +62,22 @@ export default {
       type: Array,
       default: () => [],
     },
+    datetime: {
+      type: String,
+      default: "",
+    },
   },
   methods: {
+    ...mapActions(["setSelectedMovie"]),
     imageAlt,
     getFormattedLength,
     getTime,
+    getDayOfWeek,
+    getDate,
+    selectScreening(datetime) {
+      this.setSelectedMovie({ movie: this.movie, datetime });
+      this.$router.push("/choose-seats");
+    },
   },
 };
 </script>
@@ -78,22 +102,31 @@ export default {
     color: $text-dark;
     padding-bottom: 0.35em;
   }
+
   &__info-wrapper {
     display: flex;
     align-items: baseline;
   }
+
   &__genre {
     @include filled-pill;
     margin: 0 0.875em 1.75em 0;
   }
+
   &__length {
     @include font-paragraph--the-smallest;
     color: $text-light;
     padding-bottom: 1em;
   }
+
   &__alert {
     @include font-paragraph--small;
     color: $text-accent;
+  }
+
+  &__selected-datetime {
+    @include filled-pill;
+    margin: 0 0.875em 1.75em 0;
   }
 }
 </style>
