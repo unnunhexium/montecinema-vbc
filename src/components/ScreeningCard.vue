@@ -19,7 +19,7 @@
         <HourTab
           v-for="screening in filteredScreenings"
           :key="screening.datetime"
-          @click.native="selectScreening(screening.datetime)"
+          @click.native="selectScreening(screening.datetime, screening.hall)"
         >
           {{ getTime(screening.datetime) }}
         </HourTab>
@@ -74,8 +74,8 @@ export default {
     getTime,
     getDayOfWeek,
     getDate,
-    selectScreening(datetime) {
-      this.setSelectedMovie({ movie: this.movie, datetime });
+    selectScreening(datetime, hall) {
+      this.setSelectedMovie({ movie: this.movie, datetime, hall });
       this.$router.push("/choose-seats");
     },
   },
