@@ -4,6 +4,7 @@ export const API_BASE_URL = "http://localhost:3000";
 
 export const MOVIES_URL = "movies";
 export const SCREENINGS_URL = "seances";
+export const HALL_URL = "halls";
 
 export const getMovies = async () => {
   return await axios.get(`${API_BASE_URL}/${MOVIES_URL}`);
@@ -15,4 +16,8 @@ export const getScreenings = async () => {
 
 export const getMovieDetails = async (id) => {
   return await axios.get(`${API_BASE_URL}/${MOVIES_URL}/${id}`);
+};
+
+export const getHallDetails = async (id) => {
+  return await axios.get(`${API_BASE_URL}/${HALL_URL}/${id}`);
 };

@@ -51,8 +51,8 @@ const store = new Vuex.Store({
     async setMovieTitle({ commit }, title) {
       commit("setMovieTitle", title);
     },
-    async setSelectedMovie({ commit }, { movie, datetime }) {
-      commit("setSelectedMovie", { movie, datetime });
+    async setSelectedMovie({ commit }, payload) {
+      commit("setSelectedMovie", payload);
     },
     async login({ commit, dispatch }, credentials) {
       await dispatch("logout");
