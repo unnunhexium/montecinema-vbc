@@ -44,9 +44,11 @@ export default {
     border: 2px solid $btn-pressed;
     display: flex;
     align-items: center;
+
     &:hover {
       background: $btn-pressed;
     }
+
     &:focus-visible {
       outline: none;
       border: 2px dotted $btn-pressed;

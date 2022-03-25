@@ -35,4 +35,9 @@ export default {
     background: darken($btn-dark, 20);
   }
 }
+
+.active {
+  background: $btn-dark;
+  color: $text-white;
+}
 </style>
