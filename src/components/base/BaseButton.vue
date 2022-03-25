@@ -47,6 +47,7 @@ export default {
         "base-button",
         { "base-button--primary": this.type === "primary" },
         { "base-button--secondary": this.type === "secondary" },
+        { "base-button--tertiary": this.type === "tertiary" },
       ];
     },
   },
@@ -72,7 +73,12 @@ export default {
       background: $btn-hover;
     }
 
-    &:active,
+    &:active {
+      outline: none;
+      border: 3px solid $btn-pressed;
+      background: darken($btn-default, 20);
+    }
+
     &:focus-visible {
       outline: none;
       border: 3px solid $btn-pressed;
@@ -87,6 +93,23 @@ export default {
 
     &:focus-visible {
       @include outline-focus;
+    }
+  }
+
+  &--tertiary {
+    @include font-button;
+    font-size: 18px;
+    line-height: 18px;
+    padding: 0.95em 2em;
+    background: transparent;
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: 64px;
+    transition: background-color 0.4s, border-color 0.2s;
+    &:active,
+    &:focus,
+    &:hover {
+      color: $text-white;
     }
   }
 
