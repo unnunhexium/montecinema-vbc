@@ -37,8 +37,8 @@
         Log in instead
       </router-link>
       <BaseButton
-        @click="$emit('go-to-next-step')"
         class="register-card__button"
+        @click="$emit('go-to-next-step')"
         :disabled="buttonDisabled"
         >Next step</BaseButton
       >
@@ -146,7 +146,6 @@ export default {
     font-size: 18px;
     line-height: 18px;
     padding: 0.85em 3.4em;
-    border-radius: 64px;
   }
 }
 .invalid {

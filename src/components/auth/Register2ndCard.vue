@@ -268,7 +268,6 @@ export default {
   font-size: 18px;
   line-height: 18px;
   padding: 12px 30px;
-  border-radius: 64px;
 }
 .invalid {
   color: $text-accent;

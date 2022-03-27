@@ -73,7 +73,6 @@ export default {
     font-size: 22px;
     line-height: 22px;
     padding: 0.8em 1.8em;
-    border-radius: 30px;
     @include sm {
       width: 100%;
     }

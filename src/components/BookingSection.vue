@@ -141,7 +141,6 @@ export default {
     letter-spacing: 1.5px;
     margin-top: 2.25em;
     padding: 0.75em 0 0.75em;
-    border-radius: 30px;
   }
 }
 </style>
