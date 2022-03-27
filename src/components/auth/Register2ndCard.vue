@@ -45,7 +45,7 @@
     >
       You should be minium 18 years old
     </p>
-    <div class="register-2nd-card__checkbox-wrapper">
+    <!-- <div class="register-2nd-card__checkbox-wrapper">
       <input
         type="checkbox"
         class="register-2nd-card__checkbox"
@@ -57,7 +57,8 @@
         I accept
         <a url="" class="register-2nd-card__checkbox-link">Privacy Policy</a>
       </p>
-    </div>
+    </div> -->
+    <BaseCheckbox v-model="checkboxValue" text="Privacy policy"></BaseCheckbox>
     <div class="register-2nd-card__buttons-wrapper">
       <router-link :to="{ name: 'Login' }" class="register-2nd-card__link">
         Log in instead
@@ -71,6 +72,7 @@
 
 <script>
 import BaseInput from "@/components/base/BaseInput.vue";
+import BaseCheckbox from "@/components/base/BaseCheckbox.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
 import IconCalendar from "../svg/icon-calendar.vue";
 import Datepicker from "vuejs-datepicker";
@@ -80,6 +82,7 @@ export default {
   name: "Register2ndCard",
   components: {
     BaseButton,
+    BaseCheckbox,
     BaseInput,
     Datepicker,
     IconCalendar,
@@ -89,6 +92,7 @@ export default {
       inputError: "",
       selectedDate: new Date(),
       formattedDate: "",
+      checkboxValue: false,
     };
   },
   props: {
@@ -100,6 +104,9 @@ export default {
   watch: {
     selectedDate(newVal) {
       this.$emit("set-date", newVal);
+    },
+    checkboxValue(newVal) {
+      this.$emit("set-checkbox-value", newVal);
     },
   },
   methods: {
@@ -113,12 +120,6 @@ export default {
       return new Date(date);
     },
     getDate,
-    emitCheckboxValue(event) {
-      this.$emit("set-form-field", {
-        value: event.target.value !== "true",
-        key: "checkbox",
-      });
-    },
   },
   computed: {
     isOver18() {
