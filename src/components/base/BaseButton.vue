@@ -61,7 +61,7 @@ export default {
   cursor: pointer;
   text-decoration: none;
   border: 4px solid transparent;
-  border-radius: 24px;
+  border-radius: 64px;
   transition: background-color 0.2s, border-color 0.2s;
 
   &--primary {
@@ -75,7 +75,6 @@ export default {
 
     &:active {
       outline: none;
-      border: 3px solid $btn-pressed;
       background: darken($btn-default, 20);
     }
 
@@ -100,16 +99,24 @@ export default {
     @include font-button;
     font-size: 18px;
     line-height: 18px;
+    max-height: 57px;
     padding: 0.95em 2em;
     background: transparent;
+    color: $btn-dark;
+    border: 2px solid $btn-dark;
     cursor: pointer;
     text-decoration: none;
     border-radius: 64px;
     transition: background-color 0.4s, border-color 0.2s;
+
     &:active,
-    &:focus,
     &:hover {
+      background: $btn-dark;
       color: $text-white;
+    }
+
+    &:focus-visible {
+      @include outline-focus;
     }
   }
 
