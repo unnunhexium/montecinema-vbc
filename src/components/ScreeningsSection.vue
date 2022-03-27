@@ -7,6 +7,7 @@
     <div class="screenings-section__input-wrapper">
       <DayTabsList @set-date="setDate" />
       <BaseSelect
+        label="Movie"
         :options="selectOptions"
         :selectedOption="selectedOption"
         @input="setOption"

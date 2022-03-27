@@ -1,6 +1,6 @@
 <template>
   <div class="base-select">
-    <p class="base-select__title">Movie</p>
+    <p class="base-select__title" :label="label">{{ label }}</p>
     <Multiselect
       class="base-select__input"
       :value="selectedOption"
@@ -10,6 +10,7 @@
       :close-on-select="false"
       :show-labels="false"
       :allow-empty="false"
+      :placeholder="placeholder"
       open-direction="bottom"
     >
       <template slot="caret">
@@ -30,6 +31,10 @@ export default {
   name: "BaseSelect",
   components: { Multiselect },
   props: {
+    label: {
+      type: String,
+      default: "",
+    },
     selectedOption: {
       type: String,
       required: true,
@@ -37,6 +42,10 @@ export default {
     options: {
       type: Array,
       required: true,
+    },
+    placeholder: {
+      type: String,
+      default: "",
     },
   },
 };
