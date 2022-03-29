@@ -30,3 +30,6 @@ export const getReservationDetails = async (id) => {
 export const getScreeningDetails = async (id) => {
   return await defaultClient.get(`${API_BASE_URL}/${SCREENINGS_URL}/${id}`);
 };
+
+export const postReservation = async (body) =>
+  defaultClient.post("/reservations/online", body);
