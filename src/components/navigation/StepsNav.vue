@@ -1,6 +1,10 @@
 <template>
   <div class="steps-nav">
-    <button class="steps-nav__button" :class="{ active: isActive }">
+    <button
+      class="steps-nav__button"
+      :class="{ active: isActive }"
+      @click="$emit('go-to-choose-seats')"
+    >
       <p class="steps-nav__button-num" :class="{ active: isActive }">1</p>
       Choose seats
     </button>
