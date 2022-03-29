@@ -19,7 +19,9 @@
         <HourTab
           v-for="screening in filteredScreenings"
           :key="screening.datetime"
-          @click.native="selectScreening(screening.datetime, screening.hall)"
+          @click.native="
+            selectScreening(screening.datetime, screening.hall, screening.id)
+          "
         >
           {{ getTime(screening.datetime) }}
         </HourTab>
@@ -45,7 +47,7 @@ import {
 } from "@/helpers";
 import HourTab from "./base/HourTab.vue";
 import screeningsList from "@/mixins/screeningsList.js";
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "ScreeningCard",
@@ -67,6 +69,9 @@ export default {
       default: "",
     },
   },
+  computed: {
+    ...mapGetters(["selectedMovie"]),
+  },
   methods: {
     ...mapActions(["setSelectedMovie"]),
     imageAlt,
@@ -74,8 +79,13 @@ export default {
     getTime,
     getDayOfWeek,
     getDate,
-    selectScreening(datetime, hall) {
-      this.setSelectedMovie({ movie: this.movie, datetime, hall });
+    selectScreening(datetime, hall, seanceId) {
+      this.setSelectedMovie({
+        movie: this.movie,
+        datetime,
+        hall,
+        seanceId,
+      });
       this.$router.push("/choose-seats");
     },
   },
