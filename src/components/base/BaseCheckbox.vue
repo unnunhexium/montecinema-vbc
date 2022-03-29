@@ -1,15 +1,15 @@
 <template>
   <div class="base-checkbox">
-    <input
-      type="checkbox"
-      class="base-checkbox__input"
-      :checked="value"
-      @change="$emit('input', $event.target.checked)"
-    />
-    <p class="base-checkbox__description">
+    <label class="base-checkbox__description">
+      <input
+        type="checkbox"
+        class="base-checkbox__input"
+        :checked="value"
+        @change="$emit('input', $event.target.checked)"
+      />
       I accept
       <a url="" class="base-checkbox__link">{{ text }}</a>
-    </p>
+    </label>
   </div>
 </template>
 
@@ -30,10 +30,8 @@ export default {
 
 <style lang="scss" scoped>
 .base-checkbox {
-  display: flex;
   @include font-element--medium;
   color: $text-dark;
-  align-items: center;
 
   &__input {
     margin-right: 0.75em;
@@ -42,10 +40,14 @@ export default {
   }
 
   &__description {
+    display: flex;
+    align-items: center;
   }
 
   &__link {
     text-decoration: underline;
+    margin-left: 0.25em;
+    cursor: pointer;
   }
 }
 </style>
