@@ -1,23 +1,39 @@
 <template>
   <div class="choose-seats-and-tickets-page">
-    <StepsNav class="choose-seats-and-tickets-page__nav" />
-    <h2 class="choose-seats-and-tickets-page__title">Choose your seats</h2>
+    <StepsNav
+      class="choose-seats-and-tickets-page__nav"
+      :isActive="!secondStepActive"
+      @go-to-choose-seats="secondStepActive = false"
+    />
+    <h2
+      class="choose-seats-and-tickets-page__title"
+      v-if="secondStepActive == false"
+    >
+      Choose your seats
+    </h2>
+    <h2 class="choose-seats-and-tickets-page__title" v-else>
+      Choose your tickets
+    </h2>
     <ScreeningCard
       class="choose-seats-and-tickets-page__card"
       :movie="selectedMovie.movie"
       :datetime="selectedMovie.datetime"
     />
-    <div>
-      <SeatsList
-        class="choose-seats-and-tickets-page__seats"
-        :hallId="selectedMovie.hall"
-      />
-      <BaseButton type="tertiary" class="choose-seats-and-tickets-page__button">
-        <!-- TO DO v-if seats are chosen -->
-        Choose <slot>4</slot> seats
-      </BaseButton>
-    </div>
-    <div><ChooseTickets /></div>
+    <SeatsList
+      v-if="!secondStepActive"
+      class="choose-seats-and-tickets-page__seats"
+      @go-to-next-step="secondStepActive = true"
+      @select-seat="selectSeat"
+      :selectedSeats="selectedSeats"
+      :takenSeats="takenSeats"
+      :hall="hall"
+    />
+    <ChooseTickets
+      v-else
+      @go-back="goBack"
+      :selectedSeats="selectedSeats"
+      @remove="removeItem"
+    />
   </div>
 </template>
 
@@ -27,7 +43,7 @@ import StepsNav from "@/components/navigation/StepsNav.vue";
 import ScreeningCard from "@/components/ScreeningCard.vue";
 import SeatsList from "@/components/SeatsList.vue";
 import ChooseTickets from "@/components/ChooseTickets.vue";
-import BaseButton from "@/components/base/BaseButton.vue";
+import { getScreeningDetails, getHallDetails } from "@/api/movies";
 
 export default {
   name: "ChooseSeatsAndTicketsPage",
@@ -36,10 +52,49 @@ export default {
     ScreeningCard,
     SeatsList,
     ChooseTickets,
-    BaseButton,
+  },
+  data() {
+    return {
+      secondStepActive: false,
+      selectedSeats: [],
+      takenSeats: [],
+      hall: {},
+    };
   },
   computed: {
     ...mapGetters(["selectedMovie"]),
+  },
+  methods: {
+    selectSeat(row, seat) {
+      const selectedSeat = `${row}${seat}`;
+      if (this.selectedSeats.includes(selectedSeat)) {
+        const index = this.selectedSeats.indexOf(selectedSeat);
+        this.selectedSeats.splice(index, 1);
+      } else {
+        this.selectedSeats = [...this.selectedSeats, selectedSeat];
+      }
+    },
+    goBack() {
+      this.secondStepActive = false;
+    },
+    removeItem(index) {
+      this.selectedSeats.splice(index, 1);
+    },
+  },
+  async created() {
+    try {
+      if (!this.selectedMovie.hall) {
+        this.$router.push("/screenings");
+        return;
+      } else {
+        const { data } = await getHallDetails(this.selectedMovie.hall);
+        this.hall = data;
+      }
+      const { data } = await getScreeningDetails(this.selectedMovie.seanceId);
+      this.takenSeats = data.taken_seats;
+    } catch (error) {
+      alert(error);
+    }
   },
 };
 </script>
@@ -64,22 +119,6 @@ export default {
     box-shadow: 0px 24px 78px rgba(0, 0, 0, 0.08),
       0px 5.36071px 17.4223px rgba(0, 0, 0, 0.0238443),
       0px 1.59602px 5.18708px rgba(0, 0, 0, 0.0161557);
-  }
-
-  &__seats {
-    margin-bottom: 4em;
-  }
-
-  &__button {
-    color: #f7a0a1;
-    border: 2px solid #f7a0a1;
-    display: block;
-    margin-left: auto;
-    &:active,
-    &:focus,
-    &:hover {
-      background: #f7a0a1;
-    }
   }
 }
 </style>
