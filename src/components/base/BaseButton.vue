@@ -22,7 +22,6 @@
 <script>
 export default {
   name: "BaseButton",
-  emits: ["click"],
   props: {
     href: {
       type: String,
@@ -121,10 +120,13 @@ export default {
   }
 
   &[disabled] {
+    border-color: $text-lighter;
     background: $text-lighter;
+    color: $text-white;
     cursor: not-allowed;
-    &:hover {
-      border-color: $text-lighter;
+    :hover,
+    :focus {
+      background: $text-lighter;
     }
   }
 }

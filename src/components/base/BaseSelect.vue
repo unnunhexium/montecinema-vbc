@@ -1,18 +1,21 @@
 <template>
   <div class="base-select">
-    <p class="base-select__title" :label="label">{{ label }}</p>
+    <p class="base-select__title" :title="title">{{ title }}</p>
     <Multiselect
       class="base-select__input"
       :value="selectedOption"
+      :label="label"
       @input="$emit('input', $event)"
       :options="options"
       :searchable="false"
-      :close-on-select="false"
       :show-labels="false"
       :allow-empty="false"
       :placeholder="placeholder"
       open-direction="bottom"
     >
+      <template v-if="label" slot="singleLabel" slot-scope="{ option }">
+        {{ option.name }}
+      </template>
       <template slot="caret">
         <img
           src="@/assets/icons/arrows/arrow-down-small.svg"
@@ -31,12 +34,16 @@ export default {
   name: "BaseSelect",
   components: { Multiselect },
   props: {
+    title: {
+      type: String,
+      default: "",
+    },
     label: {
       type: String,
       default: "",
     },
     selectedOption: {
-      type: String,
+      type: [String, Object],
       required: true,
     },
     options: {

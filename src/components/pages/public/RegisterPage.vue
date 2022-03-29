@@ -56,7 +56,6 @@ export default {
         this.$router.push("/choose-seats");
       } catch (error) {
         alert(error);
-        console.error(error);
       }
     },
   },

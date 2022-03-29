@@ -1,8 +1,8 @@
 <template>
   <header class="the-header" id="the-header">
-    <a class="the-header__logo" href="/">
+    <router-link class="the-header__logo" to="/">
       <img src="@/assets/logo.svg" />
-    </a>
+    </router-link>
     <NavBar />
     <div class="the-header__wrapper">
       <template v-if="!isLoggedIn">

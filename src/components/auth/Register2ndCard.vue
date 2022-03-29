@@ -45,19 +45,6 @@
     >
       You should be minium 18 years old
     </p>
-    <!-- <div class="register-2nd-card__checkbox-wrapper">
-      <input
-        type="checkbox"
-        class="register-2nd-card__checkbox"
-        @input="emitCheckboxValue"
-        :value="formData.checkbox"
-        :checked="false"
-      />
-      <p class="register-2nd-card__checkbox-description">
-        I accept
-        <a url="" class="register-2nd-card__checkbox-link">Privacy Policy</a>
-      </p>
-    </div> -->
     <BaseCheckbox v-model="checkboxValue" text="Privacy policy"></BaseCheckbox>
     <div class="register-2nd-card__buttons-wrapper">
       <router-link :to="{ name: 'Login' }" class="register-2nd-card__link">
