@@ -54,9 +54,13 @@ export default {
     },
   },
   async created() {
-    const { data } = await getMovieDetails(this.movieId);
-    this.movieDetails = data;
-    this.setMovieTitle(this.movieDetails.title);
+    try {
+      const { data } = await getMovieDetails(this.movieId);
+      this.movieDetails = data;
+      this.setMovieTitle(this.movieDetails.title);
+    } catch (error) {
+      alert(error);
+    }
   },
   computed: {
     metaTitle() {
