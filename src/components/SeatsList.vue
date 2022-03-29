@@ -1,30 +1,58 @@
 <template>
-  <div class="seats-list">
-    <div v-for="row in rowList" :key="row" class="seats-list__row">
-      <span class="seats-list__row-letter--left">{{ row }}</span>
-      <button class="seats-list__seat" v-for="seat in seatsInRow" :key="seat">
-        {{ seat }}
-      </button>
-      <span class="seats-list__row-letter--right">{{ row }}</span>
+  <div>
+    <div class="seats-list">
+      <div v-for="row in rowList" :key="row" class="seats-list__row">
+        <span class="seats-list__row-letter--left">{{ row }}</span>
+        <button
+          :class="seatClasses(row, seat)"
+          v-for="seat in seatsInRow"
+          :key="seat"
+          @click="$emit('select-seat', row, seat)"
+        >
+          {{ seat }}
+        </button>
+        <span class="seats-list__row-letter--right">{{ row }}</span>
+      </div>
     </div>
+    <BaseButton
+      type="tertiary"
+      class="seats-list__button"
+      @click="$emit('go-to-next-step')"
+      :disabled="buttonDisabled"
+    >
+      Choose {{ selectedSeats.length }} seats
+    </BaseButton>
   </div>
 </template>
 
 <script>
-import { getHallDetails } from "@/api/movies";
+// import { getReservationDetails } from "@/api/movies";
+import BaseButton from "@/components/base/BaseButton.vue";
 
 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 export default {
   name: "SeatsList",
+  components: {
+    BaseButton,
+  },
   data() {
     return {
-      hall: {},
+      reservation: {},
+      seatsInRow: 10,
     };
   },
   props: {
-    hallId: {
-      type: String,
+    hall: {
+      type: Object,
+      required: true,
+    },
+    selectedSeats: {
+      type: Array,
+      required: true,
+    },
+    takenSeats: {
+      type: Array,
       required: true,
     },
   },
@@ -32,19 +60,24 @@ export default {
     seats() {
       return this.hall.seats;
     },
-    seatsInRow() {
-      return +this.seats < 100 ? 10 : 25;
-    },
     rowsCount() {
       return this.seats / this.seatsInRow;
     },
     rowList() {
       return alphabet.slice(0, this.rowsCount).split("");
     },
+    buttonDisabled() {
+      return this.selectedSeats.length == 0;
+    },
   },
-  async created() {
-    const { data } = await getHallDetails(this.hallId);
-    this.hall = data;
+  methods: {
+    seatClasses(row, seat) {
+      return [
+        "seats-list__seat",
+        { taken: this.takenSeats.includes(`${row}${seat}`) },
+        { selected: this.selectedSeats.includes(`${row}${seat}`) },
+      ];
+    },
   },
 };
 </script>
@@ -59,7 +92,7 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 5px;
-
+  margin-bottom: 4em;
   overflow-x: auto;
 
   &__row,
@@ -105,14 +138,32 @@ export default {
       color: $text-white;
     }
   }
+  &__button {
+    display: block;
+    margin-left: auto;
+    &:not([disabled]) {
+      color: #f7a0a1;
+      border: 2px solid #f7a0a1;
+      &:active,
+      &:hover {
+        background: #f7a0a1;
+        color: $text-white;
+      }
+      &:focus-visible {
+        padding: 0.95em 2em;
+        border: 2px dotted $btn-pressed;
+      }
+    }
+  }
 }
 
 .taken {
   background: $text-light;
   color: $text-white;
+  pointer-events: none;
 }
 
-.chosen {
+.selected {
   background: $btn-default;
   color: $text-white;
 }
