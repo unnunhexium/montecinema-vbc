@@ -1,6 +1,10 @@
 <template>
   <div class="steps-nav">
-    <button class="steps-nav__button" :class="{ active: isActive }">
+    <button
+      class="steps-nav__button"
+      :class="{ active: isActive }"
+      @click="$emit('go-to-choose-seats')"
+    >
       <p class="steps-nav__button-num" :class="{ active: isActive }">1</p>
       Choose seats
     </button>
@@ -25,7 +29,6 @@ export default {
 
 <style lang="scss" scoped>
 .steps-nav {
-  margin: 0 48px;
   background: $bg-accent;
   padding: 1.25em 0 1.25em 1.5em;
   display: flex;
@@ -45,9 +48,11 @@ export default {
     border: 2px solid $btn-pressed;
     display: flex;
     align-items: center;
+
     &:hover {
       background: $btn-pressed;
     }
+
     &:focus-visible {
       outline: none;
       border: 2px dotted $btn-pressed;

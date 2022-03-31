@@ -22,7 +22,6 @@
 <script>
 export default {
   name: "BaseButton",
-  emits: ["click"],
   props: {
     href: {
       type: String,
@@ -47,6 +46,7 @@ export default {
         "base-button",
         { "base-button--primary": this.type === "primary" },
         { "base-button--secondary": this.type === "secondary" },
+        { "base-button--tertiary": this.type === "tertiary" },
       ];
     },
   },
@@ -60,7 +60,7 @@ export default {
   cursor: pointer;
   text-decoration: none;
   border: 4px solid transparent;
-  border-radius: 24px;
+  border-radius: 64px;
   transition: background-color 0.2s, border-color 0.2s;
 
   &--primary {
@@ -72,7 +72,11 @@ export default {
       background: $btn-hover;
     }
 
-    &:active,
+    &:active {
+      outline: none;
+      background: darken($btn-default, 20);
+    }
+
     &:focus-visible {
       outline: none;
       border: 3px solid $btn-pressed;
@@ -90,11 +94,39 @@ export default {
     }
   }
 
-  &[disabled] {
-    background: $text-lighter;
-    cursor: not-allowed;
+  &--tertiary {
+    @include font-button;
+    font-size: 18px;
+    line-height: 18px;
+    max-height: 57px;
+    padding: 0.95em 2em;
+    background: transparent;
+    color: $btn-dark;
+    border: 2px solid $btn-dark;
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: 64px;
+    transition: background-color 0.4s, border-color 0.2s;
+
+    &:active,
     &:hover {
-      border-color: $text-lighter;
+      background: $btn-dark;
+      color: $text-white;
+    }
+
+    &:focus-visible {
+      @include outline-focus;
+    }
+  }
+
+  &[disabled] {
+    border-color: $text-lighter;
+    background: $text-lighter;
+    color: $text-white;
+    cursor: not-allowed;
+    :hover,
+    :focus {
+      background: $text-lighter;
     }
   }
 }

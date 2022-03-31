@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app">
     <TheHeader v-if="showTheHeaderNav" />
     <SimpleNav v-if="showSimpleNav" />
     <BreadcrumbNav v-if="showBreadcrumbNav" />
@@ -48,7 +48,8 @@ export default {
 </script>
 
 <style lang="scss">
-router-view {
+.app {
   max-width: $layout-width;
+  margin: 0 auto;
 }
 </style>

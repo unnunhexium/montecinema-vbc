@@ -10,7 +10,7 @@
         See all
       </button>
     </div>
-    <div class="movies-list__card-wrapper">
+    <div class="movies-list__card-wrapper" v-if="movies.length">
       <MovieCard
         v-for="movie in moviesToDisplay"
         :movie="movie"

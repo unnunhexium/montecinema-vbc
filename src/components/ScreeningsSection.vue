@@ -7,13 +7,14 @@
     <div class="screenings-section__input-wrapper">
       <DayTabsList @set-date="setDate" />
       <BaseSelect
+        title="Movie"
         :options="selectOptions"
         :selectedOption="selectedOption"
         @input="setOption"
         placeholder="All categories"
       />
     </div>
-    <div class="screenings-section__cards-wrapper">
+    <div class="screenings-section__cards-wrapper" v-if="filteredMovies.length">
       <ScreeningCard
         v-for="movie in filteredMovies"
         :movie="movie"

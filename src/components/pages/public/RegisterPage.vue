@@ -14,6 +14,7 @@
         :formData="formData"
         @set-form-field="setFormField"
         @register-user="registerUser"
+        @set-checkbox-value="setCheckboxValue"
       />
     </div>
   </div>
@@ -46,13 +47,15 @@ export default {
     setFormField({ value, key }) {
       this.formData[key] = value;
     },
+    setCheckboxValue(value) {
+      this.formData.checkbox = value;
+    },
     async registerUser() {
       try {
         await this.$store.dispatch("register", this.formData);
         this.$router.push("/choose-seats");
       } catch (error) {
         alert(error);
-        console.error(error);
       }
     },
   },

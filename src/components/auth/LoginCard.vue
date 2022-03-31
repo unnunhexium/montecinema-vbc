@@ -44,10 +44,9 @@ export default {
     async onSubmit() {
       try {
         await this.$store.dispatch("login", this.formData);
-        this.$router.push("/choose-seats");
+        this.$router.push("/screenings");
       } catch (error) {
         alert(error);
-        console.error(error);
       }
     },
   },

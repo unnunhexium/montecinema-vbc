@@ -15,6 +15,7 @@
         @input="setOption"
         :selectedOption="selectedOption"
         :options="selectOptions"
+        title="Category"
         placeholder="All categories"
       />
     </div>
