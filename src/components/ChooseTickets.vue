@@ -78,12 +78,6 @@ export default {
   },
   data() {
     return {
-      selectOptions: [
-        "Adult - $20",
-        "Child - $10",
-        "Senior - $15",
-        "Student - $12",
-      ],
       checkboxValue: false,
       ticketsData: this.selectedSeats.map((seat) => ({
         seat,
@@ -150,9 +144,6 @@ export default {
 
   &__seat-description {
     margin-right: 1.35em;
-  }
-
-  &__ticket-select {
   }
 
   &__seat-description {
