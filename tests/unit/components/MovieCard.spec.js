@@ -22,7 +22,7 @@ describe("MovieCard", () => {
   it("shows movie title", () => {
     const wrapper = createComponent();
     expect(wrapper.find("h3").text()).toMatch(
-      "Harry Potter and the Philosopher's Stone"
+      movie.title
     );
   });
 
