@@ -37,7 +37,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import {
   imageAlt,
   getFormattedLength,
@@ -48,8 +48,10 @@ import {
 import HourTab from "./base/HourTab.vue";
 import screeningsList from "@/mixins/screeningsList.js";
 import { mapActions, mapGetters } from "vuex";
+import Vue from "vue";
 
-export default {
+export default Vue.extend({
+  
   name: "ScreeningCard",
   components: {
     HourTab,
@@ -79,7 +81,7 @@ export default {
     getTime,
     getDayOfWeek,
     getDate,
-    selectScreening(datetime, hall, seanceId) {
+    selectScreening(datetime: string, hall: number, seanceId: number) {
       this.setSelectedMovie({
         movie: this.movie,
         datetime,
@@ -89,7 +91,7 @@ export default {
       this.$router.push("/choose-seats");
     },
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>
