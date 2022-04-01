@@ -2,15 +2,21 @@
   <div class="booking-confirmation-page">
     <h3 class="booking-confirmation-page__title">Hell yeah!</h3>
     <h4 class="booking-confirmation-page__subtitle">You booked 3 tickets</h4>
-    <BookingConfirmationCard />
+    <BookingConfirmationCard class="booking-confirmation-page__card" />
+    <BaseButton class="booking-confirmation-page__button" routeName="Home">
+      Go to homepage
+    </BaseButton>
   </div>
 </template>
 
 <script>
 import BookingConfirmationCard from "@/components/BookingConfirmationCard.vue";
+import BaseButton from "@/components/base/BaseButton.vue";
+
 export default {
   components: {
     BookingConfirmationCard,
+    BaseButton,
   },
 };
 </script>
@@ -37,6 +43,18 @@ export default {
 
   &__subtitle {
     color: $text-accent-b;
+  }
+
+  &__card {
+    margin-bottom: 4em;
+  }
+
+  &__button {
+    font-size: 18px;
+    max-width: 240px;
+    padding: 0.75em 2.2em;
+    display: block;
+    margin-left: auto;
   }
 }
 </style>
