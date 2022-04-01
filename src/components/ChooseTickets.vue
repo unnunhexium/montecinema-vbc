@@ -66,7 +66,7 @@
 import BaseSelect from "@/components/base/BaseSelect.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
 import BaseCheckbox from "@/components/base/BaseCheckbox.vue";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import { postReservation } from "@/api/movies";
 
 export default {
@@ -92,7 +92,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["selectedMovie"]),
+    ...mapGetters(["selectedMovie", "seatsAndTickets"]),
     reservationBody() {
       return {
         seance_id: this.selectedMovie.seanceId,
@@ -101,6 +101,18 @@ export default {
           ticket_type_id: data.ticket?.id,
         })),
       };
+    },
+    bookingData() {
+      const tickets = [];
+      this.ticketsData.forEach((ticket) => {
+        tickets.push({
+          title: this.selectedMovie.movie.title,
+          seat: `Row ${ticket.seat[0]}, Seat ${ticket.seat.slice(1)}`,
+          datetime: this.selectedMovie.datetime,
+          ticketType: ticket.ticket.name,
+        });
+      });
+      return tickets;
     },
     buttonDisabled() {
       return !(this.selectedSeats.length && this.checkboxValue);
@@ -119,11 +131,13 @@ export default {
     },
   },
   methods: {
+    ...mapActions(["setSeatsAndTickets"]),
     setOption(value, index) {
       this.ticketsData[index].ticket = value;
     },
     bookReservation() {
       postReservation(this.reservationBody);
+      this.setSeatsAndTickets(this.bookingData);
     },
   },
 };
