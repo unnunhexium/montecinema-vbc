@@ -68,6 +68,7 @@ import BaseButton from "@/components/base/BaseButton.vue";
 import BaseCheckbox from "@/components/base/BaseCheckbox.vue";
 import { mapGetters, mapActions } from "vuex";
 import { postReservation } from "@/api/movies";
+import { getDayOfWeek, getDate, getTime } from "@/helpers";
 
 export default {
   name: "ChooseTickets",
@@ -145,9 +146,15 @@ export default {
     setOption(value, index) {
       this.ticketsData[index].ticket = value;
     },
-    bookReservation() {
-      postReservation(this.reservationBody);
-      this.setSeatsAndTickets(this.bookingData);
+    async bookReservation() {
+      try {
+        await postReservation(this.reservationBody);
+        this.setSeatsAndTickets(this.bookingData);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        this.$router.push("/booking-confirmation");
+      }
     },
   },
 };
