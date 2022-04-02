@@ -91,6 +91,14 @@ export default {
       ],
     };
   },
+  watch: {
+    selectedSeats(newVal) {
+      this.ticketsData = newVal.map((seat, index) => ({
+        seat,
+        ticket: this.ticketsData[index].ticket,
+      }));
+    },
+  },
   computed: {
     ...mapGetters(["selectedMovie", "seatsAndTickets"]),
     reservationBody() {
@@ -108,7 +116,9 @@ export default {
         tickets.push({
           title: this.selectedMovie.movie.title,
           seat: `Row ${ticket.seat[0]}, Seat ${ticket.seat.slice(1)}`,
-          datetime: this.selectedMovie.datetime,
+          datetime: `${getDayOfWeek(this.selectedMovie.datetime)}
+           ${getDate(this.selectedMovie.datetime)} -
+           ${getTime(this.selectedMovie.datetime)}`,
           ticketType: ticket.ticket.name,
         });
       });

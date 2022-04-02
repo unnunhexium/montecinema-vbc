@@ -1,22 +1,39 @@
 <template>
   <div class="booking-confirmation-page">
-    <h3 class="booking-confirmation-page__title">Hell yeah!</h3>
-    <h4 class="booking-confirmation-page__subtitle">You booked 3 tickets</h4>
-    <BookingConfirmationCard class="booking-confirmation-page__card" />
-    <BaseButton class="booking-confirmation-page__button" routeName="Home">
-      Go to homepage
-    </BaseButton>
+    <template v-if="seatsAndTickets.length >= 1">
+      <h3 class="booking-confirmation-page__title">Hell yeah!</h3>
+      <h4 class="booking-confirmation-page__subtitle">You booked 3 tickets</h4>
+      <BookingConfirmationCard
+        v-for="(booking, index) in seatsAndTickets.length"
+        :key="booking.seat"
+        class="booking-confirmation-page__card"
+        :title="seatsAndTickets[index].title"
+        :seat="seatsAndTickets[index].seat"
+        :datetime="seatsAndTickets[index].datetime"
+        :ticketType="seatsAndTickets[index].ticketType"
+      />
+      <BaseButton class="booking-confirmation-page__button" routeName="Home">
+        Go to homepage
+      </BaseButton>
+    </template>
+    <ErrorCard v-else />
   </div>
 </template>
 
 <script>
 import BookingConfirmationCard from "@/components/BookingConfirmationCard.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
+import ErrorCard from "@/components/ErrorCard.vue";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
     BookingConfirmationCard,
     BaseButton,
+    ErrorCard,
+  },
+  computed: {
+    ...mapGetters(["seatsAndTickets"]),
   },
 };
 </script>
