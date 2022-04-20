@@ -26,73 +26,126 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+// import Vue from "vue";
 import BaseSelect from "./base/BaseSelect.vue";
 import ScreeningCard from "./ScreeningCard.vue";
-import { mapGetters } from "vuex";
+// import { mapGetters } from "vuex";
 import dayTabsMixin from "@/mixins/dayTabs.js";
 import screeningsList from "@/mixins/screeningsList.js";
+import {
+  defineComponent,
+  ref,
+  computed,
+  onMounted,
+} from "@vue/composition-api";
+import { useGetters } from "vuex-composition-helpers";
 
 interface Movie {
-id: number;
-title: string;
-poster_url: string; 
-length: number; 
-release_date: string;
-description: string;
-genre: Genre;
+  id: number;
+  title: string;
+  poster_url: string;
+  length: number;
+  release_date: string;
+  description: string;
+  genre: Genre;
 }
 
 interface Genre {
-  id: number; 
+  id: number;
   name: string;
 }
 
 interface Screening {
-id: number;
-datetime: string;
-movie: number;
-hall: number;
+  id: number;
+  datetime: string;
+  movie: number;
+  hall: number;
 }
 
-interface DataType {
-  query: string;
-  selectedOption: string
-}
+// interface DataType {
+//   query: string;
+//   selectedOption: string;
+// }
 
-export default Vue.extend( {
+export default defineComponent({
   components: { BaseSelect, ScreeningCard },
   mixins: [dayTabsMixin, screeningsList],
-  data(): DataType {
+
+  setup() {
+    const selectedOption = ref("");
+    const query = ref("");
+
+    const { movies, screenings } = useGetters(["movies", "screenings"]);
+    const selectOptions = computed(() => {
+      return ["All movies", ...movies.value.map((movie: Movie) => movie.title)];
+    });
+    const filteredMovies = computed(() => {
+      return selectedOption.value === "All movies"
+        ? movies.value
+        : movies.value.filter(
+            (movie: Movie) => movie.title === selectedOption.value
+          );
+    });
+
+    function getSeances(id: number) {
+      return screenings.value.filter(
+        (screening: Screening) => screening.movie === id
+      );
+    }
+    function setOption(value: string) {
+      selectedOption.value = value;
+    }
+
+    onMounted(() => {
+      selectedOption.value = selectOptions.value[0];
+    });
+
     return {
-      selectedOption: "",
-      query: "",
+      selectedOption,
+      query,
+      selectOptions,
+      movies,
+      screenings,
+      filteredMovies,
+      getSeances,
+      setOption,
     };
   },
-  computed: {
-    ...mapGetters(["movies", "screenings"]),
-    selectOptions(): string[]{
-      return ["All movies", ...this.movies.map((movie: Movie) => movie.title)];
-    },
-    filteredMovies(): Array<Movie> {
-      return this.selectedOption === "All movies"
-        ? this.movies
-        : this.movies.filter((movie: Movie) => movie.title === this.selectedOption);
-    },
-    ...mapGetters(["movies", "genres", "screenings"]),
-  },
-  methods: {
-    getSeances(id: number) {
-      return this.screenings.filter((screening: Screening) => screening.movie === id);
-    },
-    setOption(value: string) {
-      this.selectedOption = value;
-    },
-  },
 
-  mounted() {
-    this.selectedOption = this.selectOptions[0];
-  },
+  // data(): DataType {
+  //   return {
+  //     selectedOption: "",
+  //     query: "",
+  //   };
+  // },
+  // computed: {
+  //   ...mapGetters(["movies", "screenings"]),
+  //   selectOptions(): string[] {
+  //     return ["All movies", ...this.movies.map((movie: Movie) => movie.title)];
+  //   },
+  //   filteredMovies(): Array<Movie> {
+  //     return this.selectedOption === "All movies"
+  //       ? this.movies
+  //       : this.movies.filter(
+  //           (movie: Movie) => movie.title === this.selectedOption
+  //         );
+  //   },
+  //   ...mapGetters(["movies", "genres", "screenings"]),
+  // },
+  // methods: {
+  //   getSeances(id: number) {
+  //     return this.screenings.filter(
+  //       (screening: Screening) => screening.movie === id
+  //     );
+  //   },
+  //   setOption(value: string) {
+  //     this.selectedOption = value;
+  //   },
+  // },
+
+  // mounted() {
+  //   this.selectedOption = this.selectOptions[0];
+  // },
 });
 </script>
 
