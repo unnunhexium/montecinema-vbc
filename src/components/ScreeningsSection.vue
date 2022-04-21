@@ -31,7 +31,7 @@ import BaseSelect from "./base/BaseSelect.vue";
 import ScreeningCard from "./ScreeningCard.vue";
 // import { mapGetters } from "vuex";
 import dayTabsMixin from "@/mixins/dayTabs.js";
-import { screeningsList } from "@/composables/screeningsList.js";
+import { useScreeningsList } from "@/composables/screeningsList.js";
 import {
   defineComponent,
   ref,
@@ -67,7 +67,7 @@ export default defineComponent({
   mixins: [dayTabsMixin],
 
   setup() {
-    const { filterByDay } = screeningsList();
+    const { filterByDay } = useScreeningsList();
     const selectedOption = ref("");
     const query = ref("");
 
