@@ -26,10 +26,8 @@
 </template>
 
 <script lang="ts">
-// import Vue from "vue";
 import BaseSelect from "./base/BaseSelect.vue";
 import ScreeningCard from "./ScreeningCard.vue";
-// import { mapGetters } from "vuex";
 import dayTabsMixin from "@/mixins/dayTabs.js";
 import { useScreeningsList } from "@/composables/screeningsList.js";
 import {
@@ -39,7 +37,7 @@ import {
   onMounted,
 } from "@vue/composition-api";
 import { useGetters } from "vuex-composition-helpers";
-import { Movie, Screening, DataType } from "@/api/interfaces";
+import { Movie, Screening } from "@/api/interfaces";
 
 export default defineComponent({
   components: { BaseSelect, ScreeningCard },
@@ -58,8 +56,8 @@ export default defineComponent({
       return selectedOption.value === "All movies"
         ? movies.value
         : movies.value.filter(
-          );
             (movie: Movie) => movie.title === selectedOption.value
+          );
     });
 
     function getSeances(id: number) {
@@ -68,12 +66,12 @@ export default defineComponent({
       );
     }
     function setOption(value: string) {
-    }
       selectedOption.value = value;
-    onMounted(() => {
+    }
 
-    });
+    onMounted(() => {
       selectedOption.value = selectOptions.value[0];
+    });
 
     return {
       filterByDay,
