@@ -25,45 +25,45 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from "vue";
 import BaseSelect from "./base/BaseSelect.vue";
 import ScreeningCard from "./ScreeningCard.vue";
 import { mapGetters } from "vuex";
 import dayTabsMixin from "@/mixins/dayTabs.js";
 import screeningsList from "@/mixins/screeningsList.js";
+import { Movie, Screening, DataType } from "@/api/interfaces";
 
-export default {
+export default Vue.extend({
   components: { BaseSelect, ScreeningCard },
   mixins: [dayTabsMixin, screeningsList],
-  data() {
+  data(): DataType {
     return {
-      query: "",
       selectedOption: "",
+      query: "",
     };
   },
   computed: {
     ...mapGetters(["movies", "screenings"]),
-    imageAlt() {
-      return `An image from ${this.movie.title} film.`;
+    selectOptions(): string[] {
+      return ["All movies", ...this.movies.map((movie: Movie) => movie.title)];
     },
-    movies() {
-      return this.$store.state.movies;
-    },
-    selectOptions() {
-      return ["All movies", ...this.movies.map((movie) => movie.title)];
-    },
-    filteredMovies() {
+    filteredMovies(): Array<Movie> {
       return this.selectedOption === "All movies"
         ? this.movies
-        : this.movies.filter((movie) => movie.title === this.selectedOption);
+        : this.movies.filter(
+            (movie: Movie) => movie.title === this.selectedOption
+          );
     },
     ...mapGetters(["movies", "genres", "screenings"]),
   },
   methods: {
-    getSeances(id) {
-      return this.screenings.filter((screening) => screening.movie === id);
+    getSeances(id: number) {
+      return this.screenings.filter(
+        (screening: Screening) => screening.movie === id
+      );
     },
-    setOption(value) {
+    setOption(value: string) {
       this.selectedOption = value;
     },
   },
@@ -71,7 +71,7 @@ export default {
   mounted() {
     this.selectedOption = this.selectOptions[0];
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>

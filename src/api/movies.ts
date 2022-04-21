@@ -15,21 +15,21 @@ export const getScreenings = async () => {
   return await defaultClient.get(`${API_BASE_URL}/${SCREENINGS_URL}`);
 };
 
-export const getMovieDetails = async (id) => {
+export const getMovieDetails = async (id: number) => {
   return await defaultClient.get(`${API_BASE_URL}/${MOVIES_URL}/${id}`);
 };
 
-export const getHallDetails = async (id) => {
+export const getHallDetails = async (id: number) => {
   return await defaultClient.get(`${API_BASE_URL}/${HALL_URL}/${id}`);
 };
 
-export const getReservationDetails = async (id) => {
+export const getReservationDetails = async (id: number) => {
   return await defaultClient.get(`${API_BASE_URL}/${RESERVATION_URL}/${id}`);
 };
 
-export const getScreeningDetails = async (id) => {
+export const getScreeningDetails = async (id: number) => {
   return await defaultClient.get(`${API_BASE_URL}/${SCREENINGS_URL}/${id}`);
 };
 
-export const postReservation = async (body) =>
+export const postReservation = async (body: object) =>
   defaultClient.post("/reservations/online", body);
