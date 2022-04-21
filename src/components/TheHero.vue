@@ -6,7 +6,9 @@
         Best movies, best experiences, best people. And all that doesn’t exist.
         Yikes.
       </p>
-      <BaseButton href="#online-booking">Book a ticket</BaseButton>
+      <BaseButton @click="$router.push('/screenings')"
+        >Book a ticket</BaseButton
+      >
     </div>
     <img
       src="@/assets/images/cinema.jpg"
