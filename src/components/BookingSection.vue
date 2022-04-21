@@ -29,32 +29,37 @@
 <script>
 import BaseInput from "./base/BaseInput.vue";
 import BaseButton from "./base/BaseButton.vue";
+import { ref } from "@/vue/composition-api";
 
 export default {
+  setup() {
+    const subscribed = ref(false);
+    const invalidEmail = ref(false);
+    const inputValue = ref("");
+
+    const subscribe = () => {
+      if (inputValue.value.length > 0) {
+        subscribed.value = !subscribed.value;
+      } else {
+        invalidEmail.value = true;
+      }
+    };
+    const setInput = (event) => {
+      inputValue.value = event.target.value;
+    };
+    return {
+      subscribed,
+      invalidEmail,
+      inputValue,
+      subscribe,
+      setInput,
+    };
+  },
+
   name: "BookingSection",
   components: {
     BaseInput,
     BaseButton,
-  },
-  data() {
-    return {
-      subscribed: false,
-      invalidEmail: false,
-      inputValue: "",
-    };
-  },
-
-  methods: {
-    subscribe() {
-      if (this.inputValue.length > 0) {
-        this.subscribed = !this.subscribed;
-      } else {
-        this.invalidEmail = true;
-      }
-    },
-    setInput(event) {
-      this.inputValue = event.target.value;
-    },
   },
 };
 </script>

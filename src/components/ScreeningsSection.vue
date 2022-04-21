@@ -26,50 +26,66 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+// import Vue from "vue";
 import BaseSelect from "./base/BaseSelect.vue";
 import ScreeningCard from "./ScreeningCard.vue";
-import { mapGetters } from "vuex";
+// import { mapGetters } from "vuex";
 import dayTabsMixin from "@/mixins/dayTabs.js";
-import screeningsList from "@/mixins/screeningsList.js";
+import { useScreeningsList } from "@/composables/screeningsList.js";
+import {
+  defineComponent,
+  ref,
+  computed,
+  onMounted,
+} from "@vue/composition-api";
+import { useGetters } from "vuex-composition-helpers";
 import { Movie, Screening, DataType } from "@/api/interfaces";
 
-export default Vue.extend({
+export default defineComponent({
   components: { BaseSelect, ScreeningCard },
-  mixins: [dayTabsMixin, screeningsList],
-  data(): DataType {
-    return {
-      selectedOption: "",
-      query: "",
-    };
-  },
-  computed: {
-    ...mapGetters(["movies", "screenings"]),
-    selectOptions(): string[] {
-      return ["All movies", ...this.movies.map((movie: Movie) => movie.title)];
-    },
-    filteredMovies(): Array<Movie> {
-      return this.selectedOption === "All movies"
-        ? this.movies
-        : this.movies.filter(
-            (movie: Movie) => movie.title === this.selectedOption
+  mixins: [dayTabsMixin],
+
+  setup() {
+    const { filterByDay } = useScreeningsList();
+    const selectedOption = ref("");
+    const query = ref("");
+
+    const { movies, screenings } = useGetters(["movies", "screenings"]);
+    const selectOptions = computed(() => {
+      return ["All movies", ...movies.value.map((movie: Movie) => movie.title)];
+    });
+    const filteredMovies = computed(() => {
+      return selectedOption.value === "All movies"
+        ? movies.value
+        : movies.value.filter(
           );
-    },
-    ...mapGetters(["movies", "genres", "screenings"]),
-  },
-  methods: {
-    getSeances(id: number) {
-      return this.screenings.filter(
+            (movie: Movie) => movie.title === selectedOption.value
+    });
+
+    function getSeances(id: number) {
+      return screenings.value.filter(
         (screening: Screening) => screening.movie === id
       );
-    },
-    setOption(value: string) {
-      this.selectedOption = value;
-    },
-  },
+    }
+    function setOption(value: string) {
+    }
+      selectedOption.value = value;
+    onMounted(() => {
 
-  mounted() {
-    this.selectedOption = this.selectOptions[0];
+    });
+      selectedOption.value = selectOptions.value[0];
+
+    return {
+      filterByDay,
+      selectedOption,
+      query,
+      selectOptions,
+      movies,
+      screenings,
+      filteredMovies,
+      getSeances,
+      setOption,
+    };
   },
 });
 </script>
