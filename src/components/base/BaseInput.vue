@@ -71,14 +71,6 @@ export default {
     @include input-element;
     position: relative;
   }
-  &::-webkit-search-cancel-button {
-    right: 1rem;
-    bottom: 0.2rem;
-    position: relative;
-    transform: scale(175%);
-    z-index: 2;
-    opacity: 0;
-  }
 
   &:focus {
     border: 1px solid $inp-active--border;
@@ -96,5 +88,14 @@ export default {
     @include font-paragraph--the-smallest;
     color: $text-accent;
   }
+}
+
+input[type="search" i]::-webkit-search-cancel-button {
+  right: 1rem;
+  bottom: 0.2rem;
+  position: relative;
+  transform: scale(175%);
+  z-index: 2;
+  opacity: 0;
 }
 </style>
