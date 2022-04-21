@@ -112,18 +112,14 @@ export default {
       };
     },
     bookingData() {
-      const tickets = [];
-      this.ticketsData.forEach((ticket) => {
-        tickets.push({
-          title: this.selectedMovie.movie.title,
-          seat: `Row ${ticket.seat[0]}, Seat ${ticket.seat.slice(1)}`,
-          datetime: `${getDayOfWeek(this.selectedMovie.datetime)}
+      return this.ticketsData.map((ticket) => ({
+        title: this.selectedMovie.movie.title,
+        seat: `Row ${ticket.seat[0]}, Seat ${ticket.seat.slice(1)}`,
+        datetime: `${getDayOfWeek(this.selectedMovie.datetime)}
            ${getDate(this.selectedMovie.datetime)} -
            ${getTime(this.selectedMovie.datetime)}`,
-          ticketType: ticket.ticket.name,
-        });
-      });
-      return tickets;
+        ticketType: ticket.ticket.name,
+      }));
     },
     buttonDisabled() {
       return !(this.selectedSeats.length && this.checkboxValue);

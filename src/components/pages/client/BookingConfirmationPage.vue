@@ -2,7 +2,15 @@
   <div class="booking-confirmation-page">
     <template v-if="seatsAndTickets.length >= 1">
       <h3 class="booking-confirmation-page__title">Hell yeah!</h3>
-      <h4 class="booking-confirmation-page__subtitle">You booked 3 tickets</h4>
+      <h4
+        class="booking-confirmation-page__subtitle"
+        v-if="seatsAndTickets.length === 1"
+      >
+        You booked {{ seatsAndTickets.length }} ticket
+      </h4>
+      <h4 class="booking-confirmation-page__subtitle" v-else>
+        You booked {{ seatsAndTickets.length }} tickets
+      </h4>
       <BookingConfirmationCard
         v-for="(booking, index) in seatsAndTickets.length"
         :key="booking.seat"
