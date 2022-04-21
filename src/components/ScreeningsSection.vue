@@ -25,53 +25,67 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import BaseSelect from "./base/BaseSelect.vue";
 import ScreeningCard from "./ScreeningCard.vue";
-import { mapGetters } from "vuex";
 import dayTabsMixin from "@/mixins/dayTabs.js";
-import screeningsList from "@/mixins/screeningsList.js";
+import { useScreeningsList } from "@/composables/screeningsList.js";
+import {
+  defineComponent,
+  ref,
+  computed,
+  onMounted,
+} from "@vue/composition-api";
+import { useGetters } from "vuex-composition-helpers";
+import { Movie, Screening } from "@/api/interfaces";
 
-export default {
+export default defineComponent({
   components: { BaseSelect, ScreeningCard },
-  mixins: [dayTabsMixin, screeningsList],
-  data() {
+  mixins: [dayTabsMixin],
+
+  setup() {
+    const { filterByDay } = useScreeningsList();
+    const selectedOption = ref("");
+    const query = ref("");
+
+    const { movies, screenings } = useGetters(["movies", "screenings"]);
+    const selectOptions = computed(() => {
+      return ["All movies", ...movies.value.map((movie: Movie) => movie.title)];
+    });
+    const filteredMovies = computed(() => {
+      return selectedOption.value === "All movies"
+        ? movies.value
+        : movies.value.filter(
+            (movie: Movie) => movie.title === selectedOption.value
+          );
+    });
+
+    function getSeances(id: number) {
+      return screenings.value.filter(
+        (screening: Screening) => screening.movie === id
+      );
+    }
+    function setOption(value: string) {
+      selectedOption.value = value;
+    }
+
+    onMounted(() => {
+      selectedOption.value = selectOptions.value[0];
+    });
+
     return {
-      query: "",
-      selectedOption: "",
+      filterByDay,
+      selectedOption,
+      query,
+      selectOptions,
+      movies,
+      screenings,
+      filteredMovies,
+      getSeances,
+      setOption,
     };
   },
-  computed: {
-    ...mapGetters(["movies", "screenings"]),
-    imageAlt() {
-      return `An image from ${this.movie.title} film.`;
-    },
-    movies() {
-      return this.$store.state.movies;
-    },
-    selectOptions() {
-      return ["All movies", ...this.movies.map((movie) => movie.title)];
-    },
-    filteredMovies() {
-      return this.selectedOption === "All movies"
-        ? this.movies
-        : this.movies.filter((movie) => movie.title === this.selectedOption);
-    },
-    ...mapGetters(["movies", "genres", "screenings"]),
-  },
-  methods: {
-    getSeances(id) {
-      return this.screenings.filter((screening) => screening.movie === id);
-    },
-    setOption(value) {
-      this.selectedOption = value;
-    },
-  },
-
-  mounted() {
-    this.selectedOption = this.selectOptions[0];
-  },
-};
+});
 </script>
 
 <style lang="scss" scoped>

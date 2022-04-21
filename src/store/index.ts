@@ -9,9 +9,15 @@ const AUTH_TOKEN = localStorage.getItem(AUTH_HEADER_STORAGE_KEY);
 
 Vue.use(Vuex);
 
+interface Movie {
+  id: number,
+  title: string,
+  genre: { id: number; name: string }
+}
+
 const store = new Vuex.Store({
   state: {
-    movies: [],
+    movies: [] as Movie[],
     screenings: [],
     movieTitle: "",
     selectedMovie: {},

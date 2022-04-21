@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@vue/composition-api": "^1.4.9",
     "axios": "^0.26.0",
     "core-js": "^3.8.3",
     "vue": "^2.6.14",
@@ -18,16 +19,21 @@
     "vue-multiselect": "^2.1.6",
     "vue-router": "^3.5.3",
     "vuejs-datepicker": "^1.6.2",
-    "vuex": "^3.6.2"
+    "vuex": "^3.6.2",
+    "vuex-composition-helpers": "^1.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
     "@babel/eslint-parser": "^7.12.16",
+    "@typescript-eslint/eslint-plugin": "^5.4.0",
+    "@typescript-eslint/parser": "^5.4.0",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
+    "@vue/cli-plugin-typescript": "~5.0.0",
     "@vue/cli-plugin-unit-jest": "~5.0.0",
     "@vue/cli-plugin-vuex": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
+    "@vue/eslint-config-typescript": "^9.1.0",
     "@vue/test-utils": "^1.1.3",
     "@vue/vue2-jest": "^27.0.0-alpha.2",
     "babel-jest": "^27.0.6",
@@ -37,6 +43,7 @@
     "jest-extended": "^2.0.0",
     "sass": "^1.49.9",
     "sass-loader": "^10.2.1",
+    "typescript": "~4.5.5",
     "vue-template-compiler": "^2.6.14"
   },
   "eslintConfig": {
@@ -46,10 +53,11 @@
     },
     "extends": [
       "plugin:vue/essential",
-      "eslint:recommended"
+      "eslint:recommended",
+      "@vue/typescript"
     ],
     "parserOptions": {
-      "parser": "@babel/eslint-parser"
+      "parser": "@typescript-eslint/parser"
     },
     "rules": {},
     "overrides": [

@@ -46,12 +46,14 @@
   </form>
 </template>
 
-<script>
+<script lang="ts">
+import Vue, { PropType } from "vue";
 import BaseInput from "@/components/base/BaseInput.vue";
 import PasswordInput from "@/components/base/PasswordInput.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
+import {Credentials} from "@/api/auth"
 
-export default {
+export default Vue.extend({
   name: "RegisterCard",
   components: {
     BaseInput,
@@ -66,26 +68,26 @@ export default {
   },
   props: {
     formData: {
-      type: Object,
+      type: Object as PropType<Credentials>,
       required: true,
     },
   },
   computed: {
-    buttonDisabled() {
+    buttonDisabled(): boolean {
       return !(this.formData.email.length && this.formData.password.length);
     },
-    changeColor() {
+    changeColor(): boolean {
       return this.formData.password.length >= 1;
     },
-    containsEightChars() {
+    containsEightChars(): boolean {
       return this.formData.password === "" || this.formData.password.length < 8;
     },
-    containsDigit() {
+    containsDigit(): boolean {
       return (
         this.formData.password === "" || !/\d/.test(this.formData.password)
       );
     },
-    containsLetter() {
+    containsLetter(): boolean {
       return (
         this.formData.password === "" ||
         !/[A-Za-z]/.test(this.formData.password)
@@ -102,7 +104,7 @@ export default {
       }
     },
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>
