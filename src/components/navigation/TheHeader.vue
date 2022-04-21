@@ -83,7 +83,7 @@ export default {
   .base-button {
     font-size: 16px;
     line-height: 16px;
-    margin: 25px 0;
+    margin: 35px 0 25px;
     padding: 0.75em 1.875em;
   }
 }
