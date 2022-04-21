@@ -15,6 +15,7 @@
       Choose your tickets
     </h2>
     <ScreeningCard
+      v-if="selectedMovie.movie"
       class="choose-seats-and-tickets-page__card"
       :movie="selectedMovie.movie"
       :datetime="selectedMovie.datetime"

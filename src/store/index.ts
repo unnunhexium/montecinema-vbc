@@ -22,6 +22,7 @@ const store = new Vuex.Store({
     movieTitle: "",
     selectedMovie: {},
     authHeader: AUTH_TOKEN,
+    seatsAndTickets: []
   },
   mutations: {
     setMovies(state, movies) {
@@ -43,6 +44,9 @@ const store = new Vuex.Store({
     resetAuthHeader(state) {
       state.authHeader = null;
       localStorage.removeItem(AUTH_HEADER_STORAGE_KEY);
+    },
+    setSeatsAndTickets(state, seatsAndTickets) {
+      state.seatsAndTickets = seatsAndTickets;
     },
   },
   actions: {
@@ -75,6 +79,9 @@ const store = new Vuex.Store({
     async register(ctx, credentials) {
       await authApi.register(credentials);
     },
+    async setSeatsAndTickets({ commit }, payload) {
+      commit("setSeatsAndTickets", payload)
+    }
   },
   getters: {
     movies: (state) => state.movies,
@@ -85,6 +92,7 @@ const store = new Vuex.Store({
     movieTitle: (state) => state.movieTitle,
     selectedMovie: (state) => state.selectedMovie,
     isLoggedIn: (state) => !!state.authHeader,
+    seatsAndTickets: (state) => state.seatsAndTickets,
   },
 });
 

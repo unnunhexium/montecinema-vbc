@@ -66,8 +66,9 @@
 import BaseSelect from "@/components/base/BaseSelect.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
 import BaseCheckbox from "@/components/base/BaseCheckbox.vue";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import { postReservation } from "@/api/movies";
+import { getDayOfWeek, getDate, getTime } from "@/helpers";
 
 export default {
   name: "ChooseTickets",
@@ -91,8 +92,16 @@ export default {
       ],
     };
   },
+  watch: {
+    selectedSeats(newVal) {
+      this.ticketsData = newVal.map((seat, index) => ({
+        seat,
+        ticket: this.ticketsData[index].ticket,
+      }));
+    },
+  },
   computed: {
-    ...mapGetters(["selectedMovie"]),
+    ...mapGetters(["selectedMovie", "seatsAndTickets"]),
     reservationBody() {
       return {
         seance_id: this.selectedMovie.seanceId,
@@ -101,6 +110,16 @@ export default {
           ticket_type_id: data.ticket?.id,
         })),
       };
+    },
+    bookingData() {
+      return this.ticketsData.map((ticket) => ({
+        title: this.selectedMovie.movie.title,
+        seat: `Row ${ticket.seat[0]}, Seat ${ticket.seat.slice(1)}`,
+        datetime: `${getDayOfWeek(this.selectedMovie.datetime)}
+           ${getDate(this.selectedMovie.datetime)} -
+           ${getTime(this.selectedMovie.datetime)}`,
+        ticketType: ticket.ticket.name,
+      }));
     },
     buttonDisabled() {
       return !(this.selectedSeats.length && this.checkboxValue);
@@ -119,11 +138,19 @@ export default {
     },
   },
   methods: {
+    ...mapActions(["setSeatsAndTickets"]),
     setOption(value, index) {
       this.ticketsData[index].ticket = value;
     },
-    bookReservation() {
-      postReservation(this.reservationBody);
+    async bookReservation() {
+      try {
+        await postReservation(this.reservationBody);
+        this.setSeatsAndTickets(this.bookingData);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        this.$router.push("/booking-confirmation");
+      }
     },
   },
 };
