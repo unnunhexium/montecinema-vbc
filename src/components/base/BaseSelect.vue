@@ -95,6 +95,13 @@ export default {
   }
 
   ::v-deep .multiselect {
+    &__single {
+      width: 90%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
     &__input:hover,
     &__single:hover {
       border: none;
