@@ -132,7 +132,6 @@ export default {
       border-radius: 64px;
       transition: background-color 0.4s, border-color 0.2s;
       &:focus-visible {
-        color: $text-dark;
         outline: none;
         border: 2px dotted $btn-pressed;
       }
