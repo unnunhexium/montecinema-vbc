@@ -31,7 +31,7 @@ import BaseSelect from "./base/BaseSelect.vue";
 import ScreeningCard from "./ScreeningCard.vue";
 // import { mapGetters } from "vuex";
 import dayTabsMixin from "@/mixins/dayTabs.js";
-import screeningsList from "@/mixins/screeningsList.js";
+import { screeningsList } from "@/composables/screeningsList.js";
 import {
   defineComponent,
   ref,
@@ -62,16 +62,12 @@ interface Screening {
   hall: number;
 }
 
-// interface DataType {
-//   query: string;
-//   selectedOption: string;
-// }
-
 export default defineComponent({
   components: { BaseSelect, ScreeningCard },
-  mixins: [dayTabsMixin, screeningsList],
+  mixins: [dayTabsMixin],
 
   setup() {
+    const { filterByDay } = screeningsList();
     const selectedOption = ref("");
     const query = ref("");
 
@@ -101,6 +97,7 @@ export default defineComponent({
     });
 
     return {
+      filterByDay,
       selectedOption,
       query,
       selectOptions,
@@ -111,41 +108,6 @@ export default defineComponent({
       setOption,
     };
   },
-
-  // data(): DataType {
-  //   return {
-  //     selectedOption: "",
-  //     query: "",
-  //   };
-  // },
-  // computed: {
-  //   ...mapGetters(["movies", "screenings"]),
-  //   selectOptions(): string[] {
-  //     return ["All movies", ...this.movies.map((movie: Movie) => movie.title)];
-  //   },
-  //   filteredMovies(): Array<Movie> {
-  //     return this.selectedOption === "All movies"
-  //       ? this.movies
-  //       : this.movies.filter(
-  //           (movie: Movie) => movie.title === this.selectedOption
-  //         );
-  //   },
-  //   ...mapGetters(["movies", "genres", "screenings"]),
-  // },
-  // methods: {
-  //   getSeances(id: number) {
-  //     return this.screenings.filter(
-  //       (screening: Screening) => screening.movie === id
-  //     );
-  //   },
-  //   setOption(value: string) {
-  //     this.selectedOption = value;
-  //   },
-  // },
-
-  // mounted() {
-  //   this.selectedOption = this.selectOptions[0];
-  // },
 });
 </script>
 
