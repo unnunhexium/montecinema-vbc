@@ -38,6 +38,7 @@ import IconCalendar from "./svg/icon-calendar.vue";
 import Datepicker from "vuejs-datepicker";
 
 export default {
+  name: "DayTabsList",
   components: { DayTab, IconCalendar, Datepicker },
   data() {
     return {

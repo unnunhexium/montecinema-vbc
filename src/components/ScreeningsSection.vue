@@ -40,6 +40,7 @@ import { useGetters } from "vuex-composition-helpers";
 import { Movie, Screening } from "@/api/interfaces";
 
 export default defineComponent({
+  name: "ScreeningsSection",
   components: { BaseSelect, ScreeningCard },
   mixins: [dayTabsMixin],
 

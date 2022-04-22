@@ -17,6 +17,7 @@ import ScreeningsSection from "@/components/ScreeningsSection.vue";
 import ContactCard from "@/components/ContactCard.vue";
 
 export default {
+  name: "HomePage",
   components: {
     MoviesList,
     TheHero,
