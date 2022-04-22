@@ -19,7 +19,7 @@ export default {
 <style lang="scss" scoped>
 .account-page {
   padding: 0 48px;
-  margin-top: 0.75em;
+  margin-top: 64px;
   &__wrapper {
     display: flex;
   }
