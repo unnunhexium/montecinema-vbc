@@ -40,6 +40,7 @@ import { useGetters } from "vuex-composition-helpers";
 import { Movie, Screening } from "@/api/interfaces";
 
 export default defineComponent({
+  name: "ScreeningsSection",
   components: { BaseSelect, ScreeningCard },
   mixins: [dayTabsMixin],
 
@@ -104,11 +105,14 @@ export default defineComponent({
   }
 
   &__input-wrapper {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    grid-gap: 40px;
+    display: flex;
+    gap: 2rem;
     justify-content: space-between;
     padding-bottom: 6.125em;
+  }
+
+  .day-tabs-list {
+    width: 70%;
   }
 }
 </style>

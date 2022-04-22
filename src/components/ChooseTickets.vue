@@ -183,6 +183,10 @@ export default {
     border-radius: 8px;
   }
 
+  &__ticket-select {
+    width: 350px;
+  }
+
   &__button-remove {
     display: block;
     margin-left: auto;

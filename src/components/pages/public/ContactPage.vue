@@ -12,7 +12,7 @@
       </div>
       <div class="contact-page__media-icons">
         <a
-          href=""
+          :href="icon.href"
           class="contact-page__media-icon"
           v-for="icon in icons"
           :key="icon.name"
@@ -38,13 +38,41 @@ export default {
   data() {
     return {
       icons: [
-        { src: "twitter.svg", name: "Twitter" },
-        { src: "facebook.svg", name: "Facebook" },
-        { src: "linkedin.svg", name: "Linkedin" },
-        { src: "instagram.svg", name: "Instagram" },
-        { src: "github.svg", name: "Github" },
-        { src: "behance.svg", name: "Behance" },
-        { src: "basketball.svg", name: "Basketball" },
+        {
+          src: "twitter.svg",
+          name: "Twitter",
+          href: "https://twitter.com/monterail",
+        },
+        {
+          src: "facebook.svg",
+          name: "Facebook",
+          href: "https://www.facebook.com/monterail",
+        },
+        {
+          src: "linkedin.svg",
+          name: "Linkedin",
+          href: "https://pl.linkedin.com/company/monterail",
+        },
+        {
+          src: "instagram.svg",
+          name: "Instagram",
+          href: "https://www.instagram.com/monterail/",
+        },
+        {
+          src: "github.svg",
+          name: "Github",
+          href: "https://github.com/monterail",
+        },
+        {
+          src: "behance.svg",
+          name: "Behance",
+          href: "https://www.behance.net/monterail",
+        },
+        {
+          src: "dribbble.svg",
+          name: "Dribbble",
+          href: "https://dribbble.com/monterail",
+        },
       ],
     };
   },

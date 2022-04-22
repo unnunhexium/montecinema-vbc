@@ -38,6 +38,7 @@ import IconCalendar from "./svg/icon-calendar.vue";
 import Datepicker from "vuejs-datepicker";
 
 export default {
+  name: "DayTabsList",
   components: { DayTab, IconCalendar, Datepicker },
   data() {
     return {
@@ -101,7 +102,8 @@ export default {
         { day: "Today", id: -1 },
         ...filteredTabs.slice(index),
         ...filteredTabs.slice(0, index),
-      ];
+        // this gives us today +5 next days
+      ].slice(0, -1);
     },
     showLabel() {
       const inputLabelRoutes = ["Home", "Screenings"];
@@ -132,7 +134,6 @@ export default {
       border-radius: 64px;
       transition: background-color 0.4s, border-color 0.2s;
       &:focus-visible {
-        color: $text-dark;
         outline: none;
         border: 2px dotted $btn-pressed;
       }

@@ -35,6 +35,7 @@ import ErrorCard from "@/components/ErrorCard.vue";
 import { mapGetters } from "vuex";
 
 export default {
+  name: "BookingConfirmationCard",
   components: {
     BookingConfirmationCard,
     BaseButton,

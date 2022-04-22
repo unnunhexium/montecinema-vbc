@@ -61,6 +61,8 @@ export default {
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style lang="scss" scoped>
 .base-select {
+  max-width: 400px;
+  width: 100%;
   &:active {
     background: $bg-white;
     color: $text-dark;
@@ -83,8 +85,6 @@ export default {
 
   &__input {
     border-radius: 8px;
-    min-width: 300px;
-    max-width: 400px;
     padding: 0;
     @include font-paragraph--small;
     background: $bg-light;
@@ -95,6 +95,13 @@ export default {
   }
 
   ::v-deep .multiselect {
+    &__single {
+      width: 90%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
     &__input:hover,
     &__single:hover {
       border: none;

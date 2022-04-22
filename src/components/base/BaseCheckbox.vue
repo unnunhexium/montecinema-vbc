@@ -15,6 +15,7 @@
 
 <script>
 export default {
+  name: "BaseCheckbox",
   props: {
     text: {
       type: String,

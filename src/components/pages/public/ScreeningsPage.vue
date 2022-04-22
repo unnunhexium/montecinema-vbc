@@ -8,6 +8,7 @@
 import ScreeningsSection from "@/components/ScreeningsSection.vue";
 
 export default {
+  name: "ScreeningsPage",
   components: {
     ScreeningsSection,
   },

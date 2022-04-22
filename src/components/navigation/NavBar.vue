@@ -32,6 +32,7 @@ export default {
     display: flex;
     justify-content: space-between;
     list-style: none;
+    margin: 10px 0 0;
   }
   &__list-item {
     @include font-paragraph--small;

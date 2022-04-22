@@ -20,13 +20,12 @@
       @click="$emit('go-to-next-step')"
       :disabled="buttonDisabled"
     >
-      Choose {{ selectedSeats.length }} seats
+      {{ buttonText }}
     </BaseButton>
   </div>
 </template>
 
 <script>
-// import { getReservationDetails } from "@/api/movies";
 import BaseButton from "@/components/base/BaseButton.vue";
 
 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -68,6 +67,11 @@ export default {
     },
     buttonDisabled() {
       return this.selectedSeats.length == 0;
+    },
+    buttonText() {
+      return this.selectedSeats.length === 1
+        ? `Choose ${this.selectedSeats.length} seat`
+        : `Choose ${this.selectedSeats.length} seats`;
     },
   },
   methods: {

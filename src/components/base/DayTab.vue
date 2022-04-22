@@ -27,7 +27,7 @@ export default {
   border: 2px solid $btn-dark;
 
   &:focus-visible {
-    color: $text-dark;
+    color: $btn-pressed;
     outline: none;
     border: 2px dotted $btn-pressed;
   }
@@ -39,5 +39,10 @@ export default {
 .active {
   background: $btn-dark;
   color: $text-white;
+  &:focus-visible {
+    color: $btn-pressed;
+    outline: none;
+    border: 2px dotted $btn-pressed;
+  }
 }
 </style>
