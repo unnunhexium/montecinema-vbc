@@ -102,6 +102,7 @@ export default {
         { day: "Today", id: -1 },
         ...filteredTabs.slice(index),
         ...filteredTabs.slice(0, index),
+        // this gives us today +5 next days
       ].slice(0, -1);
     },
     showLabel() {
@@ -116,9 +117,6 @@ export default {
 .day-tabs-list {
   &__wrapper {
     display: flex;
-    white-space: nowrap;
-    overflow: auto;
-    text-overflow: ellipsis;
   }
   &__title {
     @include font-heading--the-smallest;
