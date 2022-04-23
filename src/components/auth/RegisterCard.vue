@@ -40,8 +40,9 @@
         class="register-card__button"
         @click="$emit('go-to-next-step')"
         :disabled="buttonDisabled"
-        >Next step</BaseButton
       >
+        Next step
+      </BaseButton>
     </div>
   </form>
 </template>
@@ -51,7 +52,7 @@ import Vue, { PropType } from "vue";
 import BaseInput from "@/components/base/BaseInput.vue";
 import PasswordInput from "@/components/base/PasswordInput.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
-import {Credentials} from "@/api/auth"
+import { Credentials } from "@/api/auth";
 
 export default Vue.extend({
   name: "RegisterCard",

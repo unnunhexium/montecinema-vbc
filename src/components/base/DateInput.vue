@@ -26,7 +26,7 @@
         invalid: !isOver18 && value,
       }"
     >
-      You should be minium 18 years old
+      You should be minium 18 years old.
     </p>
   </div>
 </template>
