@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { getMovies, getScreenings } from "@/api/movies";
+import { getMovies, getScreenings, getReservations } from "@/api/movies";
 import * as authApi from "@/api/auth";
 import { setAuthHeader, removeAuthHeader } from "@/api/client";
 
@@ -22,7 +22,8 @@ const store = new Vuex.Store({
     movieTitle: "",
     selectedMovie: {},
     authHeader: AUTH_TOKEN,
-    seatsAndTickets: []
+    seatsAndTickets: [],
+    reservations: [],
   },
   mutations: {
     setMovies(state, movies) {
@@ -47,6 +48,9 @@ const store = new Vuex.Store({
     },
     setSeatsAndTickets(state, seatsAndTickets) {
       state.seatsAndTickets = seatsAndTickets;
+    },
+    setReservations(state, reservations) {
+      state.reservations = reservations;
     },
   },
   actions: {
@@ -81,7 +85,11 @@ const store = new Vuex.Store({
     },
     async setSeatsAndTickets({ commit }, payload) {
       commit("setSeatsAndTickets", payload)
-    }
+    },
+    async fetchReservations({ commit }) {
+      const { data } = await getReservations();
+      commit("setReservations", data);
+    },
   },
   getters: {
     movies: (state) => state.movies,
@@ -93,6 +101,7 @@ const store = new Vuex.Store({
     selectedMovie: (state) => state.selectedMovie,
     isLoggedIn: (state) => !!state.authHeader,
     seatsAndTickets: (state) => state.seatsAndTickets,
+    reservations: (state) => state.reservations,
   },
 });
 
