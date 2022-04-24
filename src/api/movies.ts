@@ -6,6 +6,7 @@ export const MOVIES_URL = "movies";
 export const SCREENINGS_URL = "seances";
 export const HALL_URL = "halls";
 export const RESERVATIONS_URL = "reservations";
+export const USER_URL = "user"
 
 export const getMovies = async () => {
   return await defaultClient.get(`${API_BASE_URL}/${MOVIES_URL}`);
@@ -30,6 +31,11 @@ export const getScreeningDetails = async (id: number) => {
 export const getReservations = async () => {
   return await defaultClient.get(`${API_BASE_URL}/${RESERVATIONS_URL}`);
 };
+
+export const getUserData = async () => {
+  return await defaultClient.get(`${API_BASE_URL}/${USER_URL}`);
+};
+
 
 export const postReservation = async (body: object) =>
   defaultClient.post("/reservations/online", body);
