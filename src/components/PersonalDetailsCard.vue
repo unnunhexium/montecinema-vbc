@@ -9,21 +9,20 @@
         :value="formData.email"
         class="personal-details-card__input"
         type="email"
-        placeholder="Please enter your email."
         :errorMessage="emailError"
         label="email"
       />
       <BaseButton
         class="personal-details-card__button--password"
         type="tertiary"
-        >Change password</BaseButton
       >
+        Change password
+      </BaseButton>
       <BaseInput
         class="personal-details-card__input"
         @input="$emit('set-form-field', { value: $event, key: 'firstName' })"
         :value="formData.firstName"
         type="text"
-        placeholder="e.g. Jessica"
         label="first name"
       />
       <BaseInput
@@ -31,19 +30,22 @@
         @input="$emit('set-form-field', { value: $event, key: 'lastName' })"
         :value="formData.lastName"
         type="text"
-        placeholder="e.g. Walton"
         label="last name"
       />
       <DateInput
-        v-model="dateOfBirth"
         class="personal-details-card__input-date"
+        @input="$emit('set-form-field', { value: $event, key: 'dateOfBirth' })"
+        :value="formData.dateOfBirth"
       />
+      <!-- there is no endpoint to change user data, so the button does not POST any data -->
+      <!-- TODO: PREVENT DOUBLE CLICK -->
       <BaseButton
         class="personal-details-card__button--submit"
         type="tertiary"
-        :disabled="!buttonDisabled"
+        :disabled="buttonDisabled"
+        @click="changeButtonText"
       >
-        Save changes
+        {{ buttonText }}
       </BaseButton>
     </div>
   </form>
@@ -60,14 +62,34 @@ export default {
   components: { BaseInput, BaseButton, DateInput },
   data() {
     return {
-      formData: {
-        email: "",
-        firstName: "",
-        lastName: "",
-      },
       emailError: "",
-      dateOfBirth: "",
+      buttonText: "Save changes",
     };
+  },
+  props: {
+    formData: {
+      type: Object,
+      required: true,
+    },
+  },
+  computed: {
+    isOver18() {
+      if (!this.formData.dateOfBirth) return;
+      const date18YearsAgo = new Date();
+      date18YearsAgo.setFullYear(date18YearsAgo.getFullYear() - 18);
+      return (
+        new Date(this.formData.dateOfBirth).getTime() <=
+        date18YearsAgo.getTime()
+      );
+    },
+    buttonDisabled() {
+      return !(
+        this.formData.email &&
+        this.formData.firstName &&
+        this.formData.lastName &&
+        this.isOver18
+      );
+    },
   },
   methods: {
     customFormatter(date) {
@@ -85,14 +107,10 @@ export default {
       }
     },
     getDate,
-  },
-  computed: {
-    buttonDisabled() {
-      return !(
-        this.formData.email &&
-        this.formData.firstName &&
-        this.formData.lastName &&
-        this.dateOfBirth
+    changeButtonText() {
+      return (
+        (this.buttonText = "Changes saved!"),
+        setTimeout(() => (this.buttonText = "Save changes"), 5000)
       );
     },
   },
@@ -142,7 +160,7 @@ export default {
 
   &__button--submit {
     width: 100%;
-    padding: 1em 0;
+    padding: 0.75em 1.375em;
 
     &[disabled] {
       border-color: #f7a0a1;
