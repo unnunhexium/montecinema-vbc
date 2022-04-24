@@ -17,9 +17,14 @@
           Login
         </BaseButton>
       </template>
-      <BaseButton class="the-header__button" v-else @click="logoutUser">
-        Logout
-      </BaseButton>
+      <template v-else>
+        <BaseButton class="the-header__button--lighter" routeName="Account">
+          My account
+        </BaseButton>
+        <BaseButton class="the-header__button" @click="logoutUser">
+          Logout
+        </BaseButton>
+      </template>
     </div>
     <img src="@/assets/navigation-menu.svg" class="the-header__hamburger" />
   </header>
@@ -73,6 +78,13 @@ export default {
     }
   }
 
+  &__button {
+    &--lighter {
+      background: $btn-medium;
+      color: $text-accent;
+    }
+  }
+
   &__hamburger {
     display: none;
     @include sm {
@@ -83,7 +95,7 @@ export default {
   .base-button {
     font-size: 16px;
     line-height: 16px;
-    margin: 35px 0 25px;
+    margin: 35px 10px 25px 0;
     padding: 0.75em 1.875em;
   }
 }
