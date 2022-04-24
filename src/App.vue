@@ -19,15 +19,12 @@ export default {
     BreadcrumbNav,
   },
   computed: {
-    // register and login
     showSimpleNav() {
       return this.$route.name === "Register" || this.$route.name === "Login";
     },
-    // all but register and login not
     showTheHeaderNav() {
       return this.$route.name !== "Register" && this.$route.name !== "Login";
     },
-    // all movies, movie detail, screenings, contact
     showBreadcrumbNav() {
       const breadcrumbsRoutes = ["Movie", "Screenings", "Contact"];
       return (
