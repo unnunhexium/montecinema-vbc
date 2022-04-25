@@ -60,6 +60,13 @@ export const routes = [
     component: () =>
       import("@/components/pages/client/BookingConfirmationPage.vue"),
   },
+  {
+    meta: { requiresAuth: true },
+    path: "/account",
+    name: "Account",
+    component: () =>
+      import("@/components/pages/client/AccountPage.vue"),
+  },
 ];
 
 const router = new VueRouter({

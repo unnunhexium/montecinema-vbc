@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { getMovies, getScreenings } from "@/api/movies";
+import { getMovies, getScreenings, getReservations, getUserData } from "@/api/movies";
 import * as authApi from "@/api/auth";
 import { setAuthHeader, removeAuthHeader } from "@/api/client";
 
@@ -22,7 +22,9 @@ const store = new Vuex.Store({
     movieTitle: "",
     selectedMovie: {},
     authHeader: AUTH_TOKEN,
-    seatsAndTickets: []
+    seatsAndTickets: [],
+    reservations: [],
+    userData: {}
   },
   mutations: {
     setMovies(state, movies) {
@@ -48,6 +50,12 @@ const store = new Vuex.Store({
     setSeatsAndTickets(state, seatsAndTickets) {
       state.seatsAndTickets = seatsAndTickets;
     },
+    setReservations(state, reservations) {
+      state.reservations = reservations;
+    },
+    setUserData(state, userData) {
+      state.userData = userData;
+    },
   },
   actions: {
     async fetchMovies({ commit }) {
@@ -70,6 +78,7 @@ const store = new Vuex.Store({
       const authHeader = response.headers["authorization"];
       setAuthHeader(authHeader);
       commit("setAuthHeader", { authHeader });
+      commit("setUserData", response.data)
     },
     async logout({ commit, getters }) {
       if (!getters.isLoggedIn) return;
@@ -81,7 +90,15 @@ const store = new Vuex.Store({
     },
     async setSeatsAndTickets({ commit }, payload) {
       commit("setSeatsAndTickets", payload)
-    }
+    },
+    async fetchReservations({ commit }) {
+      const { data } = await getReservations();
+      commit("setReservations", data);
+    },
+    async fetchUserData({ commit }) {
+      const { data } = await getUserData();
+      commit("setUserData", data);
+    },
   },
   getters: {
     movies: (state) => state.movies,
@@ -93,6 +110,8 @@ const store = new Vuex.Store({
     selectedMovie: (state) => state.selectedMovie,
     isLoggedIn: (state) => !!state.authHeader,
     seatsAndTickets: (state) => state.seatsAndTickets,
+    reservations: (state) => state.reservations,
+    userData: (state) => state.userData,
   },
 });
 

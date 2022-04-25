@@ -43,7 +43,7 @@
         invalid: !isOver18 && formData.dateOfBirth,
       }"
     >
-      You should be minium 18 years old
+      You should be minium 18 years old.
     </p>
     <BaseCheckbox v-model="checkboxValue" text="Privacy policy"></BaseCheckbox>
     <div class="register-2nd-card__buttons-wrapper">

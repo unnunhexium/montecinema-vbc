@@ -67,8 +67,6 @@ export default {
     display: flex;
     align-items: center;
 
-    &:active,
-    &:focus-visible,
     &:hover {
       background: $btn-dark;
       ::v-deep svg path {
@@ -87,6 +85,10 @@ export default {
     line-height: 16px;
     text-decoration: none;
     margin-right: 1.3125em;
+  }
+
+  &__breadcrumb-span {
+    padding: 0.65em;
   }
 
   &__breadcrumb-link {
