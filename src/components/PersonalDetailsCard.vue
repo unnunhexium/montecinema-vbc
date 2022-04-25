@@ -167,11 +167,6 @@ export default {
       background: transparent;
       color: #f7a0a1;
       cursor: not-allowed;
-      :hover,
-      :focus {
-        background: #f7a0a1;
-        color: $text-white;
-      }
     }
   }
 }

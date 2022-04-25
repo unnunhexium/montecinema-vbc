@@ -21,12 +21,8 @@
       <BookingConfirmationCard
         class="reservations-card__card"
         v-for="reservation in reservations"
-        :id="reservation.id"
         :key="reservation.id"
-        :title="reservation.title"
-        :seat="reservation.seat"
-        :datetime="reservation.datetime"
-        :ticketType="reservation.ticketType"
+        v-bind="reservation"
       />
     </div>
   </div>
