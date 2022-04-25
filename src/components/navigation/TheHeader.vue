@@ -47,7 +47,7 @@ export default {
   methods: {
     ...mapActions(["logout"]),
     logoutUser() {
-      this.$router.push("/");
+      this.$route.name === "Home" ? "" : this.$router.push("/");
       this.logout();
     },
   },

@@ -3,19 +3,21 @@
     <div class="booking-confirmation__inner">
       <div class="booking-confirmation__wrapper">
         <p class="booking-confirmation__title">Movie</p>
-        <p class="booking-confirmation__content">{{ title }}</p>
+        <p class="booking-confirmation__content">{{ reservation.title }}</p>
       </div>
       <div class="booking-confirmation__wrapper">
         <p class="booking-confirmation__title">Seat</p>
-        <p class="booking-confirmation__content">{{ seat }}</p>
+        <p class="booking-confirmation__content">{{ reservation.seat }}</p>
       </div>
       <div class="booking-confirmation__wrapper">
         <p class="booking-confirmation__title">Time</p>
-        <p class="booking-confirmation__content">{{ datetime }}</p>
+        <p class="booking-confirmation__content">{{ reservation.datetime }}</p>
       </div>
       <div class="booking-confirmation__wrapper">
         <p class="booking-confirmation__title">Ticket type</p>
-        <p class="booking-confirmation__content">{{ ticketType }}</p>
+        <p class="booking-confirmation__content">
+          {{ reservation.ticketType }}
+        </p>
       </div>
     </div>
     <template v-if="allowRemove">
@@ -24,16 +26,16 @@
           'booking-confirmation__pill',
           {
             'booking-confirmation__pill--booked':
-              reservationStatus === 'Booked',
+              reservation.reservationStatus === 'Booked',
           },
         ]"
       >
-        {{ reservationStatus }}
+        {{ reservation.reservationStatus }}
       </p>
       <BaseButton
         class="booking-confirmation__button-remove"
         type="tertiary"
-        @click="$emit('remove', id)"
+        @click="$emit('remove', reservation.id)"
       >
         Remove
       </BaseButton>
@@ -50,29 +52,9 @@ export default {
     BaseButton,
   },
   props: {
-    id: {
-      type: Number,
+    reservation: {
+      type: Object,
       required: true,
-    },
-    title: {
-      type: String,
-      required: true,
-    },
-    seat: {
-      type: String,
-      required: true,
-    },
-    datetime: {
-      type: String,
-      required: true,
-    },
-    ticketType: {
-      type: String,
-      required: true,
-    },
-    reservationStatus: {
-      type: String,
-      default: "",
     },
     allowRemove: {
       type: Boolean,

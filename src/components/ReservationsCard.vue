@@ -6,12 +6,7 @@
         class="reservations-card__card"
         v-for="reservation in reservations"
         :key="reservation.id"
-        :id="reservation.id"
-        :title="reservation.title"
-        :seat="reservation.seat"
-        :datetime="reservation.datetime"
-        :ticketType="reservation.ticketType"
-        :reservationStatus="reservation.reservationStatus"
+        :reservation="reservation"
         @remove="removeItem"
         allowRemove
       />
@@ -22,7 +17,7 @@
         class="reservations-card__card"
         v-for="reservation in reservations"
         :key="reservation.id"
-        v-bind="reservation"
+        :reservation="reservation"
       />
     </div>
   </div>
