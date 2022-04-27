@@ -52,9 +52,6 @@ export default {
   },
   computed: {
     ...mapGetters(["isLoggedIn"]),
-    // employeeButton() {
-    //   return this.$route.path.startsWith("/employee");
-    // },
     hideNavBar() {
       return this.$route.path.startsWith("/employee");
     },
