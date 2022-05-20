@@ -22,7 +22,7 @@
       @click="openPicker"
     >
       <slot class="register-2nd-card__datepicker-slot">
-        {{ formData.dateOfBirth ? getDate(formData.dateOfBirth) : "" }}</slot
+        {{ computedDate }}</slot
       >
       <IconCalendar
         src="@/assets/calendar.svg"
@@ -135,6 +135,11 @@ export default {
           this.formData.checkbox
         ) || this.loading
       );
+    },
+    computedDate() {
+      return this.formData.dateOfBirth
+        ? getDate(this.formData.dateOfBirth)
+        : "";
     },
   },
 };
