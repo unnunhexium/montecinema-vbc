@@ -16,19 +16,19 @@
     />
     <p
       class="register-card__valid-flag"
-      :class="{ valid: !containsEightChars, invalid: changeColor }"
+      :class="{ valid: containsEightChars, invalid: changeColor }"
     >
       At least 8 characters
     </p>
     <p
       class="register-card__valid-flag"
-      :class="{ valid: !containsLetter, invalid: changeColor }"
+      :class="{ valid: containsLetter, invalid: changeColor }"
     >
       At least one letter
     </p>
     <p
       class="register-card__valid-flag"
-      :class="{ valid: !containsDigit, invalid: changeColor }"
+      :class="{ valid: containsDigit, invalid: changeColor }"
     >
       At least one digit
     </p>
@@ -75,21 +75,28 @@ export default Vue.extend({
   },
   computed: {
     buttonDisabled(): boolean {
-      return !(this.formData.email.length && this.formData.password.length);
+      return !(
+        this.formData.email &&
+        this.containsEightChars &&
+        this.containsDigit &&
+        this.containsLetter
+      );
     },
     changeColor(): boolean {
       return this.formData.password.length >= 1;
     },
     containsEightChars(): boolean {
-      return this.formData.password === "" || this.formData.password.length < 8;
+      return (
+        !(this.formData.password === "") || this.formData.password.length < 8
+      );
     },
     containsDigit(): boolean {
-      return (
+      return !(
         this.formData.password === "" || !/\d/.test(this.formData.password)
       );
     },
     containsLetter(): boolean {
-      return (
+      return !(
         this.formData.password === "" ||
         !/[A-Za-z]/.test(this.formData.password)
       );

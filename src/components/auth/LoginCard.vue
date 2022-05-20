@@ -12,7 +12,9 @@
       <router-link :to="{ name: 'Register' }" class="login-card__link">
         Register instead
       </router-link>
-      <BaseButton class="login-card__button"> Log in </BaseButton>
+      <BaseButton class="login-card__button" :disabled="buttonDisabled">
+        Log in
+      </BaseButton>
     </div>
   </form>
 </template>
@@ -35,6 +37,7 @@ export default {
         email: "",
         password: "",
       },
+      loading: false,
     };
   },
   methods: {
@@ -42,12 +45,20 @@ export default {
       this.inputValue = event.target.value;
     },
     async onSubmit() {
+      this.loading = true;
       try {
         await this.$store.dispatch("login", this.formData);
         this.$router.push("/screenings");
       } catch (error) {
         alert(error);
+      } finally {
+        this.loading = false;
       }
+    },
+  },
+  computed: {
+    buttonDisabled() {
+      return !(this.formData.email && this.formData.password) || this.loading;
     },
   },
 };

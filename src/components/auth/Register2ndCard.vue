@@ -16,9 +16,13 @@
       label="last name"
     />
     <label class="register-2nd-card__datepicker-label">Date of Birth</label>
-    <button class="register-2nd-card__datepicker-button" @click="openPicker">
+    <button
+      type="button"
+      class="register-2nd-card__datepicker-button"
+      @click="openPicker"
+    >
       <slot class="register-2nd-card__datepicker-slot">
-        {{ formData.dateOfBirth ? getDate(formData.dateOfBirth) : "" }}</slot
+        {{ computedDate }}</slot
       >
       <IconCalendar
         src="@/assets/calendar.svg"
@@ -87,6 +91,10 @@ export default {
       type: Object,
       required: true,
     },
+    loading: {
+      type: Boolean,
+      default: false,
+    },
   },
   watch: {
     selectedDate(newVal) {
@@ -119,12 +127,19 @@ export default {
       );
     },
     buttonDisabled() {
-      return !(
-        this.formData.firstName.length &&
-        this.formData.lastName.length &&
-        this.isOver18 &&
-        this.formData.checkbox
+      return (
+        !(
+          this.formData.firstName.length &&
+          this.formData.lastName.length &&
+          this.isOver18 &&
+          this.formData.checkbox
+        ) || this.loading
       );
+    },
+    computedDate() {
+      return this.formData.dateOfBirth
+        ? getDate(this.formData.dateOfBirth)
+        : "";
     },
   },
 };

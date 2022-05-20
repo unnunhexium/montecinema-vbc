@@ -15,6 +15,7 @@
         @set-form-field="setFormField"
         @register-user="registerUser"
         @set-checkbox-value="setCheckboxValue"
+        :loading="loading"
       />
     </div>
   </div>
@@ -41,6 +42,7 @@ export default {
         checkbox: false,
       },
       secondStepActive: false,
+      loading: false,
     };
   },
   methods: {
@@ -51,11 +53,14 @@ export default {
       this.formData.checkbox = value;
     },
     async registerUser() {
+      this.loading = true;
       try {
         await this.$store.dispatch("register", this.formData);
         this.$router.push("/choose-seats");
       } catch (error) {
         alert(error);
+      } finally {
+        this.loading = false;
       }
     },
   },
