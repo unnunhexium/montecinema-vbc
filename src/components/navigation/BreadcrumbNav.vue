@@ -33,13 +33,18 @@ export default {
     breadcrumbs() {
       if (this.$route.name === "SingleMovie") {
         return [{ title: "Movies", url: "/movies" }];
+      } else if (this.$route.name === "CreateAReservation") {
+        //TO DO: ADD DYNAMIC DESK NUMBER
+        return [{ title: `Desk ${1}`, url: "/employee/desks" }];
       } else {
-        return [];
+        return "";
       }
     },
     currentRoute() {
       if (this.$route.name === "SingleMovie") {
         return this.$store.state.movieTitle;
+      } else if (this.$route.name === "ConfirmTickets") {
+        return `Desk ${1}`;
       } else {
         return this.$route.meta.breadcrumb || this.$route.name;
       }
