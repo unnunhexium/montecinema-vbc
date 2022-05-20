@@ -26,7 +26,11 @@ export default {
       return this.$route.name !== "Register" && this.$route.name !== "Login";
     },
     showBreadcrumbNav() {
-      const breadcrumbsRoutes = ["Movie", "Screenings", "Contact"];
+      const breadcrumbsRoutes = [
+        "Movie",
+        "ConfirmTickets",
+        "CreateAReservation",
+      ];
       return (
         this.$route.path.startsWith("/movies") ||
         breadcrumbsRoutes.includes(this.$route.name)
