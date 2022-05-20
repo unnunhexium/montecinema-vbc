@@ -3,7 +3,7 @@
     <router-link class="the-header__logo" to="/">
       <img src="@/assets/logo.svg" />
     </router-link>
-    <NavBar />
+    <NavBar v-if="!hideNavBar" />
     <div class="the-header__wrapper">
       <template v-if="!isLoggedIn">
         <BaseButton
@@ -18,7 +18,16 @@
         </BaseButton>
       </template>
       <template v-else>
-        <BaseButton class="the-header__button--lighter" routeName="Account">
+        <BaseButton
+          class="the-header__button--lighter"
+          :class="[
+            'the-header__button',
+            { 'the-header__button--lighter': !hideNavBar },
+            { 'the-header__button--bordered': hideNavBar },
+          ]"
+          routeName="Account"
+          type="primary"
+        >
           My account
         </BaseButton>
         <BaseButton class="the-header__button" @click="logoutUser">
@@ -43,6 +52,9 @@ export default {
   },
   computed: {
     ...mapGetters(["isLoggedIn"]),
+    hideNavBar() {
+      return this.$route.path.startsWith("/employee");
+    },
   },
   methods: {
     ...mapActions(["logout"]),
@@ -82,6 +94,10 @@ export default {
     &--lighter {
       background: $btn-medium;
       color: $text-accent;
+    }
+    &--bordered {
+      background: transparent;
+      border: solid 2px $btn-default;
     }
   }
 

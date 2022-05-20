@@ -67,6 +67,13 @@ export const routes = [
     component: () =>
       import("@/components/pages/client/AccountPage.vue"),
   },
+  {
+    meta: { requiresAuth: true },
+    path: "/employee/desk",
+    name: "EmployeeDesk",
+    component: () =>
+      import("@/components/pages/employee/ChooseTicketDeskPage.vue"),
+  },
 ];
 
 const router = new VueRouter({
