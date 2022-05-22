@@ -12,13 +12,10 @@
         You booked {{ seatsAndTickets.length }} tickets
       </h4>
       <BookingConfirmationCard
-        v-for="(booking, index) in seatsAndTickets.length"
-        :key="booking.seat"
+        v-for="reservation in seatsAndTickets"
+        :key="reservation.seat"
         class="booking-confirmation-page__card"
-        :title="seatsAndTickets[index].title"
-        :seat="seatsAndTickets[index].seat"
-        :datetime="seatsAndTickets[index].datetime"
-        :ticketType="seatsAndTickets[index].ticketType"
+        :reservation="reservation"
       />
       <BaseButton class="booking-confirmation-page__button" routeName="Home">
         Go to homepage
@@ -35,7 +32,7 @@ import ErrorCard from "@/components/ErrorCard.vue";
 import { mapGetters } from "vuex";
 
 export default {
-  name: "BookingConfirmationCard",
+  name: "BookingConfirmationPage",
   components: {
     BookingConfirmationCard,
     BaseButton,

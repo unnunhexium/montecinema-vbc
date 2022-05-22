@@ -4,9 +4,9 @@
     <div class="choose-ticket-desk-page__wrapper">
       <button
         class="choose-ticket-desk-page__desk"
-        v-for="(desk, index) in desks"
-        :key="desk[index]"
-        @click="$router.push('/employee/confirm-tickets')"
+        v-for="desk in desks"
+        :key="desk"
+        @click="$router.push(`/employee/confirm-tickets?desk=${desk}`)"
       >
         {{ desk }}
       </button>

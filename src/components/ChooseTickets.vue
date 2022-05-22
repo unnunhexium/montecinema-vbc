@@ -33,6 +33,7 @@
         class="choose-tickets__button-remove"
         type="tertiary"
         @click="$emit('remove', index)"
+        :disabled="buttonRemoveDisabled"
       >
         Remove
       </BaseButton>
@@ -121,6 +122,9 @@ export default {
         ticketType: ticket.ticket.name,
       }));
     },
+    buttonRemoveDisabled() {
+      return this.ticketsData.length === 1;
+    },
     buttonDisabled() {
       return !(this.selectedSeats.length && this.checkboxValue);
     },
@@ -146,10 +150,9 @@ export default {
       try {
         await postReservation(this.reservationBody);
         this.setSeatsAndTickets(this.bookingData);
+        this.$router.push("/booking-confirmation");
       } catch (error) {
         console.error(error);
-      } finally {
-        this.$router.push("/booking-confirmation");
       }
     },
   },

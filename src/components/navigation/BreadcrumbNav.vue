@@ -34,8 +34,9 @@ export default {
       if (this.$route.name === "SingleMovie") {
         return [{ title: "Movies", url: "/movies" }];
       } else if (this.$route.name === "CreateAReservation") {
-        //TO DO: ADD DYNAMIC DESK NUMBER
-        return [{ title: `Desk ${1}`, url: "/employee/desks" }];
+        return [
+          { title: `Desk ${this.$route.query.desk}`, url: "/employee/desks" },
+        ];
       } else {
         return "";
       }
@@ -44,7 +45,7 @@ export default {
       if (this.$route.name === "SingleMovie") {
         return this.$store.state.movieTitle;
       } else if (this.$route.name === "ConfirmTickets") {
-        return `Desk ${1}`;
+        return `Desk ${this.$route.query.desk}`;
       } else {
         return this.$route.meta.breadcrumb || this.$route.name;
       }
