@@ -45,7 +45,7 @@ export default {
     getDayOfWeek,
     getDate,
     getTime,
-    ...mapActions(["setMovieTitle"]),
+    ...mapActions("movies", ["setMovieTitle"]),
   },
   props: {
     movieId: {

@@ -39,7 +39,7 @@ export default {
     ErrorCard,
   },
   computed: {
-    ...mapGetters(["seatsAndTickets"]),
+    ...mapGetters("checkout", ["seatsAndTickets"]),
   },
 };
 </script>

@@ -55,7 +55,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["userData"]),
+    ...mapGetters("user", ["userData"]),
   },
   mounted() {
     this.formData.email = this.userData.email;

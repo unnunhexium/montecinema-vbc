@@ -63,7 +63,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["selectedMovie"]),
+    ...mapGetters("movie", ["selectedMovie"]),
   },
   methods: {
     selectSeat(row, seat) {

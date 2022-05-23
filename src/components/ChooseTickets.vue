@@ -102,7 +102,8 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["selectedMovie", "seatsAndTickets"]),
+    ...mapGetters("movies", ["selectedMovie"]),
+    ...mapGetters("checkout", ["seatsAndTickets"]),
     reservationBody() {
       return {
         seance_id: this.selectedMovie.seanceId,
@@ -142,7 +143,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(["setSeatsAndTickets"]),
+    ...mapActions("checkout", ["setSeatsAndTickets"]),
     setOption(value, index) {
       this.ticketsData[index].ticket = value;
     },

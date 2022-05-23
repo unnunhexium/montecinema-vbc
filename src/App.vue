@@ -11,6 +11,7 @@
 import TheHeader from "@/components/navigation/TheHeader.vue";
 import SimpleNav from "@/components/navigation/SimpleNav.vue";
 import BreadcrumbNav from "@/components/navigation/BreadcrumbNav.vue";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
@@ -19,6 +20,7 @@ export default {
     BreadcrumbNav,
   },
   computed: {
+    ...mapGetters("user", ["isLoggedIn"]),
     showSimpleNav() {
       return this.$route.name === "Register" || this.$route.name === "Login";
     },
@@ -38,9 +40,12 @@ export default {
     },
   },
   async created() {
-    this.$store.dispatch("fetchMovies");
-    this.$store.dispatch("fetchScreenings");
-    this.$store.dispatch("fetchUserData");
+    this.$store.dispatch("user/restoreUserSession");
+    this.$store.dispatch("movies/fetchMovies");
+    this.$store.dispatch("movies/fetchScreenings");
+    if (this.isLoggedIn) {
+      this.$store.dispatch("user/fetchUserData");
+    }
   },
   metaInfo: {
     title: "montecinema",

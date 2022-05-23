@@ -11,7 +11,7 @@ defaultClient.interceptors.response.use(
   (response) => response,
   async (error) => {
     if (error.response.status === 401) {
-      await store.dispatch("logout");
+      await store.dispatch("user/logout");
       router.push({ name: "Login" });
     }
     return Promise.reject(error);

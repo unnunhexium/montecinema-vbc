@@ -70,10 +70,10 @@ export default Vue.extend({
     },
   },
   computed: {
-    ...mapGetters(["selectedMovie"]),
+    ...mapGetters("movies", ["selectedMovie"]),
   },
   methods: {
-    ...mapActions(["setSelectedMovie"]),
+    ...mapActions("movies", ["setSelectedMovie"]),
     imageAlt,
     getFormattedLength,
     getTime,

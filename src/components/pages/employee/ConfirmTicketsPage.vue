@@ -135,7 +135,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["seatsAndTickets"]),
+    ...mapGetters("checkout", ["seatsAndTickets"]),
     searchedBookings() {
       return this.query
         ? this.reservations.filter((reservation) =>

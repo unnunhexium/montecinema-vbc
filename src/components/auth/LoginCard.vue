@@ -47,7 +47,7 @@ export default {
     async onSubmit() {
       this.loading = true;
       try {
-        await this.$store.dispatch("login", this.formData);
+        await this.$store.dispatch("user/login", this.formData);
         this.$router.push("/screenings");
       } catch (error) {
         alert(error);

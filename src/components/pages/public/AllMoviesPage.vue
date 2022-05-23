@@ -45,7 +45,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["movies", "genres"]),
+    ...mapGetters("movies", ["movies", "genres"]),
     selectOptions() {
       return ["All categories", ...this.genres];
     },
