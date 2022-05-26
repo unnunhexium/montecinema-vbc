@@ -8,6 +8,9 @@
       label="email"
     />
     <PasswordInput v-model="formData.password" class="login-card__password" />
+    <p class="login-card__error-message" v-if="error === true">
+      Incorrect email or password.
+    </p>
     <div class="login-card__buttons-wrapper">
       <router-link :to="{ name: 'Register' }" class="login-card__link">
         Register instead
@@ -38,6 +41,7 @@ export default {
         password: "",
       },
       loading: false,
+      error: false,
     };
   },
   methods: {
@@ -50,7 +54,7 @@ export default {
         await this.$store.dispatch("user/login", this.formData);
         this.$router.push("/screenings");
       } catch (error) {
-        alert(error);
+        this.error = true;
       } finally {
         this.loading = false;
       }
@@ -73,6 +77,11 @@ export default {
 
   &__email {
     margin-bottom: 1.7em;
+  }
+
+  &__error-message {
+    @include font-element--small-thin;
+    color: $text-accent;
   }
 
   &__buttons-wrapper {
@@ -100,9 +109,11 @@ export default {
       padding: 13px 9px;
     }
   }
+
   &__button {
     margin-top: 40px;
   }
+
   .base-button {
     font-size: 18px;
     line-height: 18px;
