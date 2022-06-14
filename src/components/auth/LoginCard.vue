@@ -8,7 +8,7 @@
       label="email"
     />
     <PasswordInput v-model="formData.password" class="login-card__password" />
-    <p class="login-card__error-message" v-if="error === true">
+    <p class="login-card__error-message" v-if="error">
       Incorrect email or password.
     </p>
     <div class="login-card__buttons-wrapper">
@@ -49,6 +49,7 @@ export default {
       this.inputValue = event.target.value;
     },
     async onSubmit() {
+      this.error = false;
       this.loading = true;
       try {
         await this.$store.dispatch("user/login", this.formData);
