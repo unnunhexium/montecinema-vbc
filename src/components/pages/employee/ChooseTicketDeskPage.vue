@@ -4,9 +4,9 @@
     <div class="choose-ticket-desk-page__wrapper">
       <button
         class="choose-ticket-desk-page__desk"
-        v-for="(desk, index) in desks"
-        :key="desk[index]"
-        :desk="desk"
+        v-for="desk in desks"
+        :key="desk"
+        @click="$router.push(`/employee/confirm-tickets?desk=${desk}`)"
       >
         {{ desk }}
       </button>
@@ -21,12 +21,6 @@ export default {
     return {
       desks: [1, 2, 3, 4],
     };
-  },
-  props: {
-    desk: {
-      type: Number,
-      required: true,
-    },
   },
 };
 </script>

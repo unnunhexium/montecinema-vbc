@@ -33,6 +33,7 @@
         class="choose-tickets__button-remove"
         type="tertiary"
         @click="$emit('remove', index)"
+        :disabled="buttonRemoveDisabled"
       >
         Remove
       </BaseButton>
@@ -101,7 +102,8 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["selectedMovie", "seatsAndTickets"]),
+    ...mapGetters("movies", ["selectedMovie"]),
+    ...mapGetters("checkout", ["seatsAndTickets"]),
     reservationBody() {
       return {
         seance_id: this.selectedMovie.seanceId,
@@ -121,6 +123,9 @@ export default {
         ticketType: ticket.ticket.name,
       }));
     },
+    buttonRemoveDisabled() {
+      return this.ticketsData.length === 1;
+    },
     buttonDisabled() {
       return !(this.selectedSeats.length && this.checkboxValue);
     },
@@ -138,7 +143,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(["setSeatsAndTickets"]),
+    ...mapActions("checkout", ["setSeatsAndTickets"]),
     setOption(value, index) {
       this.ticketsData[index].ticket = value;
     },
@@ -146,10 +151,9 @@ export default {
       try {
         await postReservation(this.reservationBody);
         this.setSeatsAndTickets(this.bookingData);
+        this.$router.push("/booking-confirmation");
       } catch (error) {
         console.error(error);
-      } finally {
-        this.$router.push("/booking-confirmation");
       }
     },
   },

@@ -49,7 +49,10 @@ export default defineComponent({
     const selectedOption = ref("");
     const query = ref("");
 
-    const { movies, screenings } = useGetters(["movies", "screenings"]);
+    const { movies, screenings } = useGetters("movies", [
+      "movies",
+      "screenings",
+    ]);
     const selectOptions = computed(() => {
       return ["All movies", ...movies.value.map((movie: Movie) => movie.title)];
     });

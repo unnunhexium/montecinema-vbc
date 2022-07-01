@@ -51,13 +51,13 @@ export default {
     NavBar,
   },
   computed: {
-    ...mapGetters(["isLoggedIn"]),
+    ...mapGetters("user", ["isLoggedIn"]),
     hideNavBar() {
       return this.$route.path.startsWith("/employee");
     },
   },
   methods: {
-    ...mapActions(["logout"]),
+    ...mapActions("user", ["logout"]),
     logoutUser() {
       this.$route.name === "Home" ? "" : this.$router.push("/");
       this.logout();

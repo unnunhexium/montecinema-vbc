@@ -34,7 +34,7 @@
     "src/**/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx"
-, "src/helpers/index.js"  ],
+, "src/helpers/index.js", "src/store/modules/user.js", "src/store/modules/movies.js", "src/store/index.js"  ],
   "exclude": [
     "node_modules"
   ]

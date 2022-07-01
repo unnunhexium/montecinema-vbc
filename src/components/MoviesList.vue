@@ -22,6 +22,7 @@
 
 <script>
 import MovieCard from "./MovieCard.vue";
+import { mapGetters } from "vuex";
 
 export default {
   name: "MoviesList",
@@ -32,9 +33,7 @@ export default {
     };
   },
   computed: {
-    movies() {
-      return this.$store.state.movies;
-    },
+    ...mapGetters("movies", ["movies"]),
     moviesToDisplay() {
       return this.listExpanded
         ? this.movies.slice(0, 6)

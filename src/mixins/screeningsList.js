@@ -14,6 +14,6 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["screenings"]),
+    ...mapGetters("movies", ["screenings"]),
   },
 };

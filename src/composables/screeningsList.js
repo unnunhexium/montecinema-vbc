@@ -2,7 +2,7 @@ import { useGetters } from "vuex-composition-helpers";
 import { getDate } from "@/helpers"
 
 export const useScreeningsList = () => {
-    const { screenings } = useGetters(["screenings"]);
+    const { screenings } = useGetters("movies", ["screenings"]);
     function filterByMovie(id) {
         return screenings.value.filter((screening) => screening.movie == id);
     }

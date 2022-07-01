@@ -106,7 +106,7 @@ export default {
       ].slice(0, -1);
     },
     showLabel() {
-      const inputLabelRoutes = ["Home", "Screenings"];
+      const inputLabelRoutes = ["Home", "Screenings", "CreateAReservation"];
       return inputLabelRoutes.includes(this.$route.name);
     },
   },

@@ -2,14 +2,25 @@
   <form @submit.prevent="$emit('register-user')" class="register-2nd-card">
     <BaseInput
       class="register-2nd-card__input"
-      @input="$emit('set-form-field', { value: $event, key: 'firstName' })"
+      @input="
+        $emit('set-form-field', {
+          value: capitalizeFirstLetter($event),
+          key: 'firstName',
+        })
+      "
       :value="formData.firstName"
       type="text"
       placeholder="e.g. Jessica"
       label="first name"
-    /><BaseInput
+    />
+    <BaseInput
       class="register-2nd-card__input"
-      @input="$emit('set-form-field', { value: $event, key: 'lastName' })"
+      @input="
+        $emit('set-form-field', {
+          value: capitalizeFirstLetter($event),
+          key: 'lastName',
+        })
+      "
       :value="formData.lastName"
       type="text"
       placeholder="e.g. Walton"
@@ -22,8 +33,8 @@
       @click="openPicker"
     >
       <slot class="register-2nd-card__datepicker-slot">
-        {{ computedDate }}</slot
-      >
+        {{ computedDate }}
+      </slot>
       <IconCalendar
         src="@/assets/calendar.svg"
         class="register-2nd-card__datepicker-icon"
@@ -49,7 +60,7 @@
     >
       You should be minium 18 years old.
     </p>
-    <BaseCheckbox v-model="checkboxValue" text="Privacy policy"></BaseCheckbox>
+    <BaseCheckbox v-model="checkboxValue" text="Privacy policy" />
     <div class="register-2nd-card__buttons-wrapper">
       <router-link :to="{ name: 'Login' }" class="register-2nd-card__link">
         Log in instead
@@ -115,6 +126,9 @@ export default {
       return new Date(date);
     },
     getDate,
+    capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    },
   },
   computed: {
     isOver18() {
@@ -197,6 +211,7 @@ export default {
       @include outline-focus;
     }
   }
+
   &__datepicker {
     font-family: Arial;
     padding: 0.7em 1em;
@@ -206,6 +221,7 @@ export default {
       outline: none;
       border: 2px dotted $btn-pressed;
     }
+
     &:active,
     &:hover {
       background: $btn-dark;
@@ -213,6 +229,7 @@ export default {
         stroke: $text-white;
       }
     }
+
     &-label {
       @include font-element--small-accent;
     }
@@ -225,9 +242,11 @@ export default {
       margin-bottom: 1.35em;
       position: relative;
     }
+
     ::v-deep &-slot {
       color: $text-dark;
     }
+
     ::v-deep &-icon {
       position: absolute;
       right: 12px;
@@ -236,6 +255,7 @@ export default {
     ::v-deep &-picker {
       right: 0;
     }
+
     ::v-deep &-input {
       display: none;
     }
@@ -266,11 +286,13 @@ export default {
 .button {
   margin-top: 40px;
 }
+
 .base-button {
   font-size: 18px;
   line-height: 18px;
   padding: 12px 30px;
 }
+
 .invalid {
   color: $text-accent;
 }

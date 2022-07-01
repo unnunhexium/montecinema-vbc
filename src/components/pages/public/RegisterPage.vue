@@ -55,8 +55,8 @@ export default {
     async registerUser() {
       this.loading = true;
       try {
-        await this.$store.dispatch("register", this.formData);
-        this.$router.push("/choose-seats");
+        await this.$store.dispatch("user/register", this.formData);
+        this.$router.push("/login");
       } catch (error) {
         alert(error);
       } finally {

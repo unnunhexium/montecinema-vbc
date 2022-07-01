@@ -69,10 +69,24 @@ export const routes = [
   },
   {
     meta: { requiresAuth: true },
-    path: "/employee/desk",
+    path: "/employee/desks",
     name: "EmployeeDesk",
     component: () =>
       import("@/components/pages/employee/ChooseTicketDeskPage.vue"),
+  },
+  {
+    meta: { requiresAuth: true },
+    path: "/employee/confirm-tickets",
+    name: "ConfirmTickets",
+    component: () =>
+      import("@/components/pages/employee/ConfirmTicketsPage.vue"),
+  },
+  {
+    meta: { requiresAuth: true, breadcrumb: "Create a reservation" },
+    path: "/employee/create-a-reservation",
+    name: "CreateAReservation",
+    component: () =>
+      import("@/components/pages/employee/CreateAReservationPage.vue"),
   },
 ];
 
@@ -82,7 +96,7 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (!router.app.$store.getters["isLoggedIn"] && to.meta?.requiresAuth) {
+  if (!router.app.$store.getters["user/isLoggedIn"] && to.meta?.requiresAuth) {
     next({
       path: "/login",
     });

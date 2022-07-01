@@ -21,11 +21,12 @@
       </button>
     </div>
     <PersonalDetailsCard
+      class="account-page__personal-details"
       :formData="formData"
       @set-form-field="setFormField"
       v-if="!secondStepActive"
     />
-    <ReservationsCard v-else />
+    <ReservationsCard v-else class="account-page__reservations" />
   </div>
 </template>
 
@@ -54,7 +55,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["userData"]),
+    ...mapGetters("user", ["userData"]),
   },
   mounted() {
     this.formData.email = this.userData.email;
